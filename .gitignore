@@ -1,4 +1,3 @@
-bin/
-out/
-lib/
-*.jar
+**/bin/
+**/out/
+**/lib/
