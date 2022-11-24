@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="server:jar">
+    <output-path>$PROJECT_DIR$/</output-path>
+    <root id="archive" name="gagaotalk_server.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/server/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="server" />
+      <element id="module-output" name="core" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.10/gson-2.10.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
