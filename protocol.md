@@ -407,10 +407,9 @@ null
 
 * server sending file parts:
 
-| range (bytes) | type                | name        | description                                       |
-|---------------|---------------------|-------------|---------------------------------------------------|
-| 0             | 8bit unsigned int   | file part # | Order number of current file part                 |
-| 1 to ..       | bytes               | data        | 2KB file part. Last part can be smaller than 2KB. |
+| range (bytes) | type                | name        | description                                              |
+|---------------|---------------------|-------------|----------------------------------------------------------|
+| 0 to ..       | bytes               | data        | 2KB binary file part. Last part can be smaller than 2KB. |
 
 * client sending final ack if file was transmitted successfully:
 <pre>null</pre>
@@ -452,10 +451,9 @@ null
 
 * client sending file parts:
 
-| range (bytes) | type                | name        | description                                       |
-|---------------|---------------------|-------------|---------------------------------------------------|
-| 0             | 8bit unsigned int   | file part # | Order number of current file part                 |
-| 1 to ..       | bytes               | data        | 2KB file part. Last part can be smaller than 2KB. |
+| range (bytes) | type                | name        | description                                              |
+|---------------|---------------------|-------------|----------------------------------------------------------|
+| 0 to ..       | bytes               | data        | 2KB binary file part. Last part can be smaller than 2KB. |
  
 
 * server sending final ack if file was transmitted successfully:
