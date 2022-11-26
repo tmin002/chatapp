@@ -10,9 +10,9 @@
 |---------------|---------------------|------------|-----------------------------------------------------------|
 | 0 to 9        | 10 ASCII characters | header     | Plain "gagaotalk!" characters for header.                 |
 | 10            | 8bit unsigned int   | request ID | Used for identifying a pair of request and result packet. |
-| 11            | 8bit unsigned int   | session ID | Session ID of client. Some action does not require this.  |
-| 12 to 19      | 8 ASCII characters  | action     | Purpose of this packet.                                   |
-| 20 to ..      | bytes               | data       | Content of this packet.                                   |
+| 11 to 26      | 128bit unsigned int | session ID | Session ID of client. Some action does not require this.  |
+| 27 to 34      | 8 ASCII characters  | action     | Purpose of this packet.                                   |
+| 35 to ..      | bytes               | data       | Content of this packet.                                   |
 
 ## Packet format for receiving
 
