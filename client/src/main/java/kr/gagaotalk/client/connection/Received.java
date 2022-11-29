@@ -1,4 +1,4 @@
-package kr.gagaotalk.client;
+package kr.gagaotalk.client.connection;
 
 import java.lang.reflect.Type;
 import java.util.Map;
@@ -20,18 +20,18 @@ public class Received {
         this.isValid = true;
     }
 
-    // Used for invalid packets
+    // Default constructor is used for invalid packets
     public Received() {
         this.statusCode = 0;
         this.action = null;
-        this.data = null;
+        this.data = "".getBytes();
         this.isValid = false;
     }
 
     public String dataToString() {
-       return new String(data);
+        return new String(data);
     }
-    public Map dataToDictionary() {
+    public Map<String, Object> dataToDictionary() {
        Gson gson = new Gson();
        try {
            return gson.fromJson(dataToString(), jsonType);

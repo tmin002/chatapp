@@ -1,4 +1,4 @@
-package kr.gagaotalk.client;
+package kr.gagaotalk.client.connection;
 
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
@@ -36,10 +36,4 @@ public enum Action {
     public byte[] getBytes() {
         return toString().getBytes(StandardCharsets.UTF_8);
     }
-
-    /*
-    public static Action parseAction(String actionString) throws ParseException {
-
-    }
-     */
 }

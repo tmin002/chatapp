@@ -10,7 +10,12 @@ public class DateConvert {
     public static String DateToString(Date date) {
         return format.format(date);
     }
-    public static Date StringToDate(String date) throws ParseException {
-        return format.parse(date);
+    public static Date StringToDate(String date) {
+        try {
+            return format.parse(date);
+        } catch (ParseException ignored) {
+            // TODO: this must be unreachable
+            return null;
+        }
     }
 }

@@ -1,19 +1,33 @@
-package kr.gagaotalk.client;
+package kr.gagaotalk.client.connection;
 
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Map;
 
 public class Connection {
 
     private static InetAddress serverAddress;
     private static int serverPort;
+    private static byte[] sessionID;
+
+    public static void setAddress(String serverAddress, int serverPort) throws UnknownHostException {
+        Connection.serverAddress = InetAddress.getByName(serverAddress);
+        Connection.serverPort = serverPort;
+    }
+    public static byte[] getSessionID() {
+        return sessionID;
+    }
+    public static void setSessionID(byte[] sessionID) {
+        Connection.sessionID = sessionID;
+    }
 
     private final static byte[] headerStringBytes = "gagaotalk!".getBytes(StandardCharsets.UTF_8);
 
-    public static Received communicate(byte[] sessionID, Action action, byte[] data) {
+    public static Received communicate(Action action, Map<String, Object> data) {
         byte[] sendBuffer = new byte[4096];
         byte[] rcvBuffer = new byte[4096];
 

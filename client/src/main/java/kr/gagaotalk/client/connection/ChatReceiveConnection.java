@@ -1,4 +1,4 @@
-package kr.gagaotalk.client;
+package kr.gagaotalk.client.connection;
 
 public class ChatReceiveConnection {
 }
