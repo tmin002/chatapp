@@ -9,30 +9,28 @@
 | range (bytes) | type                | name       | description                                               |
 |---------------|---------------------|------------|-----------------------------------------------------------|
 | 0 to 9        | 10 ASCII characters | header     | Plain "gagaotalk!" characters for header.                 |
-| 10            | 8bit unsigned int   | request ID | Used for identifying a pair of request and result packet. |
-| 11 to 26      | 128bit unsigned int | session ID | Session ID of client. Some action does not require this.  |
-| 27 to 34      | 8 ASCII characters  | action     | Purpose of this packet.                                   |
-| 35 to ..      | bytes               | data       | Content of this packet.                                   |
+| 10 to 25      | 128bit unsigned int | session ID | Session ID of client. Some action does not require this.  |
+| 26 to 33      | 8 ASCII characters  | action     | Purpose of this packet.                                   |
+| 34 to ..      | bytes               | data       | Content of this packet.                                   |
 
 ## Packet format for receiving
 
 | range (bytes) | type                | name        | description                                                                                            |
 |---------------|---------------------|-------------|--------------------------------------------------------------------------------------------------------|
 | 0 to 9        | 10 ASCII characters | header      | Plain "gagaotalk!" characters for header.                                                              |
-| 10            | 8bit unsigned int   | request ID  | Used for identifying a pair of request and result packet.                                              |
-| 11            | 8bit unsigned int   | status code | Result of action.                                                                                      |
-| 12 to 19      | 8 ASCII characters  | action      | Purpose of this packet.                                                                                |
-| 20 to ..      | bytes               | data        | Content of this packet,<br>or detailed error message of failure in JSON string if status code isn't 0. |
+| 10            | 8bit unsigned int   | status code | Result of action.                                                                                      |
+| 11 to 18      | 8 ASCII characters  | action      | Purpose of this packet.                                                                                |
+| 19 to ..      | bytes               | data        | Content of this packet,<br>or detailed error message of failure in JSON string if status code isn't 0. |
 
  ## Status code
 
-| number   | meaning                                                                                                                                       |
-|----------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| 0        | Action was successfully completed.                                                                                                            |
-| 1        | Problem occurred during the action                                                                                                            |
-| 2        | Invalid session ID                                                                                                                            |
-| 3        | IP of the client is different from the address that lastly logged on to the given session.<br>This means session ID might have been hijacked. |
-| 4 to 255 | <i>TBD</i>                                                                                                                                    |
+| number  | meaning                                                                                                                                       |
+|---------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| 0       | Action was successfully completed.                                                                                                            |
+| 1       | Problem occurred during the action                                                                                                            |
+| 2       | Invalid session ID                                                                                                                            |
+| 3       | IP of the client is different from the address that lastly logged on to the given session.<br>This means session ID might have been hijacked. |
+| rest    | <i>TBD</i>                                                                                                                                    |
 
  ## List of actions
  * Name of actions are consisted of 8 ASCII characters. 
