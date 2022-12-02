@@ -40,4 +40,11 @@ public class Received {
            return null;
        }
     }
+
+    public int getErrorCode() {
+        return (int) dataToDictionary().get("error_code");
+    }
+    public String getErrorMessage() {
+        return (String) dataToDictionary().get("message");
+    }
 }

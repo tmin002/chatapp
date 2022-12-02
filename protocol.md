@@ -56,7 +56,8 @@
 | invChtRm | Client has been invited to a chatroom.<br> Not used for sending!                                      | only server-side   | <b>yes</b>               |
 | downFile | Request download for specified file ID.                                                               | <b>yes</b>         | no                       |
 | uplFile  | Request upload for specified file.                                                                    | <b>yes</b>         | no                       |
-| bye      | Assert termination of connection.                                                                     | no                 | no                       |
+| hi       | Assert connection of receive-only socket.                                                             | yes                | no                       |
+| bye      | Assert termination of receive-only socket.                                                            | no                 | no                       |
 
  ## Data format for each actions 
  * These are the pairs of all possible actions and data.
@@ -558,7 +559,25 @@ null
 "error_code" 0 is used only.
 </pre>    
 
+### hi
+ > Only used for receive-only socket.
+* client sending
+<pre>
+null
+</pre>    
+
+* client receiving if operation successful
+<pre>
+null
+</pre>    
+
+* client receiving if something went wrong
+<pre>
+"error_code" 0 is used only.
+</pre>    
+
 ### bye
+> Only used for receive-only socket.
 
 * client sending
 <pre>

@@ -5,14 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="93208719-b4e2-40bf-ac31-b60a0ff24c52" name="Changes" comment="Client connection">
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/authentication/Authentication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/chat/Chat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/chat/ChatRoom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/connection/PersistentConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/kr/gagaotalk/core/Constants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/kr/gagaotalk/core/HexDataConvert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Build_Client.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Build_Client.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/connection/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/ChatReceiveConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/connection/ChatReceiveConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/connection/Connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/Received.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/connection/Received.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/kr/gagaotalk/core/DateConvert.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/kr/gagaotalk/core/DateConvert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/kr/gagaotalk/core/UserBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/kr/gagaotalk/core/UserBasic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/client/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/connection/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/connection/Action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/connection/ChatReceiveConnection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/connection/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/connection/Connection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/connection/Received.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/connection/Received.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/protocol.md" beforeDir="false" afterPath="$PROJECT_DIR$/protocol.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

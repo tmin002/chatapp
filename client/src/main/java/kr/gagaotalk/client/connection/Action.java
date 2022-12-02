@@ -21,6 +21,7 @@ public enum Action {
     invChtRm("invChtRm"),
     downFile("downFile"),
     uplFile("uplFile"),
+    hi("hi"),
     bye("bye");
 
     private final String code;
