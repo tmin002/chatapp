@@ -36,28 +36,29 @@
  * Name of actions are consisted of 8 ASCII characters. 
  * Capitalization is ignored, however this table uses camelCase for easier reading.
 
-| name     | description                                                                                           | require session ID | uses receive-only socket |
-|----------|-------------------------------------------------------------------------------------------------------|--------------------|--------------------------|
-| signIn   | Logging in to server.<br> Server will return session ID if success.                                   | no                 | no                       |
-| signOut  | Logging out from server.                                                                              | <b>yes</b>         | no                       |
-| signUp   | Registering to server.<br> Requires basic user information.                                           | no                 | no                       |
-| findID   | Finding ID.<br> Requires user birthday, nickname.                                                     | no                 | no                       |
-| findPW   | Finding password.<br> Requires user ID, phone number.<br>(phone number is only used for this purpose) | no                 | no                       |
-| upPW     | Changing password.<br> Requires user password once again.                                             | <b>yes</b>         | no                       |
-| getFrens | Get Information of user's friends.                                                                    | <b>yes</b>         | no                       |
-| getUser  | Get information of user.                                                                              | no                 | no                       |
-| getCtRms | Get all chatroom ID user is in.                                                                       | <b>yes</b>         | no                       |
-| upUsrInf | Update user information.                                                                              | <b>yes</b>         | no                       |
-| mkCtRm   | Make new chatroom with specified users.                                                               | <b>yes</b>         | no                       |
-| addCtRm  | Add new user to chatroom.                                                                             | <b>yes</b>         | no                       |
-| lvCtRm   | Leave specified chatroom.                                                                             | <b>yes</b>         | no                       |
-| sendMsg  | Send message to specific chat room.                                                                   | <b>yes</b>         | no                       |
-| rcvMsg   | Client received a message.<br> Not used for sending!                                                  | only server-side   | <b>yes</b>               |
-| invChtRm | Client has been invited to a chatroom.<br> Not used for sending!                                      | only server-side   | <b>yes</b>               |
-| downFile | Request download for specified file ID.                                                               | <b>yes</b>         | no                       |
-| uplFile  | Request upload for specified file.                                                                    | <b>yes</b>         | no                       |
-| hi       | Assert connection of receive-only socket.                                                             | yes                | no                       |
-| bye      | Assert termination of receive-only socket.                                                            | no                 | no                       |
+| name     | description                                                                                           | require session ID | uses persistent socket |
+|----------|-------------------------------------------------------------------------------------------------------|--------------------|------------------------|
+| signIn   | Logging in to server.<br> Server will return session ID if success.                                   | no                 | no                     |
+| signOut  | Logging out from server.                                                                              | <b>yes</b>         | no                     |
+| signUp   | Registering to server.<br> Requires basic user information.                                           | no                 | no                     |
+| findID   | Finding ID.<br> Requires user birthday, nickname.                                                     | no                 | no                     |
+| findPW   | Finding password.<br> Requires user ID, phone number.<br>(phone number is only used for this purpose) | no                 | no                     |
+| upPW     | Changing password.<br> Requires user password once again.                                             | <b>yes</b>         | no                     |
+| getFrens | Get Information of user's friends.                                                                    | <b>yes</b>         | no                     |
+| getUser  | Get information of user.                                                                              | no                 | no                     |
+| getCtRms | Get all chatroom ID user is in.                                                                       | <b>yes</b>         | no                     |
+| upUsrInf | Update user information.                                                                              | <b>yes</b>         | no                     |
+| mkCtRm   | Make new chatroom with specified users.                                                               | <b>yes</b>         | no                     |
+| addCtRm  | Add new user to chatroom.                                                                             | <b>yes</b>         | no                     |
+| lvCtRm   | Leave specified chatroom.                                                                             | <b>yes</b>         | no                     |
+| sendMsg  | Send message to specific chat room.                                                                   | <b>yes</b>         | no                     |
+| rcvMsg   | Client received a message.<br> Not used for sending!                                                  | no                 | <b>yes</b>             |
+| invChtRm | Client has been invited to a chatroom.<br> Not used for sending!                                      | no                 | <b>yes</b>             |
+| downFile | Request download for specified file ID.                                                               | <b>yes</b>         | no                     |
+| uplFile  | Request upload for specified file.                                                                    | <b>yes</b>         | no                     |
+| ruOnline | Check whether client is online or not.                                                                | no                 | <b>yes</b>             |
+| hi       | Assert connection of persistent socket.                                                               | yes                | yes                    |
+| bye      | Assert termination of all connection.                                                                 | no                 | yes                    |
 
  ## Data format for each actions 
  * These are the pairs of all possible actions and data.
@@ -226,13 +227,13 @@ null
 null
 </pre>    
 
-* client receiving if operation successful 
+* client receiving if opernation successful 
 <pre>
 {
         "friends_list": [
                 {
                    "id": "[ID for user]",
-                   "nickname": "[nickname for user]",
+                   "nickname": "[ickname for user]",
                    "birthday": "[birthday for user in yyyy-mm-dd format]",
                    "bio": "[biography for user]",
                 }, 
@@ -358,8 +359,10 @@ null
 * client sending
 <pre>
 {
-      "id_to_add": "[user's ID to add]",
-      "chatroom": "[chatroom to put user in]",
+      "id_to_add": [
+            "user ID1", "user ID2", "user ID3" , ...
+      ]
+      "chatroom_id": "[chatroom to put user in]",
 }
 </pre>
 
@@ -370,16 +373,16 @@ null
 
 * client receiving if something went wrong
 
-| "error_code" | description      |
-|--------------|------------------|
-| 1            | Invalid user ID. |
+| "error_code" | description               |
+|--------------|---------------------------|
+| 1            | Invalid user ID included. |
 
 ### lvCtRm
 
 * client sending
 <pre>
 {
-      "chatroom": "[chatroom to leave]",
+      "chatroom_id": "[chatroom to leave]",
 }
 </pre>
 

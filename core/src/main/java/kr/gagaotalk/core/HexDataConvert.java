@@ -1,11 +1,12 @@
 package kr.gagaotalk.core;
-import java.math.BigInteger;
+
+import javax.xml.bind.DatatypeConverter;
 
 public class HexDataConvert {
-    public static byte[] HexStringToBytes(String str) {
-        return new BigInteger(str, 16).toByteArray();
+    public static byte[] HexStringToBytes(String hexString) {
+        return DatatypeConverter.parseHexBinary(hexString);
     }
     public static String BytesToHexString(byte[] bytes) {
-        return new BigInteger(bytes).toString();
+        return DatatypeConverter.printHexBinary(bytes);
     }
 }

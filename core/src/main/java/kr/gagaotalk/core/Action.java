@@ -1,7 +1,6 @@
-package kr.gagaotalk.client.connection;
+package kr.gagaotalk.core;
 
 import java.nio.charset.StandardCharsets;
-import java.text.ParseException;
 
 public enum Action {
     signIn("signIn"),
@@ -21,6 +20,7 @@ public enum Action {
     invChtRm("invChtRm"),
     downFile("downFile"),
     uplFile("uplFile"),
+    ruOnline("ruOnline"),
     hi("hi"),
     bye("bye");
 

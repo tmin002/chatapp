@@ -3,6 +3,7 @@ package kr.gagaotalk.client.connection;
 import com.google.gson.Gson;
 import kr.gagaotalk.client.GagaoTalkClient;
 import kr.gagaotalk.client.authentication.Authentication;
+import kr.gagaotalk.core.Action;
 import kr.gagaotalk.core.Constants;
 
 import java.io.*;
@@ -20,24 +21,25 @@ public class Connection {
         return sendAndReceive(socket, action, data);
     }
 
-    private static Received sendAndReceive(Socket givenSocket, Action action, Map<String, Object> data) {
-        byte[] sendBuffer = new byte[4096];
-        byte[] rcvBuffer = new byte[4096];
-
-        byte statusCode = -1;
-        Action receivedAction;
-        byte[] receivedData = null;
-
+    public static byte[] constructSendBytes(int byteSize, Action action, Map<String, Object> data) {
         Gson gson = new Gson();
+        byte[] bytes = new byte[byteSize];
 
         // Header
-        System.arraycopy(Constants.HEADER_STRING_BYTES, 0, sendBuffer, 0, 10);
+        System.arraycopy(Constants.HEADER_STRING_BYTES, 0, bytes, 0, 10);
         // session ID
-        System.arraycopy(Authentication.getSessionID(), 0, sendBuffer, 10, 16);
+        System.arraycopy(Authentication.getSessionID(), 0, bytes, 10, 16);
         // action
-        System.arraycopy(action.getBytes(), 0, sendBuffer, 26, 8);
+        System.arraycopy(action.getBytes(), 0, bytes, 26, 8);
         // data
-        System.arraycopy(gson.toJson(data).getBytes(StandardCharsets.UTF_8), 0, sendBuffer, 34, 2048);
+        System.arraycopy(gson.toJson(data).getBytes(StandardCharsets.UTF_8), 0, bytes, 34, 2048);
+
+        return bytes;
+    }
+
+    private static Received sendAndReceive(Socket givenSocket, Action action, Map<String, Object> data) {
+        byte[] sendBuffer = constructSendBytes(4096, action, data);
+        byte[] rcvBuffer = new byte[4096];
 
         // determine persistent connection or not
         boolean closeAfterConnection = (givenSocket == null);
@@ -61,44 +63,50 @@ public class Connection {
                 throw new IOException("Connection with server terminated.");
             }
 
-            // header check
-            byte[] receivedHeader = new byte[10];
-            System.arraycopy(rcvBuffer, 0, receivedHeader, 0, 10);
-            if (!(Arrays.equals(receivedHeader, Constants.HEADER_STRING_BYTES))) {
-               // wrong header; ignore.
-                return new Received();
-            }
-
-            // status code parse
-            statusCode = rcvBuffer[10];
-
-            // action parse
-            byte[] receivedActionBytes = new byte[8];
-            System.arraycopy(rcvBuffer, 11, receivedActionBytes, 0, 8);
-            try {
-                receivedAction = Action.valueOf(new String(receivedActionBytes));
-            } catch (IllegalArgumentException e) {
-                // TODO: make err message
-                return new Received();
-            }
-
-            // data parse
-            receivedData = new byte[2048];
-            System.arraycopy(rcvBuffer, 19, receivedData, 0, 2048);
-
-            // return data
-            if (closeAfterConnection) {
+            // close socket if needed
+            if (closeAfterConnection)
                 socket.close();
-            }
-            if (statusCode == -1) {
-                // This part should be unreachable.
-                return new Received();
-            } else {
-                return new Received(statusCode, receivedAction, receivedData);
-            }
+
+            // return
+            return parseReceivedData(rcvBuffer);
+
         } catch (IOException e) {
            // TODO: IOException handling
-            return new Received();
+            return null;
         }
+    }
+
+    public static Received parseReceivedData(byte[] receivedData) {
+        // initialize
+        byte statusCode;
+        Action receivedAction;
+
+        // header check
+        byte[] receivedHeader = new byte[10];
+        System.arraycopy(receivedData, 0, receivedHeader, 0, 10);
+        if (!(Arrays.equals(receivedHeader, Constants.HEADER_STRING_BYTES))) {
+            // wrong header; ignore.
+            return null;
+        }
+
+        // status code parse
+        statusCode = receivedData[10];
+
+        // action parse
+        byte[] receivedActionBytes = new byte[8];
+        System.arraycopy(receivedData, 11, receivedActionBytes, 0, 8);
+        try {
+            receivedAction = Action.valueOf(new String(receivedActionBytes));
+        } catch (IllegalArgumentException e) {
+            // TODO: make err message
+            return null;
+        }
+
+        // data parse
+        byte[] dataSection = new byte[2048];
+        System.arraycopy(receivedData, 19, dataSection, 0, 2048);
+
+        // return data
+        return new Received(statusCode, receivedAction, dataSection);
     }
 }
