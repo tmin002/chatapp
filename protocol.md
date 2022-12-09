@@ -4,7 +4,7 @@
  * TCP based.
  * Almost every connection are opened by client and closed when server respond. Sockets are created for each request. (Like HTTP)
  * However, There is one socket that maintains connection from login until logout. We call this a persistent socket.
- * Server will send receiving messages, chatroom invitation to client using rersistent socket.
+ * Server will send receiving messages, chatroom invitation to client using persistent socket.
 
  ## Packet format for sending
 
