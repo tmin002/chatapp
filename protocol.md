@@ -2,7 +2,9 @@
 
  ## Basic information
  * TCP based.
- * Almost every connection are opened by client and closed when server respond. Sockets are created for each request.<br>(Except for receiving messages. There should be one socket for receiving incoming messages from server.)
+ * Almost every connection are opened by client and closed when server respond. Sockets are created for each request. (Like HTTP)
+ * However, There is one socket that maintains connection from login until logout. We call this a persistent socket.
+ * Server will send receiving messages, chatroom invitation to client using rersistent socket.
 
  ## Packet format for sending
 
