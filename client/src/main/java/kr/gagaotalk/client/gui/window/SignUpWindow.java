@@ -1,5 +1,8 @@
 package kr.gagaotalk.client.gui.window;
 
+import kr.gagaotalk.client.authentication.Authentication;
+import kr.gagaotalk.core.DateConvert;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,6 +10,11 @@ import java.awt.event.ActionListener;
 
 public class SignUpWindow extends JFrame implements ActionListener {
     JButton suButton = new JButton();
+    JTextField nickname = new JTextField("nickname");
+    JTextField id = new JTextField("id");
+    JPasswordField password = new JPasswordField("password");
+    JTextField bday = new JTextField("birthday");
+    JTextField pnum = new JTextField("phonenumber");
     public SignUpWindow() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ImageIcon icon = new ImageIcon("C:\\Users\\Administrator\\Downloads\\gagaotalk\\client\\src\\main\\java\\kr\\gagaotalk\\client\\gui\\window\\signup.png");
@@ -20,35 +28,30 @@ public class SignUpWindow extends JFrame implements ActionListener {
         supanel.setLayout(null);
 
         //Set nickname textfield
-        JTextField nickname = new JTextField("nickname");
         nickname.setOpaque(false);
         nickname.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         nickname.setSize(300, 40);
         nickname.setLocation(88, 213);
 
         //Set id textfield
-        JTextField id = new JTextField("id");
         id.setOpaque(false);
         id.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         id.setSize(300, 40);
         id.setLocation(88, 287);
 
         //Set password textfield
-        JPasswordField password = new JPasswordField("password");
         password.setOpaque(false);
         password.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         password.setSize(300, 40);
         password.setLocation(88, 361);
 
         //Set birthday textfield
-        JTextField bday = new JTextField("birthday");
         bday.setOpaque(false);
         bday.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         bday.setSize(300, 40);
         bday.setLocation(88, 435);
 
         //Set phoneNumber textfield
-        JTextField pnum = new JTextField("phonenumber");
         pnum.setOpaque(false);
         pnum.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         pnum.setSize(300, 40);
@@ -80,6 +83,7 @@ public class SignUpWindow extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == suButton) {
+            Authentication.signUp(id.getText().toString(), nickname.getText().toString(), pnum.getText().toString(), DateConvert.StringToDate(bday.getText()), password.getText().toString());
             JOptionPane.showMessageDialog(null, "Sign Up Success!!");
             dispose();
         }
