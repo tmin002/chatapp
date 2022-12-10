@@ -1,6 +1,7 @@
 package kr.gagaotalk.client;
 
 import com.sun.org.apache.xpath.internal.axes.HasPositionalPredChecker;
+import kr.gagaotalk.client.gui.window.LoginWindow;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -19,5 +20,6 @@ public class GagaoTalkClient {
             SERVER_ADDRESS = InetAddress.getByName("localhost");
             SERVER_PORT = 24242;
         } catch (UnknownHostException ignored) {}
+        LoginWindow a = new LoginWindow();
     }
 }
