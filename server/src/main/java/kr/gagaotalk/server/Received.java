@@ -1,0 +1,36 @@
+package kr.gagaotalk.server;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+import kr.gagaotalk.core.Action;
+
+import java.lang.reflect.Type;
+import java.util.Map;
+
+public class Received {
+    public final byte[] sessionID;
+    public final Action action;
+    public final byte[] data;
+    private final Type jsonType = new TypeToken<Map<String,Object>>(){}.getType();
+
+    public Received(byte[] sessionID, Action action, byte[] data) {
+        this.sessionID = sessionID;
+        this.action = action;
+        this.data = data;
+    }
+
+    public String dataToString() {
+        return new String(data);
+    }
+    public Map<String, Object> dataToDictionary() {
+        Gson gson = new Gson();
+        try {
+            return gson.fromJson(dataToString(), jsonType);
+        } catch (JsonSyntaxException e) {
+            // TODO: exception handling
+            return null;
+        }
+    }
+
+}

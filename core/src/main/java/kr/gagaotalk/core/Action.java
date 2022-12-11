@@ -35,6 +35,6 @@ public enum Action {
     }
 
     public byte[] getBytes() {
-        return toString().getBytes(StandardCharsets.UTF_8);
+        return toString().getBytes(StandardCharsets.US_ASCII);
     }
 }
