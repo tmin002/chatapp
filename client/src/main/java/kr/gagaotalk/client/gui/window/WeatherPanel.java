@@ -1,4 +1,5 @@
 package kr.gagaotalk.client.gui.window;
 
-public class WeatherPanel {
+public class WeatherPanel extends MainWindowPanel {
+
 }
