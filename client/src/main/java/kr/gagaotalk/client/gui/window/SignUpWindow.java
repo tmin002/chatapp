@@ -1,13 +1,13 @@
 package kr.gagaotalk.client.gui.window;
 
 import kr.gagaotalk.client.authentication.Authentication;
+import kr.gagaotalk.client.gui.ResourceManager;
 import kr.gagaotalk.core.DateConvert;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
 public class SignUpWindow extends JFrame implements ActionListener {
     JButton suButton = new JButton();
@@ -18,7 +18,7 @@ public class SignUpWindow extends JFrame implements ActionListener {
     JTextField pnum = new JTextField("phonenumber");
     public SignUpWindow() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/signup.png")));
+        ImageIcon icon = ResourceManager.getImageIcon("/signup.png");
         JPanel supanel = new JPanel() {
             public void paintComponent(Graphics g) {
                 g.drawImage(icon.getImage(), 0, 0, null);

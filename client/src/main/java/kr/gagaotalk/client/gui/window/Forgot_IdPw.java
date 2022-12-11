@@ -1,10 +1,11 @@
 package kr.gagaotalk.client.gui.window;
 
+import kr.gagaotalk.client.gui.ResourceManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
 public class Forgot_IdPw extends JFrame implements ActionListener {
     JButton fButton = new JButton();
@@ -12,8 +13,7 @@ public class Forgot_IdPw extends JFrame implements ActionListener {
     JButton pwButton = new JButton("PW");
     public Forgot_IdPw() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                ImageIcon icon = new ImageIcon(
-                        Objects.requireNonNull(getClass().getResource("/forgot_idpw.png")));
+        ImageIcon icon = ResourceManager.getImageIcon("/forgot_idpw.png");
                 JPanel fippanel = new JPanel() {
                     public void paintComponent(Graphics g) {
                 g.drawImage(icon.getImage(), 0, 0, null);
