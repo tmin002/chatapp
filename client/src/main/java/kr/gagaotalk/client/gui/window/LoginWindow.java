@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 import javax.imageio.*;
 
 public class LoginWindow extends JFrame implements ActionListener {
@@ -11,7 +12,7 @@ public class LoginWindow extends JFrame implements ActionListener {
     JButton fpButton = new JButton();
     public LoginWindow() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ImageIcon icon = new ImageIcon("C:\\Users\\Administrator\\Downloads\\gagaotalk\\client\\src\\main\\java\\kr\\gagaotalk\\client\\gui\\window\\login.png");
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/login.png")));
         JPanel lgpanel = new JPanel() {
             public void paintComponent(Graphics g) {
                 // Approach 1: Dispaly image at at full size

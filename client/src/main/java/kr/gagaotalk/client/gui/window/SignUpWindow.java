@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class SignUpWindow extends JFrame implements ActionListener {
     JButton suButton = new JButton();
@@ -17,7 +18,7 @@ public class SignUpWindow extends JFrame implements ActionListener {
     JTextField pnum = new JTextField("phonenumber");
     public SignUpWindow() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ImageIcon icon = new ImageIcon("C:\\Users\\Administrator\\Downloads\\gagaotalk\\client\\src\\main\\java\\kr\\gagaotalk\\client\\gui\\window\\signup.png");
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/signup.png")));
         JPanel supanel = new JPanel() {
             public void paintComponent(Graphics g) {
                 g.drawImage(icon.getImage(), 0, 0, null);
@@ -83,7 +84,7 @@ public class SignUpWindow extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == suButton) {
-            Authentication.signUp(id.getText().toString(), nickname.getText().toString(), pnum.getText().toString(), DateConvert.StringToDate(bday.getText()), password.getText().toString());
+            Authentication.signUp(id.getText(), nickname.getText(), pnum.getText(), DateConvert.StringToDate(bday.getText()), new String(password.getPassword()));
             JOptionPane.showMessageDialog(null, "Sign Up Success!!");
             dispose();
         }

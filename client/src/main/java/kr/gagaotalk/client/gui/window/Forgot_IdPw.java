@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class Forgot_IdPw extends JFrame implements ActionListener {
     JButton fButton = new JButton();
@@ -11,9 +12,10 @@ public class Forgot_IdPw extends JFrame implements ActionListener {
     JButton pwButton = new JButton("PW");
     public Forgot_IdPw() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ImageIcon icon = new ImageIcon("C:\\Users\\Administrator\\Downloads\\gagaotalk\\client\\src\\main\\java\\kr\\gagaotalk\\client\\gui\\window\\forgot_idpw.png");
-        JPanel fippanel = new JPanel() {
-            public void paintComponent(Graphics g) {
+                ImageIcon icon = new ImageIcon(
+                        Objects.requireNonNull(getClass().getResource("/forgot_idpw.png")));
+                JPanel fippanel = new JPanel() {
+                    public void paintComponent(Graphics g) {
                 g.drawImage(icon.getImage(), 0, 0, null);
                 setOpaque(false); //그림을 표시하게 설정,투명하게 조절
                 super.paintComponent(g);
