@@ -1,6 +1,9 @@
 package kr.gagaotalk.client.gui.window;
 
+import kr.gagaotalk.client.authentication.Authentication;
+import kr.gagaotalk.client.connection.Received;
 import kr.gagaotalk.client.gui.ResourceManager;
+import kr.gagaotalk.core.DateConvert;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +14,8 @@ public class Forgot_IdPw extends JFrame implements ActionListener {
     JButton fButton = new JButton();
     JButton idButton = new JButton("ID");
     JButton pwButton = new JButton("PW");
+    JTextField cp1 = new JTextField("component1");
+    JTextField cp2 = new JTextField("component2");
     public Forgot_IdPw() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ImageIcon icon = ResourceManager.getImageIcon("/forgot_idpw.png");
@@ -23,15 +28,13 @@ public class Forgot_IdPw extends JFrame implements ActionListener {
         };
         fippanel.setLayout(null);
 
-        //Set nickname textfield
-        JTextField cp1 = new JTextField("component1");
+        //Set nickname or id textfield
         cp1.setOpaque(false);
         cp1.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         cp1.setSize(300, 40);
         cp1.setLocation(88, 298);
 
-        //Set birthday textfield
-        JTextField cp2 = new JTextField("component2");
+        //Set birthday or phone_number textfield
         cp2.setOpaque(false);
         cp2.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         cp2.setSize(300, 40);
@@ -87,10 +90,23 @@ public class Forgot_IdPw extends JFrame implements ActionListener {
         }
         if (e.getSource() == fButton) {
             if (idButton.getBackground() == Color.GRAY) {
-                JOptionPane.showMessageDialog(null, "nickname and birthday");
+                String user_id = Authentication.findID(cp1.getText(), DateConvert.StringToDate(cp2.getText()));
+                if (user_id != null) {
+                    JOptionPane.showMessageDialog(null, user_id, "Find ID/PW", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Can't find your id.", "Find ID/PW", JOptionPane.ERROR_MESSAGE);
+                }
             }
             else {
-                JOptionPane.showMessageDialog(null, "id and phone number");
+                String temp_pw = Authentication.findPassword(cp1.getText(), cp2.getText());
+                if (temp_pw != null) {
+                    JOptionPane.showMessageDialog(null, "Temporary_password: " + temp_pw, "Find ID/PW", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Invalid information.", "Find ID/PW", JOptionPane.ERROR_MESSAGE);
+                }
+//                JOptionPane.showMessageDialog(null, "Search and to show user's password", "Find PASSWORD", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }

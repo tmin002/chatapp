@@ -1,5 +1,8 @@
 package kr.gagaotalk.client.gui.window;
+import kr.gagaotalk.client.authentication.Authentication;
+import kr.gagaotalk.client.connection.Received;
 import kr.gagaotalk.client.gui.ResourceManager;
+import kr.gagaotalk.core.DateConvert;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +13,8 @@ public class LoginWindow extends JFrame implements ActionListener {
     JButton lgButton = new JButton();
     JButton suButton = new JButton();
     JButton fpButton = new JButton();
+    JTextField id = new JTextField("id");
+    JPasswordField password = new JPasswordField("password");
     public LoginWindow() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ImageIcon icon = ResourceManager.getImageIcon("/login.png");
@@ -28,11 +33,10 @@ public class LoginWindow extends JFrame implements ActionListener {
             }
         };
         lgpanel.setLayout(null);
-        JTextField id = new JTextField("id");
+
         id.setSize(300, 50);
         id.setLocation(100, 350);
 
-        JPasswordField password = new JPasswordField("password");
         password.setSize(300, 50);
         password.setLocation(100, 440);
 
@@ -71,7 +75,13 @@ public class LoginWindow extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == lgButton) {
-            JOptionPane.showMessageDialog(null, "Login Success");
+            Received received = Authentication.signIn(id.getText(), password.getText());
+            if (received.statusCode == 1) {
+                if (received.getErrorCode() == 1) {
+                    JOptionPane.showMessageDialog(null, "ID or password wrong.", "LOGIN", JOptionPane.ERROR_MESSAGE);
+                } else if (received.getErrorCode() == 2)
+                    JOptionPane.showMessageDialog(null, "Already logged in on another device.", "LOGIN", JOptionPane.ERROR_MESSAGE);
+            }
         }
         if(e.getSource() == suButton) {
             SignUpWindow b = new SignUpWindow();

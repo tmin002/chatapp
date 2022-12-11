@@ -1,6 +1,7 @@
 package kr.gagaotalk.client.gui.window;
 
 import kr.gagaotalk.client.authentication.Authentication;
+import kr.gagaotalk.client.connection.Received;
 import kr.gagaotalk.client.gui.ResourceManager;
 import kr.gagaotalk.core.DateConvert;
 
@@ -84,9 +85,28 @@ public class SignUpWindow extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == suButton) {
-            Authentication.signUp(id.getText(), nickname.getText(), pnum.getText(), DateConvert.StringToDate(bday.getText()), new String(password.getPassword()));
-            JOptionPane.showMessageDialog(null, "Sign Up Success!!");
-            dispose();
+            Received received = Authentication.signUp(id.getText(), nickname.getText(), pnum.getText(), DateConvert.StringToDate(bday.getText()), new String(password.getPassword()));
+            if (received.statusCode == 1) {
+                if(received.getErrorCode() == 1) {
+                    JOptionPane.showMessageDialog(null, "ID already exists.", "Sign Up", JOptionPane.WARNING_MESSAGE);
+                }
+                else if (received.getErrorCode() == 2) {
+                    JOptionPane.showMessageDialog(null, "Birth date has wrong format or the date is invalid.", "Sign Up", JOptionPane.WARNING_MESSAGE);
+                }
+                else if (received.getErrorCode() == 3) {
+                    JOptionPane.showMessageDialog(null, "Nickname null string.", "Sign Up", JOptionPane.WARNING_MESSAGE);
+                }
+                else if (received.getErrorCode() == 4) {
+                    JOptionPane.showMessageDialog(null, "Phone number has wrong format.", "Sign Up", JOptionPane.WARNING_MESSAGE);
+                }
+                else if (received.getErrorCode() == 5) {
+                    JOptionPane.showMessageDialog(null, "Password null string.", "Sign Up", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            else if (received.statusCode == 0){
+                JOptionPane.showMessageDialog(null, "Sign Up Success.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+            }
         }
     }
 }
