@@ -1,0 +1,13 @@
+Index: client/src/main/java/kr/gagaotalk/client/gui/window/PublicData.java
+===================================================================
+diff --git a/client/src/main/java/kr/gagaotalk/client/gui/window/PublicData.java b/client/src/main/java/kr/gagaotalk/client/gui/window/PublicData.java
+--- a/client/src/main/java/kr/gagaotalk/client/gui/window/PublicData.java	
++++ b/client/src/main/java/kr/gagaotalk/client/gui/window/PublicData.java	
+@@ -128,6 +128,7 @@
+             }
+ 
+         }
++        System.out.println(nextTime);
+         System.out.println(data[0]);
+         System.out.println(data[1]);
+         System.out.println(data[2]);

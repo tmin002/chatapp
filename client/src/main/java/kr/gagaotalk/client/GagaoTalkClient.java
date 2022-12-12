@@ -1,5 +1,6 @@
 package kr.gagaotalk.client;
 
+import kr.gagaotalk.client.gui.window.ChatRoom;
 import kr.gagaotalk.client.gui.window.MainWindow;
 
 import java.io.IOException;
@@ -19,5 +20,6 @@ public class GagaoTalkClient {
         } catch (UnknownHostException ignored) {}
 //        new LoginWindow();
 //        new PublicData();
+        new ChatRoom().FileProgressbar();
     }
 }

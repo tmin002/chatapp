@@ -1,0 +1,19 @@
+<changelist name="Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM_[Changes]1" date="1670843550164" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM_[Changes]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2022/12/12 8:12 PM [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="gagaotalk_client.jar" />
+    <option name="AFTER_PATH" value="gagaotalk_client.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM_[Changes]1/gagaotalk_client.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="gagaotalk_server.jar" />
+    <option name="AFTER_PATH" value="gagaotalk_server.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM_[Changes]1/gagaotalk_server.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="client/src/main/resources/forgot_idpw.png" />
+    <option name="AFTER_PATH" value="client/src/main/resources/forgot_idpw.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM_[Changes]1/forgot_idpw.png" />
+  </binary>
+</changelist>
