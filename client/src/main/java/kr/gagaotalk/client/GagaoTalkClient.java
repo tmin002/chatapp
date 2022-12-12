@@ -17,6 +17,7 @@ public class GagaoTalkClient {
             SERVER_ADDRESS = InetAddress.getByName("localhost");
             SERVER_PORT = 24242;
         } catch (UnknownHostException ignored) {}
-        new MainWindow();
+//        new LoginWindow();
+//        new PublicData();
     }
 }

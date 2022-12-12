@@ -5,41 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="93208719-b4e2-40bf-ac31-b60a0ff24c52" name="Changes" comment="MainWindow 관련 추가">
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/component/ImageButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/component/PictureBox.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/component/RoundPictureBox.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/chatroom_default_profile_pic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/offline.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/online.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/refresh.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/user_defualt_profile_pic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/AddChatUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/Search_id.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/authentication/Authentication.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/authentication/Authentication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/ResourceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/ResourceManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/component/FriendsListAtom.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/component/FriendsListAtom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/component/Label.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/component/Label.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/ChatPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/ChatPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/FriendsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/FriendsPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindowPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindowPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/SettingsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/SettingsPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/WeatherPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/WeatherPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/chat.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/chat.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/chat_selected.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/chat_selected.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/friends.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/friends.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/friends_selected.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/friends_selected.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/logout.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/logout.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/settings.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/settings.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/settings_selected.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/settings_selected.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/weather.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/weather.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/weather_selected.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/weather_selected.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/kr/gagaotalk/core/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/kr/gagaotalk/core/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/kr/gagaotalk/core/UserBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/kr/gagaotalk/core/UserBasic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/Forgot_IdPw.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/Forgot_IdPw.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/LoginWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/LoginWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/forgot_idpw.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/forgot_idpw.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gagaotalk_client.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gagaotalk_client.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gagaotalk_server.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gagaotalk_server.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/protocol.md" beforeDir="false" afterPath="$PROJECT_DIR$/protocol.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,39 +53,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "azul-1.8",
-    "last_opened_file_path": "/Users/tmin002/workspace/gagaotalk/client/src/main/resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;azul-1.8&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/bagjuhyeog/Desktop/gagaotalk/gagaotalk&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="kr.gagaotalk.client.gui.window" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/client/src/main/resources" />
       <recent name="C:\Users\Administrator\IdeaProjects\gagaotalk\client\src\main\resources" />
       <recent name="$PROJECT_DIR$/client" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/client/src/main/resources" />
       <recent name="C:\Users\Administrator\IdeaProjects\gagaotalk\client\src\main\resources" />
       <recent name="$PROJECT_DIR$/" />
     </key>
@@ -140,7 +113,7 @@
       <workItem from="1670657337996" duration="17824000" />
       <workItem from="1670692942438" duration="554000" />
       <workItem from="1670693509343" duration="3699000" />
-      <workItem from="1670816139949" duration="11332000" />
+      <workItem from="1670815134969" duration="17316000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed submodule dependencies">
       <created>1669271663768</created>
