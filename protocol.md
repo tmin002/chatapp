@@ -48,6 +48,7 @@
 | upPW     | Changing password.<br> Requires user password once again.                                             | <b>yes</b>         | no                     |
 | getFrens | Get Information of user's friends.                                                                    | <b>yes</b>         | no                     |
 | getUser  | Get information of user.                                                                              | no                 | no                     |
+| chkUsrOn | Check whether the given user is online.                                                               | no                 | no                     |
 | getCtRms | Get all chatroom ID user is in.                                                                       | <b>yes</b>         | no                     |
 | upUsrInf | Update user information.                                                                              | <b>yes</b>         | no                     |
 | mkCtRm   | Make new chatroom with specified users.                                                               | <b>yes</b>         | no                     |
@@ -276,6 +277,27 @@ null
 |--------------|---------------|
 | 1            | Invalid ID.   |
 
+### chkUsrOn
+
+* client sending
+<pre>
+{
+        "user_id": "[ID of desired user]"
+}
+</pre>    
+
+* client receiving if operation successful
+<pre>
+{
+        "user_online": [true/false];
+}
+</pre>    
+
+* client receiving if something went wrong
+
+| "error_code" | description   |
+|--------------|---------------|
+| 1            | Invalid ID.   |
 ### getCtRms
 
 * client sending

@@ -3,9 +3,9 @@ import java.util.Date;
 
 public class UserBasic {
     public final String ID;
-    public final String nickname;
-    public final String bio;
-    public final Date birthDay;
+    public String nickname;
+    public String bio;
+    public Date birthDay;
 
     public UserBasic(String ID, String nickname, String bio, Date birthday) {
         this.ID = ID;

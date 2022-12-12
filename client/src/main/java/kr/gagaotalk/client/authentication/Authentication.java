@@ -13,7 +13,11 @@ import java.util.Map;
 public class Authentication {
 
     // Session ID
-    private static final byte[] defaultSessionID = new byte[] {0};
+    private static final byte[] defaultSessionID = new byte[128];
+    {
+        for (int i=0; i<128; i++)
+            defaultSessionID[i] = 0;
+    }
     private static byte[] sessionID = defaultSessionID;
     public static byte[] getSessionID() {
         return sessionID;

@@ -12,6 +12,9 @@ public class Window extends JFrame {
         setIconImage(ResourceManager.getImageIcon("/gagaotalk_icon.png").getImage());
         setBackground(Color.white);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
+
+    public void showWindow() {
         setVisible(true);
     }
 }

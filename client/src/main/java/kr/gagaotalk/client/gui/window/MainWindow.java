@@ -3,6 +3,7 @@ package kr.gagaotalk.client.gui.window;
 import kr.gagaotalk.client.authentication.Authentication;
 import kr.gagaotalk.client.gui.Colors;
 import kr.gagaotalk.client.gui.ResourceManager;
+import kr.gagaotalk.client.gui.component.ImageButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,19 +44,13 @@ public class MainWindow extends Window {
     private final MainWindowPanel weatherPanel = new WeatherPanel();
     private final MainWindowPanel settingsPanel = new SettingsPanel();
     private final MainWindowPanel friendsPanel = new FriendsPanel();
-    private JPanel shownPanel = new JPanel(); // default
+    private JPanel shownPanel = new JPanel(new GridLayout(1, 1)); // default
 
     public MainWindow() {
         // Initialize
         Container root = this.getContentPane();
         setSize(374, 656);
         setLayout(mainWindowLayout);
-
-        // Set title of MainWindowPanels
-        chatPanel.setTitleLabelText("chat");
-        weatherPanel.setTitleLabelText("weather");
-        friendsPanel.setTitleLabelText("friend");
-        settingsPanel.setTitleLabelText("setings");
 
         // Configure sidebar
         sideBar.setBackground(Colors.GACHON_BLUE);
@@ -67,16 +62,16 @@ public class MainWindow extends Window {
 
         // Add buttons to sidebar
         sideBar.add(friendsButton);
-        friendsButton.setBounds(0, 0, 66, 63);
+        friendsButton.setBounds(0, 37, 66, 63);
 
         sideBar.add(chatButton);
-        chatButton.setBounds(0, 64, 66, 63);
+        chatButton.setBounds(0, 101, 66, 63);
 
         sideBar.add(weatherButton);
-        weatherButton.setBounds(0, 127, 66, 63);
+        weatherButton.setBounds(0, 164, 66, 63);
 
         sideBar.add(settingsButton);
-        settingsButton.setBounds(0, 190, 66, 63);
+        settingsButton.setBounds(0, 227, 66, 63);
 
         // Add sign out button
         mainWindowLayout.putConstraint(SpringLayout.WEST, signOutButton, 0, SpringLayout.WEST, root);
@@ -107,9 +102,20 @@ public class MainWindow extends Window {
             dispose();
         });
 
+        friendsPanel.addTopButtonActionListener(e -> {
+            System.out.println("친구추가 버튼 클릭됨");
+        });
+        chatPanel.addTopButtonActionListener(e -> {
+            System.out.println("채팅방추가 버튼 클릭됨");
+        });
+        weatherPanel.addTopButtonActionListener(e -> {
+            System.out.println("날씨 새로고침 버튼 클릭됨");
+        });
+
         // Finish
         root.setBackground(Color.white);
         changeShownPanel(friendsPanel);
+        super.showWindow();
     }
 
     // 판넬 추가했을때 호출해야 하는 함수.
@@ -126,7 +132,7 @@ public class MainWindow extends Window {
     }
 }
 
-class SideBarButton extends JButton {
+class SideBarButton extends ImageButton {
 
     // static: SideBarButton 끼리 클릭된 버튼의 정보 공유. 기본값은 friends
     private static String selectedButtonName = "friends";
@@ -140,8 +146,11 @@ class SideBarButton extends JButton {
                          String imagePathWhenSelected, boolean isSignOutButton,
                          MainWindow parent) {
         // Initialize
+        super(imagePathWhenDefault, 66, 63);
+
         if (!isSignOutButton)
             buttons.add(this);
+
         this.buttonName = buttonName;
         this.imageWhenSelected = ImageIconResizer.resize(
                 ResourceManager.getImageIcon(imagePathWhenSelected), 66, 63);
@@ -149,12 +158,6 @@ class SideBarButton extends JButton {
                 ResourceManager.getImageIcon(imagePathWhenDefault), 66, 63);
 
         // Init style
-        setBorderPainted(false);
-        setBorder(null);
-        setMargin(new Insets(0, 0, 0, 0));
-        setContentAreaFilled(false);
-        setSize(new Dimension(66, 63));
-        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         changeImageToDefault();
 
         // Add handler

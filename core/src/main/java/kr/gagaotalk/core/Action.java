@@ -12,6 +12,7 @@ public enum Action {
     getUser("getUser"),
     getCtRms("getCtRms"),
     upUsrInf("upUsrInf"),
+    chkUsrOn("chkUsrOn"),
     mkCtRm("mkCtRm"),
     addCtRm("addCtRm"),
     lvCtRm("lvCtRm"),
