@@ -202,6 +202,7 @@ null
 | "error_code" | description         |
 |--------------|---------------------|
 | 1            | Wrong phone number. |
+| 2            | Invalid ID.         |
 
 ### upPW
 * client sending

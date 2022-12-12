@@ -63,7 +63,11 @@ public class User extends UserBasic {
 
     // User 객체를 생성하는 유일한 방법
     public static User createUserInstance(String ID, String nickname, String bio, String birthday) {
-        User user = new User(ID, nickname, bio, birthday, null);
+        // TODO: user profile pic
+        User user = new User(ID, nickname, bio, birthday,
+                ImageIconResizer.resize(
+                        ResourceManager.getImageIcon("/user_default_profile_pic.png")
+                , 50, 50));
         userDictionary.put("ID", user);
         return user;
     }
