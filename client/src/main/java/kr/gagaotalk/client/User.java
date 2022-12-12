@@ -1,4 +1,6 @@
 package kr.gagaotalk.client;
+import kr.gagaotalk.client.gui.ResourceManager;
+import kr.gagaotalk.client.gui.window.ImageIconResizer;
 import kr.gagaotalk.core.Action;
 import kr.gagaotalk.client.connection.Connection;
 import kr.gagaotalk.client.connection.Received;
@@ -42,6 +44,12 @@ public class User extends UserBasic {
 
     //// static things
 
+    public static User makeDummyUser() {
+        // Only for debug purpose
+        return new User("userid", "User Nickname", "This is user biography.", "20020226",
+                ImageIconResizer.resize(ResourceManager.getImageIcon("/user_default_profile_pic.png")
+                        , 50, 50));
+    }
     public static boolean checkUserOnline(String userID) {
         Map<String, Object> request = new HashMap<>();
         request.put("user_id", userID);
@@ -54,7 +62,7 @@ public class User extends UserBasic {
     }
 
     // User 객체를 생성하는 유일한 방법
-    public static User createUser(String ID, String nickname, String bio, String birthday) {
+    public static User createUserInstance(String ID, String nickname, String bio, String birthday) {
         User user = new User(ID, nickname, bio, birthday, null);
         userDictionary.put("ID", user);
         return user;
@@ -81,7 +89,7 @@ public class User extends UserBasic {
             return null;
         } else {
             Map<String, Object> userMap = received.dataToDictionary();
-            return createUser(
+            return createUserInstance(
                     (String) userMap.get("id"),
                     (String) userMap.get("nickname"),
                     (String) userMap.get("birthday"),

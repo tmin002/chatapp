@@ -1,8 +1,6 @@
 package kr.gagaotalk.client;
 
-import kr.gagaotalk.client.gui.window.LoginWindow;
 import kr.gagaotalk.client.gui.window.MainWindow;
-import kr.gagaotalk.client.gui.window.PublicData;
 
 import java.io.IOException;
 import java.net.InetAddress;

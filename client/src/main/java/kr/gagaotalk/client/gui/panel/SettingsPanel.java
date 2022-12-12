@@ -1,4 +1,4 @@
-package kr.gagaotalk.client.gui.window;
+package kr.gagaotalk.client.gui.panel;
 
 public class SettingsPanel extends MainWindowPanel {
     public SettingsPanel() {

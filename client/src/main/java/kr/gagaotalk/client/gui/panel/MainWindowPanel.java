@@ -1,5 +1,7 @@
-package kr.gagaotalk.client.gui.window;
+package kr.gagaotalk.client.gui.panel;
 
+import kr.gagaotalk.client.User;
+import kr.gagaotalk.client.gui.component.FriendsListAtom;
 import kr.gagaotalk.client.gui.component.ImageButton;
 
 import javax.swing.*;
@@ -8,7 +10,7 @@ import java.awt.event.ActionListener;
 
 public abstract class MainWindowPanel extends JPanel {
 
-    private final SpringLayout layout = new SpringLayout();
+    public final SpringLayout layout = new SpringLayout();
     private Label titleLabel;
     private ImageButton topButton;
 

@@ -18,13 +18,33 @@ public class Chatroom {
     public final int chatRoomPeopleCount;
 
 
-    public Chatroom(String chatRoomID, String chatRoomName, int chatRoomPeopleCount) {
+    private Chatroom(String chatRoomID, String chatRoomName, int chatRoomPeopleCount) {
         this.chatRoomID = chatRoomID;
         this.chatRoomName = chatRoomName;
         this.chatRoomPeopleCount = chatRoomPeopleCount;
     }
-
     // static
+
+    // Chatroom 객체를 생성하는 유일한 방법
+    public static Chatroom createChatRoomInstance(String chatRoomID, String chatRoomName, int chatRoomPeopleCount) {
+        Chatroom chatroom = new Chatroom(chatRoomID, chatRoomName, chatRoomPeopleCount);
+        chatRoomDictionary.put(chatRoomID, chatroom);
+        return chatroom;
+    }
+
+    // Chatroom 객체를 관리하는 곳.
+    // Chatroom 객체는 생성자를 통해 public 하게 생성 불가능함. 생성된 Chatroom 객체는 반드시
+    // 아래의 HashMap 에 일괄로 저장되어 관리된다.
+    // key: chatroom ID, value: Chatroom 객체
+    public static HashMap<String, Chatroom> chatRoomDictionary = new HashMap<>();
+    public static Chatroom getChatRoomInstance(String chatRoomID) {
+        return chatRoomDictionary.getOrDefault(chatRoomID, null);
+    }
+
+    // Make dummy chat room. only for debug purposes
+    public static Chatroom createDummyChatRoom() {
+        return new Chatroom("chatRoomID", "Chatroom Name", 10);
+    }
 
     // get chat rooms: get list of chat room IDs user is in.
     // TODO: not certain the array type will be in simple array type. Needs further inspection
@@ -74,6 +94,7 @@ public class Chatroom {
             return null;
         }
     }
+
 
     // Add people to chat room
     public static Received addToChatRoom(String chatRoomID, ArrayList<User> peopleToAdd) {
