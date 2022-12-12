@@ -1,7 +1,9 @@
 package kr.gagaotalk.client.gui.panel;
 
 import kr.gagaotalk.client.User;
+import kr.gagaotalk.client.gui.Colors;
 import kr.gagaotalk.client.gui.component.FriendsListAtom;
+import kr.gagaotalk.client.gui.component.ColoredButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,7 +42,6 @@ public class FriendsPanel extends MainWindowPanel {
 
         for (User u : friendList)
             addFriendsListAtom(u);
-
     }
 
     private void updateView() {

@@ -1,7 +1,6 @@
 package kr.gagaotalk.client.gui.panel;
 
-import kr.gagaotalk.client.User;
-import kr.gagaotalk.client.gui.component.FriendsListAtom;
+
 import kr.gagaotalk.client.gui.component.ImageButton;
 
 import javax.swing.*;

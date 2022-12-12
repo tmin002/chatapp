@@ -1,5 +1,6 @@
 package kr.gagaotalk.client.authentication;
 
+import kr.gagaotalk.client.User;
 import kr.gagaotalk.core.Action;
 import kr.gagaotalk.client.connection.Connection;
 import kr.gagaotalk.client.connection.Received;
@@ -19,8 +20,12 @@ public class Authentication {
             defaultSessionID[i] = 0;
     }
     private static byte[] sessionID = defaultSessionID;
+    private static User currentUser;
     public static byte[] getSessionID() {
         return sessionID;
+    }
+    public static User getCurrentUser() {
+        return currentUser;
     }
 
     // Sign In : saves session ID.
@@ -30,8 +35,10 @@ public class Authentication {
         request.put("password", password);
 
         Received received = Connection.communicate(Action.signIn, request);
-        if (received.statusCode == 0)
+        if (received.statusCode == 0) {
             sessionID = HexDataConvert.HexStringToBytes((String) received.dataToDictionary().get("session_id"));
+            currentUser = User.getUserByID(ID);
+        }
         return received;
     }
 
