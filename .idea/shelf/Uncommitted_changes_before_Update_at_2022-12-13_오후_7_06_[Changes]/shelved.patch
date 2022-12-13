@@ -1,0 +1,463 @@
+Index: client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package kr.gagaotalk.client;\r\n\r\nimport kr.gagaotalk.client.gui.window.ChatRoom;\r\nimport kr.gagaotalk.client.gui.window.MainWindow;\r\nimport kr.gagaotalk.client.gui.window.Unregister;\r\n\r\nimport java.io.IOException;\r\nimport java.net.InetAddress;\r\nimport java.net.UnknownHostException;\r\n\r\npublic class GagaoTalkClient {\r\n\r\n    public static InetAddress SERVER_ADDRESS;\r\n    public static int SERVER_PORT;\r\n\r\n    public static void main(String[] args) throws IOException {\r\n        System.out.println(\"Hello world!\");\r\n        try {\r\n            SERVER_ADDRESS = InetAddress.getByName(\"localhost\");\r\n            SERVER_PORT = 24242;\r\n        } catch (UnknownHostException ignored) {}\r\n//        new LoginWindow();\r\n//        new PublicData();\r\n//        new ChatRoom().FileProgressbar();\r\n        new Unregister();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java b/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java
+--- a/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java	(revision ee0a43ff4b65d9555f86d07f2e2a0d20a7a66006)
++++ b/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java	(date 1670914382903)
+@@ -2,7 +2,6 @@
+ 
+ import kr.gagaotalk.client.gui.window.ChatRoom;
+ import kr.gagaotalk.client.gui.window.MainWindow;
+-import kr.gagaotalk.client.gui.window.Unregister;
+ 
+ import java.io.IOException;
+ import java.net.InetAddress;
+@@ -19,9 +18,6 @@
+             SERVER_ADDRESS = InetAddress.getByName("localhost");
+             SERVER_PORT = 24242;
+         } catch (UnknownHostException ignored) {}
+-//        new LoginWindow();
+-//        new PublicData();
+-//        new ChatRoom().FileProgressbar();
+-        new Unregister();
++        new MainWindow();
+     }
+ }
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"MavenProjectsManager\">\r\n    <option name=\"originalFiles\">\r\n      <list>\r\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_19\" default=\"true\" project-jdk-name=\"azul-1.8\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision ee0a43ff4b65d9555f86d07f2e2a0d20a7a66006)
++++ b/.idea/misc.xml	(date 1670914482058)
+@@ -8,7 +8,7 @@
+       </list>
+     </option>
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="azul-1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="azul-1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: client/src/main/java/kr/gagaotalk/client/gui/window/ChatWindow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/java/kr/gagaotalk/client/gui/window/ChatWindow.java b/client/src/main/java/kr/gagaotalk/client/gui/window/ChatWindow.java
+new file mode 100644
+--- /dev/null	(date 1670922367908)
++++ b/client/src/main/java/kr/gagaotalk/client/gui/window/ChatWindow.java	(date 1670922367908)
+@@ -0,0 +1,4 @@
++package kr.gagaotalk.client.gui.window;
++
++public class ChatWindow extends Window {
++}
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"93208719-b4e2-40bf-ac31-b60a0ff24c52\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/weather/Weather.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/weather/Weather.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Enum\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"PREVIOUS_COMMIT_AUTHORS\">\r\n      <list>\r\n        <option value=\"tmin002 &lt;ssh9930@gmail.com&gt;\" />\r\n      </list>\r\n    </option>\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"pjh\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\"><![CDATA[{\r\n  \"lastFilter\": {\r\n    \"state\": \"OPEN\"\r\n  }\r\n}]]></component>\r\n  <component name=\"GithubPullRequestsUISettings\">\r\n    <option name=\"selectedUrlAndAccountId\">\r\n      <UrlAndAccount>\r\n        <option name=\"accountId\" value=\"c44bbd8e-13e0-4dd8-b1ee-492a5dd7a7f2\" />\r\n        <option name=\"url\" value=\"https://github.com/tmin002/gagaotalk.git\" />\r\n      </UrlAndAccount>\r\n    </option>\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2Hyslytn5AqITSTwoX3BSirFfJF\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;azul-1.8&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/PC/Downloads/gagaotalk&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CreateClassDialog.RecentsKey\">\r\n      <recent name=\"kr.gagaotalk.client.gui.window\" />\r\n    </key>\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\Administrator\\IdeaProjects\\gagaotalk\\client\\src\\main\\resources\" />\r\n      <recent name=\"$PROJECT_DIR$/client\" />\r\n      <recent name=\"$PROJECT_DIR$\" />\r\n      <recent name=\"$PROJECT_DIR$/src\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\Administrator\\IdeaProjects\\gagaotalk\\client\\src\\main\\resources\" />\r\n      <recent name=\"$PROJECT_DIR$/\" />\r\n    </key>\r\n    <key name=\"MoveClassesOrPackagesDialog.RECENTS_KEY\">\r\n      <recent name=\"kr.gagaotalk.client.gui\" />\r\n    </key>\r\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\r\n      <recent name=\"kr.gagaotalk.server\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Application.Build Client\">\r\n    <configuration name=\"DatabaseEG\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"kr.gagaotalk.server.DatabaseEG\" />\r\n      <module name=\"server\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"kr.gagaotalk.server.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Application.Build Client\" />\r\n      <item itemvalue=\"Application.DatabaseEG\" />\r\n    </list>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.DatabaseEG\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"93208719-b4e2-40bf-ac31-b60a0ff24c52\" name=\"Changes\" comment=\"\" />\r\n      <created>1669268812812</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1669268812812</updated>\r\n      <workItem from=\"1669268814127\" duration=\"939000\" />\r\n      <workItem from=\"1669271422429\" duration=\"4461000\" />\r\n      <workItem from=\"1670657337996\" duration=\"17824000\" />\r\n      <workItem from=\"1670692942438\" duration=\"554000\" />\r\n      <workItem from=\"1670693509343\" duration=\"3699000\" />\r\n      <workItem from=\"1670815134969\" duration=\"25190000\" />\r\n      <workItem from=\"1670903878764\" duration=\"4291000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Fixed submodule dependencies\">\r\n      <created>1669271663768</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669271663768</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Configure IntelliJ build option&#10;artifacts, dependencies.\">\r\n      <created>1669272460397</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669272460397</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Configure Test environment&#10;start_server.cmd, start_server.sh\">\r\n      <created>1669276073086</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669276073086</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"protocol minor update\">\r\n      <created>1669276403675</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669276403675</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"build setting minor update\">\r\n      <created>1669276418465</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669276418465</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Protocol finished version\">\r\n      <created>1669277099919</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669277099919</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"Protocol finished version\">\r\n      <created>1669277183972</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669277183972</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"Protocol finished version\">\r\n      <created>1669277232477</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669277232477</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"Protocol finished version\">\r\n      <created>1669277857871</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669277857871</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"Removed request ID since we no longer use single socket connection\">\r\n      <created>1669731843445</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669731843445</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"Removed request ID since we no longer use single socket connection\">\r\n      <created>1669736704499</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669736704499</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"Client connection\">\r\n      <created>1669736781775</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669736781775</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"프로토콜 대로 UTF-8에서 ASCII 로 수정\">\r\n      <created>1670744955572</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1670744955572</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"이미지 리소스 폴더에 들어가도록 지정\">\r\n      <created>1670745106239</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1670745106239</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00015\" summary=\"서버: 들어오는 패킷 파싱 및 내보내는 패킷 만드는 기능 추가\">\r\n      <created>1670745146563</created>\r\n      <option name=\"number\" value=\"00015\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1670745146563</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00016\" summary=\"gson 파싱할때 필요한 타입 Constants에 추가\">\r\n      <created>1670746434201</created>\r\n      <option name=\"number\" value=\"00016\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1670746434201</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00017\" summary=\"ResourceManager로 프로젝트 이미지 간편추가기능\">\r\n      <created>1670747164080</created>\r\n      <option name=\"number\" value=\"00017\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1670747164080</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00018\" summary=\"최상위 JFrame (Window) 추가\">\r\n      <created>1670754108975</created>\r\n      <option name=\"number\" value=\"00018\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1670754108975</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00019\" summary=\"MainWindow 관련 추가\">\r\n      <created>1670754174535</created>\r\n      <option name=\"number\" value=\"00019\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00019\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1670754174535</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00020\" summary=\"MainWindow 관련 추가\">\r\n      <created>1670754183793</created>\r\n      <option name=\"number\" value=\"00020\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00020\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1670754183793</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00021\" summary=\"MainWindow 관련 추가\">\r\n      <created>1670754193088</created>\r\n      <option name=\"number\" value=\"00021\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00021\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1670754193088</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00022\" summary=\"MainWindow 관련 추가\">\r\n      <created>1670754228297</created>\r\n      <option name=\"number\" value=\"00022\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00022\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1670754228298</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00023\" summary=\"친구 검색 기능 및 채팅방 친구 초대 기능 추가\">\r\n      <created>1670843619971</created>\r\n      <option name=\"number\" value=\"00023\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00023\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1670843619971</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00024\" summary=\"회원탈퇴 수정\">\r\n      <created>1670906691436</created>\r\n      <option name=\"number\" value=\"00024\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00024\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1670906691436</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"25\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Fixed submodule dependencies\" />\r\n    <MESSAGE value=\"Configure IntelliJ build option&#10;artifacts, dependencies.\" />\r\n    <MESSAGE value=\"Configure Test environment&#10;start_server.cmd, start_server.sh\" />\r\n    <MESSAGE value=\"protocol minor update\" />\r\n    <MESSAGE value=\"build setting minor update\" />\r\n    <MESSAGE value=\"Protocol finished version\" />\r\n    <MESSAGE value=\"Removed request ID since we no longer use single socket connection\" />\r\n    <MESSAGE value=\"Client connection\" />\r\n    <MESSAGE value=\"프로토콜 대로 UTF-8에서 ASCII 로 수정\" />\r\n    <MESSAGE value=\"이미지 리소스 폴더에 들어가도록 지정\" />\r\n    <MESSAGE value=\"서버: 들어오는 패킷 파싱 및 내보내는 패킷 만드는 기능 추가\" />\r\n    <MESSAGE value=\"gson 파싱할때 필요한 타입 Constants에 추가\" />\r\n    <MESSAGE value=\"ResourceManager로 프로젝트 이미지 간편추가기능\" />\r\n    <MESSAGE value=\"최상위 JFrame (Window) 추가\" />\r\n    <MESSAGE value=\"MainWindow 관련 추가\" />\r\n    <MESSAGE value=\"친구 검색 기능 및 채팅방 친구 초대 기능 추가\" />\r\n    <MESSAGE value=\"회원탈퇴 수정\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"회원탈퇴 수정\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision ee0a43ff4b65d9555f86d07f2e2a0d20a7a66006)
++++ b/.idea/workspace.xml	(date 1670923053133)
+@@ -4,9 +4,29 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="93208719-b4e2-40bf-ac31-b60a0ff24c52" name="Changes" comment="">
++    <list default="true" id="93208719-b4e2-40bf-ac31-b60a0ff24c52" name="Changes" comment="Server 프로젝트에 SQL CONNECTOR 추가">
++      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/ChatWindow.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/client/src/main/resources/cloudy.png" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/client/src/main/resources/littlecloudy.png" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/client/src/main/resources/raining.png" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/client/src/main/resources/refresh_white.png" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/client/src/main/resources/snowandrain.png" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/client/src/main/resources/snowing.png" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/client/src/main/resources/sunny.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__10_37__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__10_37__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__10_37__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__10_37__Changes_1.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_4_31_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_4_31_PM__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM__Changes_1.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_13_12_00_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_13_12_00_AM__Changes_.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/weather/Weather.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/weather/Weather.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/panel/MainWindowPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/panel/MainWindowPanel.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/panel/WeatherPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/panel/WeatherPanel.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindow.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/gagaotalk_client.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gagaotalk_client.jar" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/gagaotalk_server.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gagaotalk_server.jar" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -17,6 +37,7 @@
+     <option name="RECENT_TEMPLATES">
+       <list>
+         <option value="Enum" />
++        <option value="Kotlin Class" />
+         <option value="Class" />
+       </list>
+     </option>
+@@ -33,22 +54,16 @@
+       </map>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+-  </component>
+-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+-  "lastFilter": {
+-    "state": "OPEN"
+-  }
+-}]]></component>
+-  <component name="GithubPullRequestsUISettings">
+-    <option name="selectedUrlAndAccountId">
+-      <UrlAndAccount>
+-        <option name="accountId" value="c44bbd8e-13e0-4dd8-b1ee-492a5dd7a7f2" />
+-        <option name="url" value="https://github.com/tmin002/gagaotalk.git" />
+-      </UrlAndAccount>
+-    </option>
+   </component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
++  </component>
++  <component name="MavenImportPreferences">
++    <option name="generalSettings">
++      <MavenGeneralSettings>
++        <option name="usePluginRegistry" value="true" />
++      </MavenGeneralSettings>
++    </option>
+   </component>
+   <component name="ProjectId" id="2Hyslytn5AqITSTwoX3BSirFfJF" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+@@ -65,7 +80,7 @@
+     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;azul-1.8&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;C:/Users/PC/Downloads/gagaotalk&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/jwooo/Desktop/Univ/instakilogram&quot;,
+     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+@@ -74,7 +89,7 @@
+     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+ }</component>
+@@ -89,6 +104,7 @@
+       <recent name="$PROJECT_DIR$/src" />
+     </key>
+     <key name="MoveFile.RECENT_KEYS">
++      <recent name="C:\Users\PC\IdeaProjects\gagaotalk\client\src\main\resources" />
+       <recent name="C:\Users\Administrator\IdeaProjects\gagaotalk\client\src\main\resources" />
+       <recent name="$PROJECT_DIR$/" />
+     </key>
+@@ -137,7 +153,6 @@
+       <workItem from="1670692942438" duration="554000" />
+       <workItem from="1670693509343" duration="3699000" />
+       <workItem from="1670815134969" duration="25190000" />
+-      <workItem from="1670903878764" duration="4291000" />
+     </task>
+     <task id="LOCAL-00001" summary="Fixed submodule dependencies">
+       <created>1669271663768</created>
+@@ -300,12 +315,12 @@
+       <option name="project" value="LOCAL" />
+       <updated>1670843619971</updated>
+     </task>
+-    <task id="LOCAL-00024" summary="회원탈퇴 수정">
+-      <created>1670906691436</created>
++    <task id="LOCAL-00024" summary="Server 프로젝트에 SQL CONNECTOR 추가">
++      <created>1670914343137</created>
+       <option name="number" value="00024" />
+       <option name="presentableId" value="LOCAL-00024" />
+       <option name="project" value="LOCAL" />
+-      <updated>1670906691436</updated>
++      <updated>1670914343137</updated>
+     </task>
+     <option name="localTasksCounter" value="25" />
+     <servers />
+@@ -341,8 +356,8 @@
+     <MESSAGE value="최상위 JFrame (Window) 추가" />
+     <MESSAGE value="MainWindow 관련 추가" />
+     <MESSAGE value="친구 검색 기능 및 채팅방 친구 초대 기능 추가" />
+-    <MESSAGE value="회원탈퇴 수정" />
+-    <option name="LAST_COMMIT_MESSAGE" value="회원탈퇴 수정" />
++    <MESSAGE value="Server 프로젝트에 SQL CONNECTOR 추가" />
++    <option name="LAST_COMMIT_MESSAGE" value="Server 프로젝트에 SQL CONNECTOR 추가" />
+   </component>
+   <component name="XSLT-Support.FileAssociations.UIState">
+     <expand />
+Index: client/src/main/java/kr/gagaotalk/client/gui/window/MainWindow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package kr.gagaotalk.client.gui.window;\r\n\r\nimport kr.gagaotalk.client.authentication.Authentication;\r\nimport kr.gagaotalk.client.gui.Colors;\r\nimport kr.gagaotalk.client.gui.ResourceManager;\r\nimport kr.gagaotalk.client.gui.component.ImageButton;\r\nimport kr.gagaotalk.client.gui.panel.*;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.util.ArrayList;\r\n\r\npublic class MainWindow extends Window {\r\n\r\n    private final SpringLayout mainWindowLayout = new SpringLayout();\r\n    private final JPanel sideBar = new JPanel(null);\r\n    private final SideBarButton friendsButton = new SideBarButton(\r\n            \"friends\",\r\n            \"/friends.png\",\r\n            \"/friends_selected.png\",\r\n            false, this);\r\n    private final SideBarButton chatButton = new SideBarButton(\r\n            \"chat\",\r\n            \"/chat.png\",\r\n            \"/chat_selected.png\",\r\n            false, this);\r\n    private final SideBarButton weatherButton = new SideBarButton(\r\n            \"weather\",\r\n            \"/weather.png\",\r\n            \"/weather_selected.png\",\r\n            false, this);\r\n    private final SideBarButton settingsButton = new SideBarButton(\r\n            \"settings\",\r\n            \"/settings.png\",\r\n            \"/settings_selected.png\",\r\n            false, this);\r\n    private final SideBarButton signOutButton = new SideBarButton(\r\n            \"signOut\",\r\n            \"/logout.png\",\r\n            \"/logout.png\",\r\n            true, this);\r\n\r\n    // 보여질 판넬\r\n    private final MainWindowPanel chatPanel = new ChatPanel();\r\n    private final MainWindowPanel weatherPanel = new WeatherPanel();\r\n    private final MainWindowPanel settingsPanel = new SettingsPanel();\r\n    private final MainWindowPanel friendsPanel = new FriendsPanel();\r\n    private JPanel shownPanel = new JPanel(new GridLayout(1, 1)); // default\r\n\r\n    public MainWindow() {\r\n        // Initialize\r\n        Container root = this.getContentPane();\r\n        setSize(374, 656);\r\n        setLayout(mainWindowLayout);\r\n\r\n        // Configure sidebar\r\n        sideBar.setBackground(Colors.GACHON_BLUE);\r\n        sideBar.setPreferredSize(new Dimension(66, 0));\r\n        mainWindowLayout.putConstraint(SpringLayout.WEST, sideBar, 0, SpringLayout.WEST, root);\r\n        mainWindowLayout.putConstraint(SpringLayout.NORTH, sideBar, 0, SpringLayout.NORTH, root);\r\n        mainWindowLayout.putConstraint(SpringLayout.SOUTH, sideBar, 0, SpringLayout.NORTH, signOutButton);\r\n        root.add(sideBar);\r\n\r\n        // Add buttons to sidebar\r\n        sideBar.add(friendsButton);\r\n        friendsButton.setBounds(0, 37, 66, 63);\r\n\r\n        sideBar.add(chatButton);\r\n        chatButton.setBounds(0, 101, 66, 63);\r\n\r\n        sideBar.add(weatherButton);\r\n        weatherButton.setBounds(0, 164, 66, 63);\r\n\r\n        sideBar.add(settingsButton);\r\n        settingsButton.setBounds(0, 227, 66, 63);\r\n\r\n        // Add sign out button\r\n        mainWindowLayout.putConstraint(SpringLayout.WEST, signOutButton, 0, SpringLayout.WEST, root);\r\n        mainWindowLayout.putConstraint(SpringLayout.SOUTH, signOutButton, 0, SpringLayout.SOUTH, root);\r\n        signOutButton.setPreferredSize(new Dimension(66, 63));\r\n        root.add(signOutButton);\r\n\r\n        // side bar buttons default image set\r\n        friendsButton.setIcon(\r\n                ImageIconResizer.resize(\r\n                        ResourceManager.getImageIcon(\"/friends_selected.png\"), 66, 63));\r\n\r\n        // Add shownPanel\r\n        mainWindowLayout.putConstraint(SpringLayout.WEST, shownPanel, 0, SpringLayout.EAST, sideBar);\r\n        mainWindowLayout.putConstraint(SpringLayout.EAST, shownPanel, 0, SpringLayout.EAST, root);\r\n        mainWindowLayout.putConstraint(SpringLayout.NORTH, shownPanel, 0, SpringLayout.NORTH, root);\r\n        mainWindowLayout.putConstraint(SpringLayout.SOUTH, shownPanel, 0, SpringLayout.SOUTH, root);\r\n        root.add(shownPanel);\r\n\r\n        // Event handlers\r\n        friendsButton.addActionListener(e -> changeShownPanel(friendsPanel));\r\n        chatButton.addActionListener(e -> changeShownPanel(chatPanel));\r\n        weatherButton.addActionListener(e -> changeShownPanel(weatherPanel));\r\n        settingsButton.addActionListener(e -> changeShownPanel(settingsPanel));\r\n        signOutButton.addActionListener(e -> {\r\n           // Sign Out\r\n            Authentication.signOut();\r\n            dispose();\r\n        });\r\n\r\n        friendsPanel.addTopButtonActionListener(e -> {\r\n            System.out.println(\"친구추가 버튼 클릭됨\");\r\n        });\r\n        chatPanel.addTopButtonActionListener(e -> {\r\n            System.out.println(\"채팅방추가 버튼 클릭됨\");\r\n        });\r\n        weatherPanel.addTopButtonActionListener(e -> {\r\n            System.out.println(\"날씨 새로고침 버튼 클릭됨\");\r\n        });\r\n\r\n        // Finish\r\n        root.setBackground(Color.white);\r\n        changeShownPanel(friendsPanel);\r\n        super.showWindow();\r\n    }\r\n\r\n    // 판넬 추가했을때 호출해야 하는 함수.\r\n    public void updateView() {\r\n        revalidate();\r\n        repaint();\r\n    }\r\n\r\n    // shownPanel 바꾸는 함수.\r\n    public void changeShownPanel(MainWindowPanel p) {\r\n       shownPanel.removeAll();\r\n       shownPanel.add(p);\r\n       updateView();\r\n    }\r\n}\r\n\r\nclass SideBarButton extends ImageButton {\r\n\r\n    // static: SideBarButton 끼리 클릭된 버튼의 정보 공유. 기본값은 friends\r\n    private static String selectedButtonName = \"friends\";\r\n    private static ArrayList<SideBarButton> buttons = new ArrayList<>();\r\n\r\n    // member variables and constructor\r\n    private final String buttonName;\r\n    private final ImageIcon imageWhenDefault;\r\n    private final ImageIcon imageWhenSelected;\r\n    public SideBarButton(String buttonName, String imagePathWhenDefault,\r\n                         String imagePathWhenSelected, boolean isSignOutButton,\r\n                         MainWindow parent) {\r\n        // Initialize\r\n        super(imagePathWhenDefault, 66, 63);\r\n\r\n        if (!isSignOutButton)\r\n            buttons.add(this);\r\n\r\n        this.buttonName = buttonName;\r\n        this.imageWhenSelected = ImageIconResizer.resize(\r\n                ResourceManager.getImageIcon(imagePathWhenSelected), 66, 63);\r\n        this.imageWhenDefault = ImageIconResizer.resize(\r\n                ResourceManager.getImageIcon(imagePathWhenDefault), 66, 63);\r\n\r\n        // Init style\r\n        changeImageToDefault();\r\n\r\n        // Add handler\r\n        this.addActionListener(e -> {\r\n            if (!selectedButtonName.equals(buttonName)) {\r\n                changeImageToSelected();\r\n\r\n                if (!isSignOutButton) {\r\n                    selectedButtonName = this.buttonName;\r\n                    for (SideBarButton sbb : buttons) {\r\n                        if (sbb != this)\r\n                            sbb.changeImageToDefault();\r\n                    }\r\n                }\r\n            }\r\n        });\r\n    }\r\n\r\n    public void changeImageToSelected() {\r\n        setIcon(imageWhenSelected);\r\n    }\r\n    public void changeImageToDefault() {\r\n        setIcon(imageWhenDefault);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindow.java b/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindow.java
+--- a/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindow.java	(revision ee0a43ff4b65d9555f86d07f2e2a0d20a7a66006)
++++ b/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindow.java	(date 1670914382918)
+@@ -13,7 +13,7 @@
+ public class MainWindow extends Window {
+ 
+     private final SpringLayout mainWindowLayout = new SpringLayout();
+-    private final JPanel sideBar = new JPanel(null);
++    public final JPanel sideBar = new JPanel(null);
+     private final SideBarButton friendsButton = new SideBarButton(
+             "friends",
+             "/friends.png",
+@@ -40,19 +40,46 @@
+             "/logout.png",
+             true, this);
+ 
+-    // 보여질 판넬
+     private final MainWindowPanel chatPanel = new ChatPanel();
+-    private final MainWindowPanel weatherPanel = new WeatherPanel();
++    private final MainWindowPanel weatherPanel = new WeatherPanel(this);
+     private final MainWindowPanel settingsPanel = new SettingsPanel();
+     private final MainWindowPanel friendsPanel = new FriendsPanel();
++    // 보여질 판넬
+     private JPanel shownPanel = new JPanel(new GridLayout(1, 1)); // default
+ 
++    // Background label
++    private JLabel backgroundPanel = new JLabel("");
++    // Set background
++    public void setBackground(String backgroundResourcePath) {
++    }
++
+     public MainWindow() {
+         // Initialize
+         Container root = this.getContentPane();
+         setSize(374, 656);
+         setLayout(mainWindowLayout);
+ 
++        // Add buttons
++        friendsButton.setPreferredSize(new Dimension(66, 63));
++        mainWindowLayout.putConstraint(SpringLayout.WEST, friendsButton, 0, SpringLayout.WEST, root);
++        mainWindowLayout.putConstraint(SpringLayout.NORTH, friendsButton, 37, SpringLayout.NORTH, root);
++        add(friendsButton);
++
++        chatButton.setPreferredSize(new Dimension(66, 63));
++        mainWindowLayout.putConstraint(SpringLayout.WEST, chatButton, 0, SpringLayout.WEST, root);
++        mainWindowLayout.putConstraint(SpringLayout.NORTH, chatButton, 101, SpringLayout.NORTH, root);
++        add(chatButton);
++
++        weatherButton.setPreferredSize(new Dimension(66, 63));
++        mainWindowLayout.putConstraint(SpringLayout.WEST, weatherButton, 0, SpringLayout.WEST, root);
++        mainWindowLayout.putConstraint(SpringLayout.NORTH, weatherButton, 164, SpringLayout.NORTH, root);
++        add(weatherButton);
++
++        settingsButton.setPreferredSize(new Dimension(66, 63));
++        mainWindowLayout.putConstraint(SpringLayout.WEST, settingsButton, 0, SpringLayout.WEST, root);
++        mainWindowLayout.putConstraint(SpringLayout.NORTH, settingsButton, 227, SpringLayout.NORTH, root);
++        add(settingsButton);
++
+         // Configure sidebar
+         sideBar.setBackground(Colors.GACHON_BLUE);
+         sideBar.setPreferredSize(new Dimension(66, 0));
+@@ -61,18 +88,6 @@
+         mainWindowLayout.putConstraint(SpringLayout.SOUTH, sideBar, 0, SpringLayout.NORTH, signOutButton);
+         root.add(sideBar);
+ 
+-        // Add buttons to sidebar
+-        sideBar.add(friendsButton);
+-        friendsButton.setBounds(0, 37, 66, 63);
+-
+-        sideBar.add(chatButton);
+-        chatButton.setBounds(0, 101, 66, 63);
+-
+-        sideBar.add(weatherButton);
+-        weatherButton.setBounds(0, 164, 66, 63);
+-
+-        sideBar.add(settingsButton);
+-        settingsButton.setBounds(0, 227, 66, 63);
+ 
+         // Add sign out button
+         mainWindowLayout.putConstraint(SpringLayout.WEST, signOutButton, 0, SpringLayout.WEST, root);
+@@ -174,6 +189,13 @@
+                     }
+                 }
+             }
++            if (selectedButtonName.equals("weather")) {
++                parent.sideBar.setVisible(false);
++                parent.getContentPane().setBackground(Color.black);
++            } else {
++                parent.sideBar.setVisible(true);
++                parent.getContentPane().setBackground(Color.white);
++            }
+         });
+     }
+ 
+@@ -183,4 +205,4 @@
+     public void changeImageToDefault() {
+         setIcon(imageWhenDefault);
+     }
+-}
++}
+\ No newline at end of file
+Index: client/src/main/java/kr/gagaotalk/client/gui/panel/MainWindowPanel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package kr.gagaotalk.client.gui.panel;\r\n\r\n\r\nimport kr.gagaotalk.client.gui.component.ImageButton;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.awt.event.ActionListener;\r\n\r\npublic abstract class MainWindowPanel extends JPanel {\r\n\r\n    public final SpringLayout layout = new SpringLayout();\r\n    private Label titleLabel;\r\n    private ImageButton topButton;\r\n\r\n    private void initialize(String titleLabelText) {\r\n        setPreferredSize(new Dimension(308, 656));\r\n        setBackground(Color.white);\r\n        setLayout(layout);\r\n\r\n        // titleLabel\r\n        titleLabel = new Label(titleLabelText);\r\n        layout.putConstraint(SpringLayout.WEST, titleLabel,36, SpringLayout.WEST, this);\r\n        layout.putConstraint(SpringLayout.NORTH, titleLabel,54, SpringLayout.NORTH, this);\r\n        titleLabel.setFont(new Font(\"Dialog\", Font.BOLD, 24));\r\n        add(titleLabel);\r\n    }\r\n\r\n    // topButton actionListener\r\n    public void addTopButtonActionListener(ActionListener al) {\r\n        topButton.addActionListener(al);\r\n    }\r\n\r\n    // topButton 보이게\r\n    public MainWindowPanel(String titleLabelText, String topButtonImagePath) {\r\n        initialize(titleLabelText);\r\n\r\n        // topButton placement\r\n        topButton = new ImageButton(topButtonImagePath, 30, 30);\r\n        layout.putConstraint(SpringLayout.NORTH, topButton, 54, SpringLayout.NORTH, this);\r\n        layout.putConstraint(SpringLayout.EAST, topButton, -33, SpringLayout.EAST, this);\r\n        add(topButton);\r\n    }\r\n\r\n    // topButton 안보이게\r\n    public MainWindowPanel(String titleLabelText) {\r\n        initialize(titleLabelText);\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/java/kr/gagaotalk/client/gui/panel/MainWindowPanel.java b/client/src/main/java/kr/gagaotalk/client/gui/panel/MainWindowPanel.java
+--- a/client/src/main/java/kr/gagaotalk/client/gui/panel/MainWindowPanel.java	(revision ee0a43ff4b65d9555f86d07f2e2a0d20a7a66006)
++++ b/client/src/main/java/kr/gagaotalk/client/gui/panel/MainWindowPanel.java	(date 1670914384060)
+@@ -10,7 +10,7 @@
+ public abstract class MainWindowPanel extends JPanel {
+ 
+     public final SpringLayout layout = new SpringLayout();
+-    private Label titleLabel;
++    public Label titleLabel;
+     private ImageButton topButton;
+ 
+     private void initialize(String titleLabelText) {
+Index: client/src/main/java/kr/gagaotalk/client/gui/panel/WeatherPanel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package kr.gagaotalk.client.gui.panel;\r\n\r\npublic class WeatherPanel extends MainWindowPanel {\r\n\r\n    public WeatherPanel() {\r\n        super(\"Weather\", \"/refresh.png\");\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/java/kr/gagaotalk/client/gui/panel/WeatherPanel.java b/client/src/main/java/kr/gagaotalk/client/gui/panel/WeatherPanel.java
+--- a/client/src/main/java/kr/gagaotalk/client/gui/panel/WeatherPanel.java	(revision ee0a43ff4b65d9555f86d07f2e2a0d20a7a66006)
++++ b/client/src/main/java/kr/gagaotalk/client/gui/panel/WeatherPanel.java	(date 1670920748297)
+@@ -1,8 +1,118 @@
+ package kr.gagaotalk.client.gui.panel;
+ 
++import kr.gagaotalk.client.gui.ResourceManager;
++import kr.gagaotalk.client.gui.component.Label;
++import kr.gagaotalk.client.gui.component.PictureBox;
++import kr.gagaotalk.client.gui.window.ImageIconResizer;
++import kr.gagaotalk.client.gui.window.MainWindow;
++
++import javax.swing.*;
++import java.awt.*;
++
+ public class WeatherPanel extends MainWindowPanel {
+ 
+-    public WeatherPanel() {
+-        super("Weather", "/refresh.png");
++
++    private ImageIcon cloudyImageIcon = ImageIconResizer.resize(
++            ResourceManager.getImageIcon("/cloudy.png"),
++            50, 50
++    );
++    private ImageIcon rainyImageIcon = ImageIconResizer.resize(
++            ResourceManager.getImageIcon("/raining.png"),
++            50, 50
++    );
++    private ImageIcon partlyCloudyImageIcon = ImageIconResizer.resize(
++            ResourceManager.getImageIcon("/littlecloudy.png"),
++            50, 50
++    );
++    private ImageIcon snowyImageIcon = ImageIconResizer.resize(
++            ResourceManager.getImageIcon("/snowing.png"),
++            50, 50
++    );
++    private ImageIcon snowAndRainImageIcon = ImageIconResizer.resize(
++            ResourceManager.getImageIcon("/snowandrain.png"),
++            50, 50
++    );
++
++    private SpringLayout contentPanelLayout = new SpringLayout();
++    private JPanel contentPanel = new JPanel(contentPanelLayout);
++    private JPanel contentPanelWrapper = new JPanel(new GridBagLayout());
++    private JScrollPane contentPanelScrollPane = new JScrollPane(contentPanelWrapper);
++    private PictureBox weatherStatusPictureBox = new PictureBox(rainyImageIcon, 50, 50);
++    private Label temperatureLabel = new Label("10°C");
++    public WeatherPanel(MainWindow parent) {
++
++        // Initialize
++        super("Weather", "/refresh_white.png");
++        super.titleLabel.setForeground(Color.white);
++        setBackground(new Color(0,0,0,50));
++
++        // Init rootPanel
++        contentPanelScrollPane.setBackground(new Color(0,0,0,0));
++        contentPanelScrollPane.setBorder(null);
++        layout.putConstraint(SpringLayout.NORTH, contentPanelScrollPane, 151, SpringLayout.NORTH, this);
++        layout.putConstraint(SpringLayout.SOUTH, contentPanelScrollPane, 0, SpringLayout.SOUTH, this);
++        layout.putConstraint(SpringLayout.WEST, contentPanelScrollPane, 0, SpringLayout.WEST, this);
++        layout.putConstraint(SpringLayout.EAST, contentPanelScrollPane, 0, SpringLayout.EAST, this);
++        add(contentPanelScrollPane);
++
++        // Init contentPanelWrapper
++        GridBagConstraints gbc = new GridBagConstraints();
++        gbc.gridwidth = GridBagConstraints.REMAINDER;
++        gbc.fill = GridBagConstraints.HORIZONTAL;
++        contentPanelWrapper.setBackground(new Color(0, 0, 0, 0));
++
++        // Init contentPanel
++        contentPanel.setBackground(new Color(0,0,0,0));
++        contentPanel.setPreferredSize(new Dimension(200, 500));
++        contentPanelWrapper.add(contentPanel);
++
++        // Add weather picture box
++        contentPanelLayout.putConstraint(SpringLayout.NORTH, weatherStatusPictureBox, 4, SpringLayout.NORTH, this);
++        contentPanelLayout.putConstraint(SpringLayout.WEST, weatherStatusPictureBox, 22, SpringLayout.WEST, this);
++        contentPanel.add(weatherStatusPictureBox);
++
++        // Add temperature label
++        contentPanelLayout.putConstraint(SpringLayout.NORTH, temperatureLabel, 2, SpringLayout.NORTH, this);
++        contentPanelLayout.putConstraint(SpringLayout.WEST, temperatureLabel, 84, SpringLayout.WEST, this);
++        temperatureLabel.setFontSize(48);
++        temperatureLabel.setFontWeight(Font.BOLD);
++        temperatureLabel.setForeground(Color.white);
++        contentPanel.add(temperatureLabel);
++
++        // Add asdfasdfsaf
++        WeatherHourlyAtom wha = new WeatherHourlyAtom("19시", "맑음");
++        contentPanelLayout.putConstraint(SpringLayout.NORTH, wha, 94, SpringLayout.NORTH, this);
++        contentPanelLayout.putConstraint(SpringLayout.WEST, wha, 0, SpringLayout.WEST, this);
++        contentPanelLayout.putConstraint(SpringLayout.EAST, wha, 0, SpringLayout.EAST, this);
++        contentPanel.add(wha);
++
++    }
++
++    public void updateWeather() {
++
++    }
++
++}
++
++class WeatherHourlyAtom extends JPanel {
++    public WeatherHourlyAtom(String hourString, String weather) {
++
++        // Initialize
++        setPreferredSize(new Dimension(200, 41));
++        setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
++        setBackground(new Color(0, 0, 0, 0));
++        setLayout(null);
++
++        // Add hour string
++        Label hourLabel = new Label(hourString);
++        hourLabel.setForeground(Color.white);
++        hourLabel.setFontSize(15);
++        hourLabel.setBounds(5, 14, 70, 17);
++        add(hourLabel);
++
++        // Add weather img
++        PictureBox weatherImage = new PictureBox(ResourceManager.getImageIcon("/cloudy.png"), 18, 18);
++        weatherImage.setBounds(179, 14, 18, 18);
++        add(weatherImage);
+     }
+ }
