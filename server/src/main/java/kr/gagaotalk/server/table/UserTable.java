@@ -1,5 +1,6 @@
 package kr.gagaotalk.server.table;
 
+import kr.gagaotalk.server.ErrorInProcessingException;
 import kr.gagaotalk.server.table.Table;
 
 import java.sql.*;
@@ -69,92 +70,91 @@ public class UserTable extends Table {
     }
 
     //test result : no problem
-    public String login(String inputtedUserID, String inputtedPW) {
+    public void login(String inputtedUserID, String inputtedPW) throws ErrorInProcessingException {
         StringBuilder password = executeQuery("select password from " + tableName + " where id = '" + inputtedUserID + "';", 1);
-        if(password.length() == 0) { // doesn't exist inputted ID in table
-            return "1";
+        if(password.length() == 0) {
+            throw new ErrorInProcessingException(1, "doesn't exist inputted ID in table");
         }
         else {
             if(inputtedPW.equals(password.toString().trim())) {
                 // login success
                 OnlineUserTable onlineUserTable = new OnlineUserTable(con, "onlineUserTable");
-                if(onlineUserTable.isOnline(inputtedUserID)) { // already online
-                    return "2";
+                if(onlineUserTable.isOnline(inputtedUserID)) {
+                    throw new ErrorInProcessingException(2, " already online");
                 }
                 else {
                     onlineUserTable.insertOnlineTableLoginUser(inputtedUserID); // insert this account into onlineTable
                 }
-                return "0"; //success
+                //success
             }
             else {
-                return "1"; //wrong password
-
+                throw new ErrorInProcessingException(1, "wrong password");
             }
         }
     }
 
-    public String logout(String userID) {
+    public void logout(String userID) {
         OnlineUserTable onlineUserTable = new OnlineUserTable(con, "onlineUserTable");
         if(onlineUserTable.isOnline(userID)) { // already online
             onlineUserTable.deleteOnlineTableLogoutUser(userID);
-            return "0";
         }
-        else {
-            // that userID is OFFLINE
-        }
-        return "";
     }
 
     // phone number format : no hyphen
     // test check no problem
-    public String signup(String userID, String nickname, String phoneNumber, String birth, String password) {
+    public void signup(String userID, String nickname, String phoneNumber, String birth, String password) throws ErrorInProcessingException {
         // ********* need to add Error type : password security (8 over)
-        if(doesExistID(userID)) { return "1"; } //already exist ID
+        if(doesExistID(userID)) { throw new ErrorInProcessingException(1, "already exist ID"); } //
         else {
-            if(!isValidBirthdayFormat(birth)) { return "2"; } //invalid birthday
-            if(nickname.isEmpty()) { return "3"; } //nickname is null
-            if(phoneNumber.length() != 11) { return "4"; }
+            if(!isValidBirthdayFormat(birth)) { throw new ErrorInProcessingException(2, "invalid birthday"); }
+            if(nickname.isEmpty()) { throw new ErrorInProcessingException(3, "nickname is null"); } //
+            if(phoneNumber.length() != 11) { throw new ErrorInProcessingException(4, "phone number length is not 11"); }
             try {
                 int phone = Integer.parseInt(phoneNumber);
-            } catch (NumberFormatException e) { return "4"; }
-            if(password.isEmpty()) { return "5"; } //password is null
+            } catch (NumberFormatException e) { throw new ErrorInProcessingException(4, "invalid phone number"); }
+            if(password.isEmpty()) { throw new ErrorInProcessingException(5, "password is null"); } //
             executeUpdate("insert into " + tableName + " values ('" + userID + "', '" + password + "', '" + nickname + "', '', '" + phoneNumber + "', '" + birth + "' );");
         }
-        return "0"; // success
     }
 
-    public String findID(String nickname, String birth) {
+    public void unregister(String userID) throws ErrorInProcessingException {
+        if(doesExistID(userID)) {
+            executeUpdate("delete from " + tableName + " where id = '" + userID + "';");
+        }
+        else { throw new ErrorInProcessingException(1, "does not exist id"); }
+    }
+
+    public String findID(String nickname, String birth) throws ErrorInProcessingException {
         StringBuilder id = executeQuery("select id from " + tableName + " where nickname = '" + nickname + "' and birthday = '" + birth + "';", 1);
-        if(id.toString().trim().equals("")) { return "1"; } //does not exist
+        if(id.toString().trim().equals("")) { throw new ErrorInProcessingException(1, "does not exist id"); }
         return id.toString(); // return id
     }
 
-    public String findPW(String userID, String phoneNumber) {
+    public String findPW(String userID, String phoneNumber) throws ErrorInProcessingException {
 
-        if(!doesExistID(userID)) { return "2"; } // userID does not exist
+        if(!doesExistID(userID)) { throw new ErrorInProcessingException(2, "does not exist id"); } // userID does not exist
         StringBuilder password = executeQuery("select password from " + tableName + " where id = '" + userID + "' and phoneNumber = '" + phoneNumber + "';", 1);
-        if(password.toString().trim().equals("")) { return "1"; }
+        if(password.toString().trim().equals("")) { throw new ErrorInProcessingException(1, "does not exist id"); }
         String tempPassword = getRandomPassword(12);
         executeUpdate("update " + tableName + " set password = '" + tempPassword + "' where id = '" + userID + "';");
         return password.toString(); // return password in String (success)
     }
 
     // test result : no problem
-    public String updateUserInfo(String userID, String nickname, String birth, String bio) {
-        if(!isValidBirthdayFormat(birth)) { return "1"; }
-        if(nickname.isEmpty()) { return "2"; }
+    public void updateUserInfo(String userID, String nickname, String birth, String bio) throws ErrorInProcessingException {
+        if(!isValidBirthdayFormat(birth)) { throw new ErrorInProcessingException(1, "invaild birthday"); }
+        if(nickname.isEmpty()) { throw new ErrorInProcessingException(2, "nickname is null"); }
         executeUpdate("update " + tableName + " set nickname = '" + nickname + "', birthday = '" + birth + "', bio = '" + bio + "' where id = '" + userID + "';");
-        return "0"; //success
+
     }
 
     // test result : no problem
-    public String updatePassword(String userID, String inputtedCurrentPW, String newPW) {
+    public void updatePassword(String userID, String inputtedCurrentPW, String newPW) throws ErrorInProcessingException {
         String curPW = getPW(userID);
         if(curPW.trim().equals(inputtedCurrentPW)) { // if same
             executeUpdate("update " + tableName + " set password = '" + newPW + "' where id = '" + userID + "';");
-            return "0"; // update success
         }
-        else { return "1"; } // wrong password
+        else { throw new ErrorInProcessingException(1, "wrong password"); } // wrong password
     }
 
     // test result : no problem

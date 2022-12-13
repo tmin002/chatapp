@@ -21,7 +21,7 @@ public class DatabaseEG {
         }
     }
 
-    public static void main(String args[]) throws ClassNotFoundException {
+    public static void main(String args[]) throws ClassNotFoundException, ErrorInProcessingException {
         /*System.out.println("Enter the SQL server password:");
         Scanner kb = new Scanner(System.in);
         String pw = kb.nextLine(); // or create password String variable*/

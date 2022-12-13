@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Table {
     Connection con = null;
@@ -89,7 +90,7 @@ public class Table {
             Statement stmt = con.createStatement();
             rs = stmt.executeQuery(query);
             while(rs.next()) {
-                resultStringBuilder.append(rs.getString(1) + " ");
+                resultStringBuilder.append(rs.getString(column) + " ");
                 cnt++;
             }
         } catch(SQLException e) {
@@ -107,12 +108,28 @@ public class Table {
             Statement stmt = con.createStatement();
             rs = stmt.executeQuery(query);
             while(rs.next()) {
-                resultStringBuilder.append(rs.getString(1) + delimiter);
+                resultStringBuilder.append(rs.getString(column) + delimiter);
             }
         } catch(SQLException e) {
             e.printStackTrace();
         }
         return resultStringBuilder;
+    }
+
+    public ArrayList<String> executeQueryArrayList(String query, int column) {
+        ArrayList<String> resultArrayList = new ArrayList<>();
+        start();
+        ResultSet rs = null;
+        try {
+            Statement stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            while(rs.next()) {
+                resultArrayList.add(rs.getString(column));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return resultArrayList;
     }
 
     // return ResultSet variable just call with query (e.g. create database)
