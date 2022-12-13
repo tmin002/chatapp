@@ -50,6 +50,10 @@ public class ChatroomTable extends Table {
         return "";
     }
 
+    public void receiveMessage() {
+
+    }
+
     //non-finished
     public String sendMessage(String chatroomID, String content, String userID) {
         StringBuilder chatroomContentAddress = executeQuery("select contentAddress from " + tableName + " where chatroomID = " + chatroomID + ";", 1);
@@ -68,7 +72,7 @@ public class ChatroomTable extends Table {
 
 
     // need to extract only the message part
-    public StringBuilder getContents(String chatroomID) {
+    public StringBuilder getMessage(String chatroomID) {
         StringBuilder contentsAddress = executeQuery("select contentAddress from " + tableName + " where id = " + chatroomID + ";", 1);
         StringBuilder content = new StringBuilder("");
         try {
