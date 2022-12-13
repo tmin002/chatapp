@@ -13,21 +13,22 @@ public class Table {
 
     public int cnt;
 
+    //just test
+    Table() {
+        this.tableName = "noName";
+        this.schema = "noSchema";
+        this.databaseName = "noDatabase";
+    }
+    //just test
+    public Table(String tableName) {
+        this.tableName = tableName;
+        this.schema = "noSchema";
+        this.databaseName = "noDatabase";
+    }
     public Table(Connection con) {
         cnt = 1;
         this.con = con;
         this.tableName = "noName";
-    }
-    public Table(Connection con, String tableName) {
-        this.con = con;
-        this.tableName = tableName;
-        cnt = getTableLength(tableName) + 1;
-    }
-    public Table(Connection con, String tableName, String schema) {
-        this.con = con;
-        this.tableName = tableName;
-        this.schema = schema;
-        cnt = getTableLength(tableName) + 1;
     }
     public Table(Connection con, String tableName, String schema, String databaseName) {
         this.con = con;

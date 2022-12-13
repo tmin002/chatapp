@@ -5,7 +5,7 @@ import java.sql.Connection;
 
 public class FriendsTables extends Table {
     FriendsTables(Connection con) { super(con); }
-    FriendsTables(Connection con, String userID) { super(con, userID + "_friends", database); }
+    FriendsTables(Connection con, String userID) { super(con, userID + "_friends", schema, database); }
 
     public static String database = "friends";
     public static String schema = "id varchar(32) not null, primary key(id)"; // or "id varchar(32) not null, state varchar(8), primary key(id)" state : invisible/ block etc.
