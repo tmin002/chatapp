@@ -1,7 +1,5 @@
 package kr.gagaotalk.server;
 
-import kr.gagaotalk.server.connection.Server;
-
 import java.io.IOException;
 import java.net.BindException;
 import java.net.ServerSocket;

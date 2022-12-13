@@ -48,7 +48,7 @@ public class DatabaseEG {
         System.out.println(user1.login("user1", "1233"));*/
         //System.out.println(user)
 
-
+        GagaoTalkServer.mainLoop();
 
     }
 }
