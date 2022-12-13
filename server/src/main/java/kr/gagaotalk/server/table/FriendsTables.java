@@ -1,13 +1,11 @@
 package kr.gagaotalk.server.table;
 
-import kr.gagaotalk.server.ErrorInProcessingException;
-
 import java.sql.Connection;
 import java.util.ArrayList;
 
 public class FriendsTables extends Table {
     FriendsTables(Connection con) { super(con); }
-    public FriendsTables(Connection con, String userID) throws ErrorInProcessingException {
+    public FriendsTables(Connection con, String userID) {
         super(con, userID + "_friends", schema, database);
     }
 

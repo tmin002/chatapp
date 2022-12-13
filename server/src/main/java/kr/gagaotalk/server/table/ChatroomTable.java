@@ -23,7 +23,7 @@ public class ChatroomTable extends Table {
 
     private final int fileIDLength = 8;
 
-    public static String schema = "chatroomID varchar(16) not null, chatroomName varchar(32) not null, contentAddress varchar(32) not null, participantsAddress varchar(32) not null, primary key(chatroomID)";
+    public static String schema = "chatroomID varchar(16) not null, chatroomName varchar(32) not null, contentAddress varchar(32) not null, primary key(chatroomID)";
     public static String database = "gagaotalkDB";
 
     private boolean doesExistChatID(String chatroomID) {
@@ -62,20 +62,36 @@ public class ChatroomTable extends Table {
     //non-finished
     //mkCtRm
     public String createChatroom(ArrayList<String> participants, String chatroomName) {
+        //if(chatroomName.length() > 16)  limit word length
         String chatroomID = getRandomChatroomID();
+        String contentAddress = "./database/chatrooms/" + chatroomID + ".txt";
+        File chatroomContentFile = new File(contentAddress);
 
+        ParticipantsTables participantsTable = new ParticipantsTables(con, chatroomID);
+        participantsTable.addUsersToChatroom(participants);
+
+        try {
+            chatroomContentFile.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        executeUpdate("insert into " + tableName + " values ('" + chatroomID + "', '" + chatroomName + "', '" + contentAddress + "');");
         return "";
     }
 
     //non-finished
     //addCtRm
-    public String inviteUserToChatroom() {
+    public String inviteUserToChatroom(ArrayList<String> participants, String chatroomID) {
+
         return "";
     }
 
     //non-finished
     //invCtRm (notification)
-    public String invitedChatroom() {
+    public String invitedChatroom(String chatroomID) {
+
         return "";
     }
 
