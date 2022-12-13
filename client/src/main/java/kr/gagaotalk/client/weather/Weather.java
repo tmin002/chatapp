@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -116,49 +117,46 @@ public class Weather {
 //        System.out.println(data[2]);
     }
     //하늘상태
-    public static String getCloud() {
-        String cloud = new String();
-        switch (data[1]) {
-            case "1":
-                //맑음
-                cloud = "맑음";
-                break;
-            case "3":
-                //구름많음
-                cloud = "구름많음";
-                break;
-            case "4":
-                //흐림
-                cloud = "흐림";
-                break;
+    public static String getWhether() {
+        String whether = "";
+        //강수량 없을 경우 구름많 반환
+        if (Objects.equals(data[2], "0")) {
+            switch (data[1]) {
+                case "1":
+                    //맑음
+                    whether = "맑음";
+                    break;
+                case "3":
+                    //구름많음
+                    whether = "구름많음";
+                    break;
+                case "4":
+                    //흐림
+                    whether = "흐림";
+                    break;
+            }
         }
-        return cloud;
-    }
-    //강수형태
-    public static String getRain() {
-        String rain = new String();
-        switch (data[2]) {
-            case "0":
-                //없음
-                rain = "없음";
-                break;
-            case "1":
-                //비
-                rain = "비";
-                break;
-            case "2":
-                //비/눈
-                rain = "비/눈";
-                break;
-            case "3":
-                //눈
-                rain = "눈";
-                break;
-            case "4":
-                //소나기
-                rain = "소나기";
-                break;
+        //강수량 있을 경우 강수량만 반환
+        else {
+            switch (data[2]) {
+                case "1":
+                    //비
+                    whether = "비";
+                    break;
+                case "2":
+                    //비/눈
+                    whether = "비/눈";
+                    break;
+                case "3":
+                    //눈
+                    whether = "눈";
+                    break;
+                case "4":
+                    //소나기
+                    whether = "소나기";
+                    break;
+            }
         }
-        return rain;
+        return whether;
     }
 }
