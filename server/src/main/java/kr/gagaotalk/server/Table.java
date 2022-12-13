@@ -88,6 +88,7 @@ public class Table {
             rs = stmt.executeQuery(query);
             while(rs.next()) {
                 resultStringBuilder.append(rs.getString(1) + " ");
+                cnt++;
             }
         } catch(SQLException e) {
             e.printStackTrace();
