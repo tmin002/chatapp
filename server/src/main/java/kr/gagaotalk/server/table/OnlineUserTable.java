@@ -1,6 +1,7 @@
 package kr.gagaotalk.server.table;
 
 import kr.gagaotalk.server.DatabaseEG;
+import kr.gagaotalk.server.ErrorInProcessingException;
 
 import java.security.SecureRandom;
 import java.sql.Connection;
@@ -54,19 +55,25 @@ public class OnlineUserTable extends Table {
         return tt.equals("1");
     }
 
-    public String getUserIDInOnlineTable(String sessionID) {
-        StringBuilder userID = executeQuery("select userID from " + tableName + " where sessionID = '" + sessionID + "';", 1);
-        return userID.toString().trim();
+    public String getUserIDInOnlineTable(String sessionID) throws ErrorInProcessingException {
+        if(doesExistSessionID(sessionID)) {
+            StringBuilder userID = executeQuery("select userID from " + tableName + " where sessionID = '" + sessionID + "';", 1);
+            return userID.toString().trim();
+        }
+        else throw new ErrorInProcessingException(1, "does not exist sessionID");
     }
 
     public void insertOnlineTableLoginUser(String userID) {
-        String sessionID = getRandomSessionID();
-        executeUpdate("insert into " + tableName + " values ('" + userID + "', '" + sessionID + "');");
-
+        if(!isOnline(userID)) {
+            String sessionID = getRandomSessionID();
+            executeUpdate("inert into " + tableName + " values ('" + userID + "', '" + sessionID + "');");
+        }
     }
 
     public void deleteOnlineTableLogoutUser(String userID) {
-        executeUpdate("delete from " + tableName + " where userID = '" + userID + "';");
+        if(isOnline(userID)) {
+            executeUpdate("delete from " + tableName + " where userID = '" + userID + "';");
+        }
     }
 
 
