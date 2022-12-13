@@ -34,7 +34,7 @@ public class OnlineUserTable extends Table {
                 idx = sr.nextInt(len);
                 sb.append(charSet[idx]);
             }
-        } while (doesExistSessionID(sb.toString()) == true);
+        } while (doesExistSessionID(sb.toString()));
 
 
         return sb.toString();

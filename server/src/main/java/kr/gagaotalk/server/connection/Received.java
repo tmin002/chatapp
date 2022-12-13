@@ -1,4 +1,4 @@
-package kr.gagaotalk.server;
+package kr.gagaotalk.server.connection;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;

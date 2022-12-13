@@ -1,5 +1,7 @@
 package kr.gagaotalk.server.table;
 
+import kr.gagaotalk.server.table.Table;
+
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.security.SecureRandom;
 
-public class UserTable extends Table{
+public class UserTable extends Table {
     public UserTable() { super(); } // just test
     public UserTable(Connection con) { super(con); }
     public UserTable(Connection con, String tableName) { super(con, tableName, schema, database); }

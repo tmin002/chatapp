@@ -269,9 +269,9 @@ null
 
 * client receiving if something went wrong
 
-<pre>
-"error_code" 0 is used only.
-</pre>    
+| "error_code" | description   |
+|--------------|---------------|
+| 1            | Invalid ID.   |
 
 ### getUser
 
