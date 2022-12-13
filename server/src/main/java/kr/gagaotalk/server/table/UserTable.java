@@ -123,6 +123,8 @@ public class UserTable extends Table {
             } catch (NumberFormatException e) { throw new ErrorInProcessingException(4, "invalid phone number"); }
             if(password.isEmpty()) { throw new ErrorInProcessingException(5, "password is null"); } //
             executeUpdate("insert into " + tableName + " values ('" + userID + "', '" + password + "', '" + nickname + "', '', '" + phoneNumber + "', '" + birth + "' );");
+            FriendsTables friendsTable = new FriendsTables(DatabaseEG.con, userID);
+            friendsTable.makeTable();
         }
     }
 
