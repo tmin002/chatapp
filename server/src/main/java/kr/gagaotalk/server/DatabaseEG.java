@@ -34,12 +34,8 @@ public class DatabaseEG {
 
         ChatroomTables chatroomInUser1 = new ChatroomTables(con, "user1");
         chatroomInUser1.makeTable();
-
-        UserTable user1 = new UserTable(con, "userTable");
-        user1.makeTable();
-
-        OnlineUserTable onlineUserTable = new OnlineUserTable(con, "onlineUserTable");
-        onlineUserTable.makeTable();
+       //UserTable.userTableGlobal.signup("user1", "ddong", "01012345678", "20021001", "1234");
+        //UserTable.userTableGlobal.unregister("user1");
 
         // below : just test code
        /* System.out.println(user1.signup("user1", "ddong", "01012345678", "20021001", "1234"));

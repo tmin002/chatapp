@@ -101,6 +101,7 @@ public class UserTable extends Table {
         }
     }
 
+
     public void logout(String userID) {
         OnlineUserTable onlineUserTable = new OnlineUserTable(con, "onlineUserTable");
         if(onlineUserTable.isOnline(userID)) { // already online
@@ -125,6 +126,8 @@ public class UserTable extends Table {
         }
     }
 
+    // test result : no problem
+    // delete account
     public void unregister(String userID) throws ErrorInProcessingException {
         if(doesExistID(userID)) {
             executeUpdate("delete from " + tableName + " where id = '" + userID + "';");
@@ -137,6 +140,7 @@ public class UserTable extends Table {
         if(id.toString().trim().equals("")) { throw new ErrorInProcessingException(1, "does not exist id"); }
         return id.toString(); // return id
     }
+
 
     public String findPW(String userID, String phoneNumber) throws ErrorInProcessingException {
 

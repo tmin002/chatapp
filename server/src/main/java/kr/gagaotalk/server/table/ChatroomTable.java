@@ -17,7 +17,7 @@ public class ChatroomTable extends Table {
         chatroomTableGlobal.makeTable();
     }
 
-    public static String schema = "chatroomID int not null, name varchar(32) not null, contentAddress varchar(32) not null, participantsAddress varchar(32) not null, primary key(ID)";
+    public static String schema = "chatroomID int not null, name varchar(32) not null, contentAddress varchar(32) not null, participantsAddress varchar(32) not null, primary key(chatroomID)";
     public static String database = "gagaotalkDB";
 
     public int getNumberOfParticipants(String chatroomID) {
