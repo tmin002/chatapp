@@ -1,6 +1,8 @@
 package kr.gagaotalk.server.table;
 
+import kr.gagaotalk.server.DatabaseEG;
 import kr.gagaotalk.server.ErrorInProcessingException;
+import kr.gagaotalk.server.User;
 import kr.gagaotalk.server.table.Table;
 
 import java.sql.*;
@@ -13,8 +15,14 @@ import java.time.format.DateTimeParseException;
 import java.security.SecureRandom;
 
 public class UserTable extends Table {
-    public UserTable() { super(); } // just test
-    public UserTable(Connection con) { super(con); }
+
+    // static
+    public static UserTable userTableGlobal;
+    public static void initializeUserTableGlobal() {
+        userTableGlobal = new UserTable(DatabaseEG.con, "UserTable");
+        userTableGlobal.makeTable();
+    }
+
     public UserTable(Connection con, String tableName) { super(con, tableName, schema, database); }
     public static String schema = "ID varchar(32) not null, password varchar(32) not null, nickname varchar(32), bio varchar(32), phoneNumber varchar(16) not null, birthday varchar(16) not null, primary key(ID)";
     public static String database = "gagaotalkDB";
@@ -159,25 +167,24 @@ public class UserTable extends Table {
 
     // test result : no problem
     //NOTE: order is userID, nickname, birthday, bio
-    public StringBuilder getUserInfo(String userID) {
+    public User getUserInfo(String userID) throws ErrorInProcessingException {
         if(doesExistID(userID)) {
-            StringBuilder IDError = new StringBuilder("1");
-            return IDError;
+            throw new ErrorInProcessingException(1, "ID not found");
         }
         ResultSet userInfoResultSet = null;
         userInfoResultSet = executeQuery("select nickname, birthday, bio from " + tableName + " where id = '" + userID + "';");
-        StringBuilder userInfo = new StringBuilder("");
+
         try {
             if(userInfoResultSet.next()) {
-                userInfo.append(userID + "\n");
-                userInfo.append(userInfoResultSet.getString(1) + "\n");
-                userInfo.append(userInfoResultSet.getString(2) + "\n");
-                userInfo.append(userInfoResultSet.getString(3) + "\n");
+                return new User(userID,
+                        userInfoResultSet.getString(1),
+                        userInfoResultSet.getString(2),
+                        userInfoResultSet.getString(3));
                 //e.g. user11\nddong\n20021001\n뿌직\n
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return userInfo;
+        return null;
     }
 }

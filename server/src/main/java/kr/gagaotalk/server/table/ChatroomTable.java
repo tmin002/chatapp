@@ -1,5 +1,7 @@
 package kr.gagaotalk.server.table;
 
+import kr.gagaotalk.server.DatabaseEG;
+
 import java.io.*;
 import java.sql.Connection;
 
@@ -8,6 +10,12 @@ import java.sql.Connection;
 public class ChatroomTable extends Table {
     public ChatroomTable(Connection con) { super(con); }
     public ChatroomTable(Connection con, String tableName) { super(con, tableName, schema, database); }
+
+    public static ChatroomTable chatroomTableGlobal;
+    public static void initializeChatroomTableGlobal() {
+        chatroomTableGlobal = new ChatroomTable(DatabaseEG.con, "ChatroomTable");
+        chatroomTableGlobal.makeTable();
+    }
 
     public static String schema = "chatroomID int not null, name varchar(32) not null, contentAddress varchar(32) not null, participantsAddress varchar(32) not null, primary key(ID)";
     public static String database = "gagaotalkDB";

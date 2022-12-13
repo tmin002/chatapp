@@ -1,5 +1,7 @@
 package kr.gagaotalk.server.table;
 
+import kr.gagaotalk.server.DatabaseEG;
+
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.util.Date;
@@ -7,6 +9,12 @@ import java.util.Date;
 public class OnlineUserTable extends Table {
     public OnlineUserTable(Connection con) { super(con); }
     public OnlineUserTable(Connection con, String tableName) { super(con, tableName, schema, database); }
+
+    public static OnlineUserTable onlineUserTableGlobal;
+    public static void initializeOnlineUserTableGlobal() {
+       onlineUserTableGlobal = new OnlineUserTable(DatabaseEG.con, "OnlineUserTable");
+       onlineUserTableGlobal.makeTable();
+    }
 
     public static String schema = "userID varchar(32) not null, sessionID varchar(17) not null, primary key(userID)";
     public static String database = "gagaotalkDB";

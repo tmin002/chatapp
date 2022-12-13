@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 public enum Action {
     signIn("signIn"),
     signOut("signOut"),
+    signUp("signUp"),
     findID("findID"),
     findPW("findPW"),
     upPW("upPW"),

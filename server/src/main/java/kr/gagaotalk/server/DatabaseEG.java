@@ -1,15 +1,13 @@
 package kr.gagaotalk.server;
 
-import kr.gagaotalk.server.table.ChatroomTables;
-import kr.gagaotalk.server.table.OnlineUserTable;
-import kr.gagaotalk.server.table.UserTable;
+import kr.gagaotalk.server.table.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseEG {
-    static Connection con = null;
+    public static Connection con = null;
 
     private static void makeConnection(String url, String userName, String password) throws ClassNotFoundException {
         try {
@@ -27,6 +25,12 @@ public class DatabaseEG {
         String pw = kb.nextLine(); // or create password String variable*/
         String pw = "1234";
         makeConnection("jdbc:mysql://localhost", "root", pw);
+
+        // initialize table instances
+        ChatroomTable.initializeChatroomTableGlobal();
+        FileTable.initializeFileTableGlobal();
+        OnlineUserTable.initializeOnlineUserTableGlobal();
+        UserTable.initializeUserTableGlobal();
 
         ChatroomTables chatroomInUser1 = new ChatroomTables(con, "user1");
         chatroomInUser1.makeTable();
