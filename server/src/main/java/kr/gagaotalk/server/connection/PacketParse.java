@@ -58,9 +58,10 @@ public class PacketParse {
         // Status code
         bytes[10] = statusCode;
         // action
-        System.arraycopy(action.getBytes(), 0, bytes, 11, 8);
+        System.arraycopy(action.getBytes(), 0, bytes, 11, action.getBytes().length);
         // data
-        System.arraycopy(gson.toJson(data).getBytes(StandardCharsets.UTF_8), 0, bytes, 19, 2048);
+        byte[] gsonBytes = gson.toJson(data).getBytes(StandardCharsets.UTF_8);
+        System.arraycopy(gsonBytes, 0, bytes, 19, gsonBytes.length);
 
         return bytes;
     }

@@ -59,7 +59,7 @@ public class Authentication {
         request.put("phoneNumber", phoneNumber);
         request.put("birthday", DateConvert.DateToString(birthday));
         request.put("password", password);
-        return Connection.communicate(Action.signOut, request);
+        return Connection.communicate(Action.signUp, request);
     }
 
     // Find ID: recover forgotten ID.

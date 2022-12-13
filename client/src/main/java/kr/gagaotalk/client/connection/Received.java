@@ -20,7 +20,7 @@ public class Received {
     }
 
     public String dataToString() {
-        return new String(data);
+        return new String(data).trim();
     }
     public Map<String, Object> dataToDictionary() {
        Gson gson = new Gson();
@@ -33,7 +33,7 @@ public class Received {
     }
 
     public int getErrorCode() {
-        return (int) dataToDictionary().get("error_code");
+        return ((Double) dataToDictionary().get("error_code")).intValue();
     }
     public String getErrorMessage() {
         return (String) dataToDictionary().get("message");
