@@ -1,6 +1,7 @@
 package kr.gagaotalk.server;
 
 import kr.gagaotalk.server.table.ChatroomTables;
+import kr.gagaotalk.server.table.OnlineUserTable;
 import kr.gagaotalk.server.table.UserTable;
 
 import java.sql.Connection;

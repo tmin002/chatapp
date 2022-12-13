@@ -1,4 +1,4 @@
-package kr.gagaotalk.server;
+package kr.gagaotalk.server.table;
 
 import java.sql.*;
 import java.text.ParseException;
