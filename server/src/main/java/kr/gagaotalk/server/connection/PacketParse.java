@@ -32,7 +32,7 @@ public class PacketParse {
         byte[] receivedActionBytes = new byte[8];
         System.arraycopy(receivedData, 26, receivedActionBytes, 0, 8);
         try {
-            receivedAction = Action.valueOf(new String(receivedActionBytes));
+            receivedAction = Action.valueOf(new String(receivedActionBytes, StandardCharsets.US_ASCII));
         } catch (IllegalArgumentException e) {
             // TODO: make err message
             return null;
