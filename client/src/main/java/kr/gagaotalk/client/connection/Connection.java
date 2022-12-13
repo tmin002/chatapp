@@ -97,7 +97,7 @@ public class Connection {
         byte[] receivedActionBytes = new byte[8];
         System.arraycopy(receivedData, 11, receivedActionBytes, 0, 8);
         try {
-            receivedAction = Action.valueOf(new String(receivedActionBytes, StandardCharsets.US_ASCII));
+            receivedAction = Action.valueOf(new String(receivedActionBytes, StandardCharsets.US_ASCII).trim());
         } catch (IllegalArgumentException e) {
             // TODO: make err message
             return null;
