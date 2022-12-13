@@ -1,0 +1,221 @@
+Index: client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package kr.gagaotalk.client;\n\nimport kr.gagaotalk.client.gui.window.MainWindow;\n\nimport java.io.IOException;\nimport java.net.InetAddress;\nimport java.net.UnknownHostException;\n\npublic class GagaoTalkClient {\n\n    public static InetAddress SERVER_ADDRESS;\n    public static int SERVER_PORT;\n\n    public static void main(String[] args) throws IOException {\n        System.out.println(\"Hello world!\");\n        try {\n            SERVER_ADDRESS = InetAddress.getByName(\"localhost\");\n            SERVER_PORT = 24242;\n        } catch (UnknownHostException ignored) {}\n//        new LoginWindow();\n//        new PublicData();\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java b/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java
+--- a/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java	(revision e19b524a569f2c5b40453e784d7f7dab8156b497)
++++ b/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java	(date 1670845654076)
+@@ -1,5 +1,6 @@
+ package kr.gagaotalk.client;
+ 
++import kr.gagaotalk.client.gui.window.ChatRoom;
+ import kr.gagaotalk.client.gui.window.MainWindow;
+ 
+ import java.io.IOException;
+@@ -19,5 +20,6 @@
+         } catch (UnknownHostException ignored) {}
+ //        new LoginWindow();
+ //        new PublicData();
++        new ChatRoom().FileProgressbar();
+     }
+ }
+\ No newline at end of file
+Index: client/src/main/java/kr/gagaotalk/client/weather/Weather.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package kr.gagaotalk.client.weather;\nimport java.io.InputStreamReader;\nimport java.net.HttpURLConnection;\nimport java.net.URL;\nimport java.net.URLEncoder;\nimport java.io.BufferedReader;\nimport java.io.IOException;\nimport java.text.SimpleDateFormat;\nimport java.util.Date;\n\nimport com.google.gson.JsonArray;\nimport com.google.gson.JsonObject;\nimport com.google.gson.JsonParser;\n\n\npublic class Weather {\n    private static String date;\n    private static String time;\n    private static String data[] = new String[3];\n\n    public Weather() throws IOException {\n        // 1. URL을 만들기 위한 StringBuilder.\n        Date date_now = new Date(System.currentTimeMillis()); // 현재시간을 가져와 Date형으로 저장한다\n        SimpleDateFormat date_format = new SimpleDateFormat(\"yyyyMMdd\");\n        SimpleDateFormat time_format = new SimpleDateFormat(\"HH\");\n\n        date = date_format.format(date_now).toString();\n        time = time_format.format(date_now).toString();\n\n        int timeSet = Integer.parseInt(time) - 1;\n        time = Integer.toString(timeSet);\n        time = String.format(\"%02d\", timeSet);\n        time = time + \"00\";\n        String dataType = \"JSON\";\n        StringBuilder urlBuilder = new StringBuilder(\"http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst\"); /*URL*/\n        // 2. 오픈 API의요청 규격에 맞는 파라미터 생성, 발급받은 인증키.\n        /*Service Key*/\n        /*XML 또는 JSON*/\n        /*한 페이지 결과 수*/\n        /*페이지 번호*/\n        /*요청자료형식(XML/JSON)Default: XML*/\n        /*예보지점의 X 좌표값*/\n        urlBuilder.append(\"?\").append(URLEncoder.encode(\"serviceKey\", \"UTF-8\"))\n                .append(\"=dYLEfE8lYJtPSDTpLXh02LoQit3HQbZKrnpZjreaaBVNwnTkA3nq2C%2BZIIcEo%2BPwm6LX9CyT1uhkK0vbe4hWNQ%3D%3D\")\n                .append(\"&\").append(URLEncoder.encode(\"returnType\", \"UTF-8\")).append(\"=\").append(URLEncoder.encode(\"JSON\", \"UTF-8\"))\n                .append(\"&\").append(URLEncoder.encode(\"numOfRows\", \"UTF-8\")).append(\"=\").append(URLEncoder.encode(\"10\", \"UTF-8\"))\n                .append(\"&\").append(URLEncoder.encode(\"pageNo\", \"UTF-8\")).append(\"=\").append(URLEncoder.encode(\"1\", \"UTF-8\"))\n                .append(\"&\").append(URLEncoder.encode(\"dataType\", \"UTF-8\")).append(\"=\").append(URLEncoder.encode(dataType, \"UTF-8\"))\n                .append(\"&\").append(URLEncoder.encode(\"base_date\", \"UTF-8\")).append(\"=\").append(URLEncoder.encode(date, \"UTF-8\"))\n                .append(\"&\").append(URLEncoder.encode(\"base_time\", \"UTF-8\")).append(\"=\").append(URLEncoder.encode(time, \"UTF-8\"))\n                .append(\"&\").append(URLEncoder.encode(\"nx\", \"UTF-8\")).append(\"=\").append(URLEncoder.encode(\"62\", \"UTF-8\"))\n                .append(\"&\").append(URLEncoder.encode(\"ny\", \"UTF-8\")).append(\"=\").append(URLEncoder.encode(\"124\", \"UTF-8\")); /*예보지점 Y 좌표*/\n        // 3. URL 객체 생성.\n        URL url = new URL(urlBuilder.toString());\n        // 4. 요청하고자 하는 URL과 통신하기 위한 Connection 객체 생성.\n        HttpURLConnection conn = (HttpURLConnection) url.openConnection();\n        // 5. 통신을 위한 메소드 SET.\n        conn.setRequestMethod(\"GET\");\n        // 6. 통신을 위한 Content-type SET.\n        conn.setRequestProperty(\"Content-type\", \"application/json\");\n        // 7. 통신 응답 코드 확인.\n        System.out.println(\"Response code: \" + conn.getResponseCode());\n        // 8. 전달받은 데이터를 BufferedReader 객체로 저장.\n        BufferedReader rd;\n        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {\n            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));\n        } else {\n            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));\n        }\n        // 9. 저장된 데이터를 라인별로 읽어 StringBuilder 객체로 저장.\n        StringBuilder sb = new StringBuilder();\n        String line;\n        while ((line = rd.readLine()) != null) {\n            sb.append(line);\n        }\n        // 10. 객체 해제.\n        rd.close();\n        conn.disconnect();\n\n        // 11. 전달받은 데이터 확인.\n        String result= sb.toString();\n        System.out.println(sb.toString());\n\n        JsonParser parser = new JsonParser();\n        JsonObject obj = (JsonObject) parser.parse(result);\n        JsonObject parse_response = (JsonObject) obj.get(\"response\");\n        JsonObject parse_body = (JsonObject) parse_response.get(\"body\");\n        JsonObject parse_items = (JsonObject) parse_body.get(\"items\");\n        JsonArray parse_item = (JsonArray) parse_items.get(\"item\");\n\n        JsonObject weather;\n        String nextTime = null;\n        System.out.println(parse_item);\n        for(int i = 0 ; i < parse_item.size(); i++) {\n            weather = (JsonObject) parse_item.get(i);\n            if(i == 0) {\n                nextTime = weather.get(\"fcstTime\").getAsString();\n            }\n\n            if(weather.get(\"fcstTime\").getAsString().compareTo(nextTime) == 0) {\n                if(weather.get(\"category\").getAsString().compareTo(\"T1H\") == 0) {\n                    data[0] = weather.get(\"fcstValue\").getAsString(); //\n                }\n                else if(weather.get(\"category\").getAsString().compareTo(\"SKY\") == 0) {\n                    data[1] = weather.get(\"fcstValue\").getAsString(); // 말긍ㅁ\n                }\n                else if(weather.get(\"category\").getAsString().compareTo(\"PTY\") == 0) {\n                    data[2] = weather.get(\"fcstValue\").getAsString(); // rain\n                }\n\n            }\n\n        }\n        System.out.println(data[0]);\n        System.out.println(data[1]);\n        System.out.println(data[2]);\n\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/java/kr/gagaotalk/client/weather/Weather.java b/client/src/main/java/kr/gagaotalk/client/weather/Weather.java
+--- a/client/src/main/java/kr/gagaotalk/client/weather/Weather.java	(revision e19b524a569f2c5b40453e784d7f7dab8156b497)
++++ b/client/src/main/java/kr/gagaotalk/client/weather/Weather.java	(date 1670849310478)
+@@ -102,18 +102,63 @@
+                     data[0] = weather.get("fcstValue").getAsString(); //
+                 }
+                 else if(weather.get("category").getAsString().compareTo("SKY") == 0) {
+-                    data[1] = weather.get("fcstValue").getAsString(); // 말긍ㅁ
++                    data[1] = weather.get("fcstValue").getAsString(); // 하늘상태
+                 }
+                 else if(weather.get("category").getAsString().compareTo("PTY") == 0) {
+-                    data[2] = weather.get("fcstValue").getAsString(); // rain
++                    data[2] = weather.get("fcstValue").getAsString(); // 강수형태
+                 }
+ 
+             }
+ 
+         }
+-        System.out.println(data[0]);
+-        System.out.println(data[1]);
+-        System.out.println(data[2]);
+-
++//        System.out.println(data[0]);
++//        System.out.println(data[1]);
++//        System.out.println(data[2]);
++    }
++    //하늘상태
++    public static String getCloud() {
++        String cloud = new String();
++        switch (data[1]) {
++            case "1":
++                //맑음
++                cloud = "맑음";
++                break;
++            case "3":
++                //구름많음
++                cloud = "구름많음";
++                break;
++            case "4":
++                //흐림
++                cloud = "흐림";
++                break;
++        }
++        return cloud;
++    }
++    //강수형태
++    public static String getRain() {
++        String rain = new String();
++        switch (data[2]) {
++            case "0":
++                //없음
++                rain = "없음";
++                break;
++            case "1":
++                //비
++                rain = "비";
++                break;
++            case "2":
++                //비/눈
++                rain = "비/눈";
++                break;
++            case "3":
++                //눈
++                rain = "눈";
++                break;
++            case "4":
++                //소나기
++                rain = "소나기";
++                break;
++        }
++        return rain;
+     }
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"93208719-b4e2-40bf-ac31-b60a0ff24c52\" name=\"Changes\" comment=\"MainWindow 관련 추가\">\n      <change afterPath=\"$PROJECT_DIR$/.idea/dbnavigator.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/AddChatUser.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/Search_id.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/Forgot_IdPw.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/Forgot_IdPw.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/LoginWindow.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/LoginWindow.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/resources/forgot_idpw.png\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/resources/forgot_idpw.png\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/gagaotalk_client.jar\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/gagaotalk_client.jar\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/gagaotalk_server.jar\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/gagaotalk_server.jar\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Enum\" />\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"PREVIOUS_COMMIT_AUTHORS\">\n      <list>\n        <option value=\"tmin002 &lt;ssh9930@gmail.com&gt;\" />\n      </list>\n    </option>\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"pjh\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2Hyslytn5AqITSTwoX3BSirFfJF\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\n    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;azul-1.8&quot;,\n    &quot;last_opened_file_path&quot;: &quot;/Users/bagjuhyeog/Desktop/gagaotalk/gagaotalk&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\n    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,\n    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,\n    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,\n    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"RecentsManager\">\n    <key name=\"CreateClassDialog.RecentsKey\">\n      <recent name=\"kr.gagaotalk.client.gui.window\" />\n    </key>\n    <key name=\"CopyFile.RECENT_KEYS\">\n      <recent name=\"C:\\Users\\Administrator\\IdeaProjects\\gagaotalk\\client\\src\\main\\resources\" />\n      <recent name=\"$PROJECT_DIR$/client\" />\n      <recent name=\"$PROJECT_DIR$\" />\n      <recent name=\"$PROJECT_DIR$/src\" />\n    </key>\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"C:\\Users\\Administrator\\IdeaProjects\\gagaotalk\\client\\src\\main\\resources\" />\n      <recent name=\"$PROJECT_DIR$/\" />\n    </key>\n    <key name=\"MoveClassesOrPackagesDialog.RECENTS_KEY\">\n      <recent name=\"kr.gagaotalk.client.gui\" />\n    </key>\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\n      <recent name=\"kr.gagaotalk.server\" />\n    </key>\n  </component>\n  <component name=\"RunManager\" selected=\"Application.Build Client\">\n    <list>\n      <item itemvalue=\"Application.Build Client\" />\n      <item itemvalue=\"Application.Build Server\" />\n    </list>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"93208719-b4e2-40bf-ac31-b60a0ff24c52\" name=\"Changes\" comment=\"\" />\n      <created>1669268812812</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1669268812812</updated>\n      <workItem from=\"1669268814127\" duration=\"939000\" />\n      <workItem from=\"1669271422429\" duration=\"4461000\" />\n      <workItem from=\"1670657337996\" duration=\"17824000\" />\n      <workItem from=\"1670692942438\" duration=\"554000\" />\n      <workItem from=\"1670693509343\" duration=\"3699000\" />\n      <workItem from=\"1670815134969\" duration=\"17316000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"Fixed submodule dependencies\">\n      <created>1669271663768</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669271663768</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Configure IntelliJ build option&#10;artifacts, dependencies.\">\n      <created>1669272460397</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669272460397</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"Configure Test environment&#10;start_server.cmd, start_server.sh\">\n      <created>1669276073086</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669276073086</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"protocol minor update\">\n      <created>1669276403675</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669276403675</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"build setting minor update\">\n      <created>1669276418465</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669276418465</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"Protocol finished version\">\n      <created>1669277099919</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669277099919</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"Protocol finished version\">\n      <created>1669277183972</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669277183972</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"Protocol finished version\">\n      <created>1669277232477</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669277232477</updated>\n    </task>\n    <task id=\"LOCAL-00009\" summary=\"Protocol finished version\">\n      <created>1669277857871</created>\n      <option name=\"number\" value=\"00009\" />\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669277857871</updated>\n    </task>\n    <task id=\"LOCAL-00010\" summary=\"Removed request ID since we no longer use single socket connection\">\n      <created>1669731843445</created>\n      <option name=\"number\" value=\"00010\" />\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669731843445</updated>\n    </task>\n    <task id=\"LOCAL-00011\" summary=\"Removed request ID since we no longer use single socket connection\">\n      <created>1669736704499</created>\n      <option name=\"number\" value=\"00011\" />\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669736704499</updated>\n    </task>\n    <task id=\"LOCAL-00012\" summary=\"Client connection\">\n      <created>1669736781775</created>\n      <option name=\"number\" value=\"00012\" />\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669736781775</updated>\n    </task>\n    <task id=\"LOCAL-00013\" summary=\"프로토콜 대로 UTF-8에서 ASCII 로 수정\">\n      <created>1670744955572</created>\n      <option name=\"number\" value=\"00013\" />\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670744955572</updated>\n    </task>\n    <task id=\"LOCAL-00014\" summary=\"이미지 리소스 폴더에 들어가도록 지정\">\n      <created>1670745106239</created>\n      <option name=\"number\" value=\"00014\" />\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670745106239</updated>\n    </task>\n    <task id=\"LOCAL-00015\" summary=\"서버: 들어오는 패킷 파싱 및 내보내는 패킷 만드는 기능 추가\">\n      <created>1670745146563</created>\n      <option name=\"number\" value=\"00015\" />\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670745146563</updated>\n    </task>\n    <task id=\"LOCAL-00016\" summary=\"gson 파싱할때 필요한 타입 Constants에 추가\">\n      <created>1670746434201</created>\n      <option name=\"number\" value=\"00016\" />\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670746434201</updated>\n    </task>\n    <task id=\"LOCAL-00017\" summary=\"ResourceManager로 프로젝트 이미지 간편추가기능\">\n      <created>1670747164080</created>\n      <option name=\"number\" value=\"00017\" />\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670747164080</updated>\n    </task>\n    <task id=\"LOCAL-00018\" summary=\"최상위 JFrame (Window) 추가\">\n      <created>1670754108975</created>\n      <option name=\"number\" value=\"00018\" />\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670754108975</updated>\n    </task>\n    <task id=\"LOCAL-00019\" summary=\"MainWindow 관련 추가\">\n      <created>1670754174535</created>\n      <option name=\"number\" value=\"00019\" />\n      <option name=\"presentableId\" value=\"LOCAL-00019\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670754174535</updated>\n    </task>\n    <task id=\"LOCAL-00020\" summary=\"MainWindow 관련 추가\">\n      <created>1670754183793</created>\n      <option name=\"number\" value=\"00020\" />\n      <option name=\"presentableId\" value=\"LOCAL-00020\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670754183793</updated>\n    </task>\n    <task id=\"LOCAL-00021\" summary=\"MainWindow 관련 추가\">\n      <created>1670754193088</created>\n      <option name=\"number\" value=\"00021\" />\n      <option name=\"presentableId\" value=\"LOCAL-00021\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670754193088</updated>\n    </task>\n    <task id=\"LOCAL-00022\" summary=\"MainWindow 관련 추가\">\n      <created>1670754228297</created>\n      <option name=\"number\" value=\"00022\" />\n      <option name=\"presentableId\" value=\"LOCAL-00022\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670754228298</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"23\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"Fixed submodule dependencies\" />\n    <MESSAGE value=\"Configure IntelliJ build option&#10;artifacts, dependencies.\" />\n    <MESSAGE value=\"Configure Test environment&#10;start_server.cmd, start_server.sh\" />\n    <MESSAGE value=\"protocol minor update\" />\n    <MESSAGE value=\"build setting minor update\" />\n    <MESSAGE value=\"Protocol finished version\" />\n    <MESSAGE value=\"Removed request ID since we no longer use single socket connection\" />\n    <MESSAGE value=\"Client connection\" />\n    <MESSAGE value=\"프로토콜 대로 UTF-8에서 ASCII 로 수정\" />\n    <MESSAGE value=\"이미지 리소스 폴더에 들어가도록 지정\" />\n    <MESSAGE value=\"서버: 들어오는 패킷 파싱 및 내보내는 패킷 만드는 기능 추가\" />\n    <MESSAGE value=\"gson 파싱할때 필요한 타입 Constants에 추가\" />\n    <MESSAGE value=\"ResourceManager로 프로젝트 이미지 간편추가기능\" />\n    <MESSAGE value=\"최상위 JFrame (Window) 추가\" />\n    <MESSAGE value=\"MainWindow 관련 추가\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"MainWindow 관련 추가\" />\n  </component>\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\n    <expand />\n    <select />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision e19b524a569f2c5b40453e784d7f7dab8156b497)
++++ b/.idea/workspace.xml	(date 1670857152562)
+@@ -4,17 +4,12 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="93208719-b4e2-40bf-ac31-b60a0ff24c52" name="Changes" comment="MainWindow 관련 추가">
+-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/AddChatUser.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/Search_id.java" afterDir="false" />
++    <list default="true" id="93208719-b4e2-40bf-ac31-b60a0ff24c52" name="Changes" comment="친구 검색 기능 및 채팅방 친구 초대 기능 추가">
++      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/ChatRoom.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/Forgot_IdPw.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/Forgot_IdPw.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/LoginWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/LoginWindow.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/forgot_idpw.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/forgot_idpw.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/weather/Weather.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/weather/Weather.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/gagaotalk_client.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gagaotalk_client.jar" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/gagaotalk_server.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gagaotalk_server.jar" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -113,7 +108,7 @@
+       <workItem from="1670657337996" duration="17824000" />
+       <workItem from="1670692942438" duration="554000" />
+       <workItem from="1670693509343" duration="3699000" />
+-      <workItem from="1670815134969" duration="17316000" />
++      <workItem from="1670815134969" duration="25190000" />
+     </task>
+     <task id="LOCAL-00001" summary="Fixed submodule dependencies">
+       <created>1669271663768</created>
+@@ -269,7 +264,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1670754228298</updated>
+     </task>
+-    <option name="localTasksCounter" value="23" />
++    <task id="LOCAL-00023" summary="친구 검색 기능 및 채팅방 친구 초대 기능 추가">
++      <created>1670843619971</created>
++      <option name="number" value="00023" />
++      <option name="presentableId" value="LOCAL-00023" />
++      <option name="project" value="LOCAL" />
++      <updated>1670843619971</updated>
++    </task>
++    <option name="localTasksCounter" value="24" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -302,7 +304,8 @@
+     <MESSAGE value="ResourceManager로 프로젝트 이미지 간편추가기능" />
+     <MESSAGE value="최상위 JFrame (Window) 추가" />
+     <MESSAGE value="MainWindow 관련 추가" />
+-    <option name="LAST_COMMIT_MESSAGE" value="MainWindow 관련 추가" />
++    <MESSAGE value="친구 검색 기능 및 채팅방 친구 초대 기능 추가" />
++    <option name="LAST_COMMIT_MESSAGE" value="친구 검색 기능 및 채팅방 친구 초대 기능 추가" />
+   </component>
+   <component name="XSLT-Support.FileAssociations.UIState">
+     <expand />
+Index: client/src/main/java/kr/gagaotalk/client/gui/window/ChatRoom.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/java/kr/gagaotalk/client/gui/window/ChatRoom.java b/client/src/main/java/kr/gagaotalk/client/gui/window/ChatRoom.java
+new file mode 100644
+--- /dev/null	(date 1670845731988)
++++ b/client/src/main/java/kr/gagaotalk/client/gui/window/ChatRoom.java	(date 1670845731988)
+@@ -0,0 +1,40 @@
++package kr.gagaotalk.client.gui.window;
++
++import javax.swing.*;
++import javax.swing.border.Border;
++import java.awt.*;
++import java.awt.event.ActionEvent;
++import java.awt.event.ActionListener;
++
++public class ChatRoom extends JFrame implements ActionListener {
++
++    public void FileProgressbar() {
++        JFrame f = new JFrame("File receiving");
++        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
++        Container content = f.getContentPane();
++        JProgressBar progressBar = new JProgressBar(0, 100);
++        progressBar.setValue(0);
++        progressBar.setStringPainted(true);
++        Border border = BorderFactory.createTitledBorder("Receiving...");
++        progressBar.setBorder(border);
++        content.add(progressBar, BorderLayout.NORTH);
++        f.setSize(300, 80);
++        f.setVisible(true);
++        int num = 0;
++        while(num < 100) {
++            progressBar.setValue(num);
++            try {
++                Thread.sleep(100);
++            } catch (InterruptedException e) {
++            }
++            num += 1;
++        }
++        f.dispose();
++
++    }
++
++    @Override
++    public void actionPerformed(ActionEvent e) {
++
++    }
++}

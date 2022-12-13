@@ -1,0 +1,673 @@
+Index: client/src/main/java/kr/gagaotalk/client/gui/window/LoginWindow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package kr.gagaotalk.client.gui.window;\nimport kr.gagaotalk.client.authentication.Authentication;\nimport kr.gagaotalk.client.connection.Received;\nimport kr.gagaotalk.client.gui.ResourceManager;\nimport kr.gagaotalk.core.DateConvert;\n\nimport javax.swing.*;\nimport java.awt.*;\nimport java.awt.event.ActionEvent;\nimport java.awt.event.ActionListener;\n\npublic class LoginWindow extends JFrame implements ActionListener {\n    JButton lgButton = new JButton();\n    JButton suButton = new JButton();\n    JButton fpButton = new JButton();\n    JTextField id = new JTextField(\"id\");\n    JPasswordField password = new JPasswordField(\"password\");\n    public LoginWindow() {\n        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\n        ImageIcon icon = ResourceManager.getImageIcon(\"/login.png\");\n        JPanel lgpanel = new JPanel() {\n            public void paintComponent(Graphics g) {\n                // Approach 1: Dispaly image at at full size\n                g.drawImage(icon.getImage(), 0, 0, null);\n                // Approach 2: Scale image to size of component\n                // Dimension d = getSize();\n                // g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);\n                // Approach 3: Fix the image position in the scroll pane\n                // Point p = scrollPane.getViewport().getViewPosition();\n                // g.drawImage(icon.getImage(), p.x, p.y, null);\n                setOpaque(false); //그림을 표시하게 설정,투명하게 조절\n                super.paintComponent(g);\n            }\n        };\n        lgpanel.setLayout(null);\n\n        id.setSize(300, 50);\n        id.setLocation(100, 350);\n\n        password.setSize(300, 50);\n        password.setLocation(100, 440);\n\n//        JButton lg = new JButton();\n        lgButton.setSize(300, 50);\n        lgButton.setLocation(100, 540);\n        lgButton.setBorderPainted(false);\n        lgButton.setContentAreaFilled(false);\n        lgButton.addActionListener(this);\n\n        suButton.setSize(90, 30);\n        suButton.setLocation(90, 690);\n        suButton.setBorderPainted(false);\n        suButton.setContentAreaFilled(false);\n        suButton.addActionListener(this);\n\n        fpButton.setSize(180, 60);\n        fpButton.setLocation(220, 690);\n        fpButton.setBorderPainted(false);\n        fpButton.setContentAreaFilled(false);\n        fpButton.addActionListener(this);\n\n        lgpanel.add(id);\n        lgpanel.add(password);\n        lgpanel.add(lgButton);\n        lgpanel.add(suButton);\n        lgpanel.add(fpButton);\n\n        add(lgpanel);\n        setTitle(\"Login\");\n        setSize(500, 817);\n        setResizable(false);\n        setVisible(true);\n    }\n\n    @Override\n    public void actionPerformed(ActionEvent e) {\n        if(e.getSource() == lgButton) {\n            Received received = Authentication.signIn(id.getText(), password.getText());\n            if (received.statusCode == 1) {\n                if (received.getErrorCode() == 1) {\n                    JOptionPane.showMessageDialog(null, \"ID or password wrong.\", \"LOGIN\", JOptionPane.ERROR_MESSAGE);\n                } else if (received.getErrorCode() == 2)\n                    JOptionPane.showMessageDialog(null, \"Already logged in on another device.\", \"LOGIN\", JOptionPane.ERROR_MESSAGE);\n            }\n        }\n        if(e.getSource() == suButton) {\n            SignUpWindow b = new SignUpWindow();\n//          JOptionPane.showMessageDialog(null, \"Sign up\");\n        }\n        if(e.getSource() == fpButton) {\n            Forgot_IdPw c = new Forgot_IdPw();\n//            JOptionPane.showMessageDialog(null, \"Forgot ID/password\");\n        }\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/java/kr/gagaotalk/client/gui/window/LoginWindow.java b/client/src/main/java/kr/gagaotalk/client/gui/window/LoginWindow.java
+--- a/client/src/main/java/kr/gagaotalk/client/gui/window/LoginWindow.java	(revision 1d0913ce77969abf422b7d1d5f7dcc3d534eba71)
++++ b/client/src/main/java/kr/gagaotalk/client/gui/window/LoginWindow.java	(date 1670827343765)
+@@ -84,11 +84,12 @@
+             }
+         }
+         if(e.getSource() == suButton) {
+-            SignUpWindow b = new SignUpWindow();
++            new SignUpWindow();
+ //          JOptionPane.showMessageDialog(null, "Sign up");
+         }
+         if(e.getSource() == fpButton) {
+-            Forgot_IdPw c = new Forgot_IdPw();
++            new Search_id();
++//            new Forgot_IdPw();
+ //            JOptionPane.showMessageDialog(null, "Forgot ID/password");
+         }
+     }
+Index: client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package kr.gagaotalk.client;\n\nimport kr.gagaotalk.client.gui.window.LoginWindow;\nimport kr.gagaotalk.client.gui.window.MainWindow;\nimport kr.gagaotalk.client.gui.window.PublicData;\n\nimport java.io.IOException;\nimport java.net.InetAddress;\nimport java.net.UnknownHostException;\n\npublic class GagaoTalkClient {\n\n    public static InetAddress SERVER_ADDRESS;\n    public static int SERVER_PORT;\n\n    public static void main(String[] args) throws IOException {\n        System.out.println(\"Hello world!\");\n        try {\n            SERVER_ADDRESS = InetAddress.getByName(\"localhost\");\n            SERVER_PORT = 24242;\n        } catch (UnknownHostException ignored) {}\n        new MainWindow();\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java b/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java
+--- a/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java	(revision 1d0913ce77969abf422b7d1d5f7dcc3d534eba71)
++++ b/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java	(date 1670822371079)
+@@ -19,6 +19,6 @@
+             SERVER_ADDRESS = InetAddress.getByName("localhost");
+             SERVER_PORT = 24242;
+         } catch (UnknownHostException ignored) {}
+-        new MainWindow();
++        new LoginWindow();
+     }
+ }
+\ No newline at end of file
+Index: client/src/main/java/kr/gagaotalk/client/gui/window/Search_id.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/java/kr/gagaotalk/client/gui/window/Search_id.java b/client/src/main/java/kr/gagaotalk/client/gui/window/Search_id.java
+new file mode 100644
+--- /dev/null	(date 1670830275260)
++++ b/client/src/main/java/kr/gagaotalk/client/gui/window/Search_id.java	(date 1670830275260)
+@@ -0,0 +1,79 @@
++package kr.gagaotalk.client.gui.window;
++
++import kr.gagaotalk.client.gui.ResourceManager;
++import javax.swing.*;
++import kr.gagaotalk.client.authentication.Authentication;
++import kr.gagaotalk.client.connection.Received;
++import kr.gagaotalk.client.gui.ResourceManager;
++import kr.gagaotalk.core.DateConvert;
++import javax.swing.*;
++import java.awt.*;
++import java.awt.event.ActionEvent;
++import java.awt.event.ActionListener;
++
++public class Search_id extends JFrame implements ActionListener {
++
++    JButton seButton = new JButton();
++    JButton adButton = new JButton();
++    JTextField sid = new JTextField("enter id");
++    JTextField aid = new JTextField("find id");
++
++    public Search_id() {
++        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
++        ImageIcon icon = ImageIconResizer.resize(ResourceManager.getImageIcon("/search_id.png"), 337, 99);
++        JPanel sepanel = new JPanel() {
++            public void paintComponent(Graphics g) {
++                g.drawImage(icon.getImage(), 0, 0, null);
++                setOpaque(false); //그림을 표시하게 설정,투명하게 조절
++                super.paintComponent(g);
++            }
++        };
++        sepanel.setLayout(null);
++
++        //Set search id textfield
++        sid.setOpaque(false);
++        sid.setBorder(javax.swing.BorderFactory.createEmptyBorder());
++        sid.setSize(253, 40);
++        sid.setLocation(15, 10);
++
++        //Set find id textfield
++        aid.setOpaque(false);
++        aid.setBorder(javax.swing.BorderFactory.createEmptyBorder());
++        aid.setSize(253, 40);
++        aid.setLocation(15, 50);
++//
++        //Set Sign Up button
++        seButton.setSize(57, 33);
++        seButton.setLocation(268, 15);
++        seButton.setBorderPainted(false);
++        seButton.setContentAreaFilled(false);
++        seButton.addActionListener(this);
++//
++        //Set Sign Up button
++        adButton.setSize(57, 33);
++        adButton.setLocation(268, 53);
++        adButton.setBorderPainted(false);
++        adButton.setContentAreaFilled(false);
++        adButton.addActionListener(this);
++//
++        sepanel.add(sid);
++        sepanel.add(aid);
++        sepanel.add(seButton);
++        sepanel.add(adButton);
++
++        //add sign up panel at Jframe
++        add(sepanel);
++        setTitle("Search ID");
++        setSize(334, 126);
++        setResizable(false);
++        setVisible(true);
++
++    }
++
++    @Override
++    public void actionPerformed(ActionEvent e) {
++        if(e.getSource() == seButton) {
++
++        }
++    }
++}
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"93208719-b4e2-40bf-ac31-b60a0ff24c52\" name=\"Changes\" comment=\"MainWindow 관련 추가\">\n      <change afterPath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/component/FriendsListAtom.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/component/Label.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindowPanel.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/client/src/main/resources/chat_new.png\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/client/src/main/resources/friend_new.png\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/ChatPanel.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/ChatPanel.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/FriendsPanel.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/FriendsPanel.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindow.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindow.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/SettingsPanel.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/SettingsPanel.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/WeatherPanel.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/WeatherPanel.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/resources/chat.png\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/resources/chat.png\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/resources/chat_selected.png\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/resources/chat_selected.png\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/resources/friends.png\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/resources/friends.png\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/resources/friends_selected.png\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/resources/friends_selected.png\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/resources/logout.png\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/resources/logout.png\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/resources/settings.png\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/resources/settings.png\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/resources/settings_selected.png\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/resources/settings_selected.png\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/resources/weather.png\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/resources/weather.png\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/client/src/main/resources/weather_selected.png\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/client/src/main/resources/weather_selected.png\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/gagaotalk_client.jar\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/gagaotalk_client.jar\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Enum\" />\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"PREVIOUS_COMMIT_AUTHORS\">\n      <list>\n        <option value=\"tmin002 &lt;ssh9930@gmail.com&gt;\" />\n      </list>\n    </option>\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"pjh\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2Hyslytn5AqITSTwoX3BSirFfJF\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\n    \"WebServerToolWindowFactoryState\": \"false\",\n    \"jdk.selected.JAVA_MODULE\": \"azul-1.8\",\n    \"last_opened_file_path\": \"C:/Users/Administrator/IdeaProjects/gagaotalk/client/src/main/resources\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.detected.package.tslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"nodejs_package_manager_path\": \"npm\",\n    \"project.structure.last.edited\": \"Libraries\",\n    \"project.structure.proportion\": \"0.15\",\n    \"project.structure.side.proportion\": \"0.2\",\n    \"settings.editor.selected.configurable\": \"editor.preferences.fonts.default\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"CreateClassDialog.RecentsKey\">\n      <recent name=\"kr.gagaotalk.client.gui.window\" />\n    </key>\n    <key name=\"CopyFile.RECENT_KEYS\">\n      <recent name=\"C:\\Users\\Administrator\\IdeaProjects\\gagaotalk\\client\\src\\main\\resources\" />\n      <recent name=\"$PROJECT_DIR$/client\" />\n      <recent name=\"$PROJECT_DIR$\" />\n      <recent name=\"$PROJECT_DIR$/src\" />\n    </key>\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"C:\\Users\\Administrator\\IdeaProjects\\gagaotalk\\client\\src\\main\\resources\" />\n      <recent name=\"$PROJECT_DIR$/\" />\n    </key>\n    <key name=\"MoveClassesOrPackagesDialog.RECENTS_KEY\">\n      <recent name=\"kr.gagaotalk.client.gui\" />\n    </key>\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\n      <recent name=\"kr.gagaotalk.server\" />\n    </key>\n  </component>\n  <component name=\"RunManager\" selected=\"Application.Build Client\">\n    <list>\n      <item itemvalue=\"Application.Build Client\" />\n      <item itemvalue=\"Application.Build Server\" />\n    </list>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"93208719-b4e2-40bf-ac31-b60a0ff24c52\" name=\"Changes\" comment=\"\" />\n      <created>1669268812812</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1669268812812</updated>\n      <workItem from=\"1669268814127\" duration=\"939000\" />\n      <workItem from=\"1669271422429\" duration=\"4461000\" />\n      <workItem from=\"1670657337996\" duration=\"17824000\" />\n      <workItem from=\"1670692942438\" duration=\"554000\" />\n      <workItem from=\"1670693509343\" duration=\"3699000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"Fixed submodule dependencies\">\n      <created>1669271663768</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669271663768</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Configure IntelliJ build option&#10;artifacts, dependencies.\">\n      <created>1669272460397</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669272460397</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"Configure Test environment&#10;start_server.cmd, start_server.sh\">\n      <created>1669276073086</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669276073086</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"protocol minor update\">\n      <created>1669276403675</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669276403675</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"build setting minor update\">\n      <created>1669276418465</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669276418465</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"Protocol finished version\">\n      <created>1669277099919</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669277099919</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"Protocol finished version\">\n      <created>1669277183972</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669277183972</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"Protocol finished version\">\n      <created>1669277232477</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669277232477</updated>\n    </task>\n    <task id=\"LOCAL-00009\" summary=\"Protocol finished version\">\n      <created>1669277857871</created>\n      <option name=\"number\" value=\"00009\" />\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669277857871</updated>\n    </task>\n    <task id=\"LOCAL-00010\" summary=\"Removed request ID since we no longer use single socket connection\">\n      <created>1669731843445</created>\n      <option name=\"number\" value=\"00010\" />\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669731843445</updated>\n    </task>\n    <task id=\"LOCAL-00011\" summary=\"Removed request ID since we no longer use single socket connection\">\n      <created>1669736704499</created>\n      <option name=\"number\" value=\"00011\" />\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669736704499</updated>\n    </task>\n    <task id=\"LOCAL-00012\" summary=\"Client connection\">\n      <created>1669736781775</created>\n      <option name=\"number\" value=\"00012\" />\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1669736781775</updated>\n    </task>\n    <task id=\"LOCAL-00013\" summary=\"프로토콜 대로 UTF-8에서 ASCII 로 수정\">\n      <created>1670744955572</created>\n      <option name=\"number\" value=\"00013\" />\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670744955572</updated>\n    </task>\n    <task id=\"LOCAL-00014\" summary=\"이미지 리소스 폴더에 들어가도록 지정\">\n      <created>1670745106239</created>\n      <option name=\"number\" value=\"00014\" />\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670745106239</updated>\n    </task>\n    <task id=\"LOCAL-00015\" summary=\"서버: 들어오는 패킷 파싱 및 내보내는 패킷 만드는 기능 추가\">\n      <created>1670745146563</created>\n      <option name=\"number\" value=\"00015\" />\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670745146563</updated>\n    </task>\n    <task id=\"LOCAL-00016\" summary=\"gson 파싱할때 필요한 타입 Constants에 추가\">\n      <created>1670746434201</created>\n      <option name=\"number\" value=\"00016\" />\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670746434201</updated>\n    </task>\n    <task id=\"LOCAL-00017\" summary=\"ResourceManager로 프로젝트 이미지 간편추가기능\">\n      <created>1670747164080</created>\n      <option name=\"number\" value=\"00017\" />\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670747164080</updated>\n    </task>\n    <task id=\"LOCAL-00018\" summary=\"최상위 JFrame (Window) 추가\">\n      <created>1670754108975</created>\n      <option name=\"number\" value=\"00018\" />\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670754108975</updated>\n    </task>\n    <task id=\"LOCAL-00019\" summary=\"MainWindow 관련 추가\">\n      <created>1670754174535</created>\n      <option name=\"number\" value=\"00019\" />\n      <option name=\"presentableId\" value=\"LOCAL-00019\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670754174535</updated>\n    </task>\n    <task id=\"LOCAL-00020\" summary=\"MainWindow 관련 추가\">\n      <created>1670754183793</created>\n      <option name=\"number\" value=\"00020\" />\n      <option name=\"presentableId\" value=\"LOCAL-00020\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670754183793</updated>\n    </task>\n    <task id=\"LOCAL-00021\" summary=\"MainWindow 관련 추가\">\n      <created>1670754193088</created>\n      <option name=\"number\" value=\"00021\" />\n      <option name=\"presentableId\" value=\"LOCAL-00021\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670754193088</updated>\n    </task>\n    <task id=\"LOCAL-00022\" summary=\"MainWindow 관련 추가\">\n      <created>1670754228297</created>\n      <option name=\"number\" value=\"00022\" />\n      <option name=\"presentableId\" value=\"LOCAL-00022\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1670754228298</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"23\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"Fixed submodule dependencies\" />\n    <MESSAGE value=\"Configure IntelliJ build option&#10;artifacts, dependencies.\" />\n    <MESSAGE value=\"Configure Test environment&#10;start_server.cmd, start_server.sh\" />\n    <MESSAGE value=\"protocol minor update\" />\n    <MESSAGE value=\"build setting minor update\" />\n    <MESSAGE value=\"Protocol finished version\" />\n    <MESSAGE value=\"Removed request ID since we no longer use single socket connection\" />\n    <MESSAGE value=\"Client connection\" />\n    <MESSAGE value=\"프로토콜 대로 UTF-8에서 ASCII 로 수정\" />\n    <MESSAGE value=\"이미지 리소스 폴더에 들어가도록 지정\" />\n    <MESSAGE value=\"서버: 들어오는 패킷 파싱 및 내보내는 패킷 만드는 기능 추가\" />\n    <MESSAGE value=\"gson 파싱할때 필요한 타입 Constants에 추가\" />\n    <MESSAGE value=\"ResourceManager로 프로젝트 이미지 간편추가기능\" />\n    <MESSAGE value=\"최상위 JFrame (Window) 추가\" />\n    <MESSAGE value=\"MainWindow 관련 추가\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"MainWindow 관련 추가\" />\n  </component>\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\n    <expand />\n    <select />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 1d0913ce77969abf422b7d1d5f7dcc3d534eba71)
++++ b/.idea/workspace.xml	(date 1670830275295)
+@@ -5,28 +5,13 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="93208719-b4e2-40bf-ac31-b60a0ff24c52" name="Changes" comment="MainWindow 관련 추가">
+-      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/component/FriendsListAtom.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/component/Label.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindowPanel.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/chat_new.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/friend_new.png" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/Search_id.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/ChatPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/ChatPanel.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/FriendsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/FriendsPanel.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindow.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/SettingsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/SettingsPanel.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/WeatherPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/WeatherPanel.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/chat.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/chat.png" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/chat_selected.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/chat_selected.png" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/friends.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/friends.png" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/friends_selected.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/friends_selected.png" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/logout.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/logout.png" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/settings.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/settings.png" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/settings_selected.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/settings_selected.png" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/weather.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/weather.png" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/weather_selected.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/weather_selected.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/LoginWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/LoginWindow.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/gagaotalk_client.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gagaotalk_client.jar" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/gagaotalk_server.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gagaotalk_server.jar" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -72,7 +57,7 @@
+     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+     "WebServerToolWindowFactoryState": "false",
+     "jdk.selected.JAVA_MODULE": "azul-1.8",
+-    "last_opened_file_path": "C:/Users/Administrator/IdeaProjects/gagaotalk/client/src/main/resources",
++    "last_opened_file_path": "/Users/bagjuhyeog/Desktop/gagaotalk/gagaotalk",
+     "node.js.detected.package.eslint": "true",
+     "node.js.detected.package.tslint": "true",
+     "node.js.selected.package.eslint": "(autodetect)",
+@@ -125,6 +110,7 @@
+       <workItem from="1670657337996" duration="17824000" />
+       <workItem from="1670692942438" duration="554000" />
+       <workItem from="1670693509343" duration="3699000" />
++      <workItem from="1670815134969" duration="7757000" />
+     </task>
+     <task id="LOCAL-00001" summary="Fixed submodule dependencies">
+       <created>1669271663768</created>
+Index: .idea/dbnavigator.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/dbnavigator.xml b/.idea/dbnavigator.xml
+new file mode 100644
+--- /dev/null	(date 1670815860989)
++++ b/.idea/dbnavigator.xml	(date 1670815860989)
+@@ -0,0 +1,469 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="DBNavigator.Project.DataEditorManager">
++    <record-view-column-sorting-type value="BY_INDEX" />
++    <value-preview-text-wrapping value="true" />
++    <value-preview-pinned value="false" />
++  </component>
++  <component name="DBNavigator.Project.DataExportManager">
++    <export-instructions>
++      <create-header value="true" />
++      <friendly-headers value="false" />
++      <quote-values-containing-separator value="true" />
++      <quote-all-values value="false" />
++      <value-separator value="" />
++      <file-name value="" />
++      <file-location value="" />
++      <scope value="GLOBAL" />
++      <destination value="FILE" />
++      <format value="EXCEL" />
++      <charset value="UTF-8" />
++      <charset value="UTF-8" />
++    </export-instructions>
++  </component>
++  <component name="DBNavigator.Project.DatabaseBrowserManager">
++    <autoscroll-to-editor value="false" />
++    <autoscroll-from-editor value="true" />
++    <show-object-properties value="true" />
++    <loaded-nodes />
++  </component>
++  <component name="DBNavigator.Project.DatabaseFileManager">
++    <open-files />
++  </component>
++  <component name="DBNavigator.Project.EditorStateManager">
++    <last-used-providers />
++  </component>
++  <component name="DBNavigator.Project.ExecutionManager">
++    <retain-sticky-names value="false" />
++  </component>
++  <component name="DBNavigator.Project.MethodExecutionManager">
++    <method-browser />
++    <execution-history>
++      <group-entries value="true" />
++      <execution-inputs />
++    </execution-history>
++    <argument-values-cache />
++  </component>
++  <component name="DBNavigator.Project.ObjectDependencyManager">
++    <last-used-dependency-type value="INCOMING" />
++  </component>
++  <component name="DBNavigator.Project.ObjectQuickFilterManager">
++    <last-used-operator value="EQUAL" />
++    <filters />
++  </component>
++  <component name="DBNavigator.Project.ParserDiagnosticsManager">
++    <diagnostics-history />
++  </component>
++  <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
++    <recently-used-interfaces />
++  </component>
++  <component name="DBNavigator.Project.Settings">
++    <connections />
++    <browser-settings>
++      <general>
++        <display-mode value="TABBED" />
++        <navigation-history-size value="100" />
++        <show-object-details value="false" />
++      </general>
++      <filters>
++        <object-type-filter>
++          <object-type name="SCHEMA" enabled="true" />
++          <object-type name="USER" enabled="true" />
++          <object-type name="ROLE" enabled="true" />
++          <object-type name="PRIVILEGE" enabled="true" />
++          <object-type name="CHARSET" enabled="true" />
++          <object-type name="TABLE" enabled="true" />
++          <object-type name="VIEW" enabled="true" />
++          <object-type name="MATERIALIZED_VIEW" enabled="true" />
++          <object-type name="NESTED_TABLE" enabled="true" />
++          <object-type name="COLUMN" enabled="true" />
++          <object-type name="INDEX" enabled="true" />
++          <object-type name="CONSTRAINT" enabled="true" />
++          <object-type name="DATASET_TRIGGER" enabled="true" />
++          <object-type name="DATABASE_TRIGGER" enabled="true" />
++          <object-type name="SYNONYM" enabled="true" />
++          <object-type name="SEQUENCE" enabled="true" />
++          <object-type name="PROCEDURE" enabled="true" />
++          <object-type name="FUNCTION" enabled="true" />
++          <object-type name="PACKAGE" enabled="true" />
++          <object-type name="TYPE" enabled="true" />
++          <object-type name="TYPE_ATTRIBUTE" enabled="true" />
++          <object-type name="ARGUMENT" enabled="true" />
++          <object-type name="DIMENSION" enabled="true" />
++          <object-type name="CLUSTER" enabled="true" />
++          <object-type name="DBLINK" enabled="true" />
++        </object-type-filter>
++      </filters>
++      <sorting>
++        <object-type name="COLUMN" sorting-type="NAME" />
++        <object-type name="FUNCTION" sorting-type="NAME" />
++        <object-type name="PROCEDURE" sorting-type="NAME" />
++        <object-type name="ARGUMENT" sorting-type="POSITION" />
++        <object-type name="TYPE ATTRIBUTE" sorting-type="POSITION" />
++      </sorting>
++      <default-editors>
++        <object-type name="VIEW" editor-type="SELECTION" />
++        <object-type name="PACKAGE" editor-type="SELECTION" />
++        <object-type name="TYPE" editor-type="SELECTION" />
++      </default-editors>
++    </browser-settings>
++    <navigation-settings>
++      <lookup-filters>
++        <lookup-objects>
++          <object-type name="SCHEMA" enabled="true" />
++          <object-type name="USER" enabled="false" />
++          <object-type name="ROLE" enabled="false" />
++          <object-type name="PRIVILEGE" enabled="false" />
++          <object-type name="CHARSET" enabled="false" />
++          <object-type name="TABLE" enabled="true" />
++          <object-type name="VIEW" enabled="true" />
++          <object-type name="MATERIALIZED VIEW" enabled="true" />
++          <object-type name="INDEX" enabled="true" />
++          <object-type name="CONSTRAINT" enabled="true" />
++          <object-type name="DATASET TRIGGER" enabled="true" />
++          <object-type name="DATABASE TRIGGER" enabled="true" />
++          <object-type name="SYNONYM" enabled="false" />
++          <object-type name="SEQUENCE" enabled="true" />
++          <object-type name="PROCEDURE" enabled="true" />
++          <object-type name="FUNCTION" enabled="true" />
++          <object-type name="PACKAGE" enabled="true" />
++          <object-type name="TYPE" enabled="true" />
++          <object-type name="DIMENSION" enabled="false" />
++          <object-type name="CLUSTER" enabled="false" />
++          <object-type name="DBLINK" enabled="true" />
++        </lookup-objects>
++        <force-database-load value="false" />
++        <prompt-connection-selection value="true" />
++        <prompt-schema-selection value="true" />
++      </lookup-filters>
++    </navigation-settings>
++    <dataset-grid-settings>
++      <general>
++        <enable-zooming value="true" />
++        <enable-column-tooltip value="true" />
++      </general>
++      <sorting>
++        <nulls-first value="true" />
++        <max-sorting-columns value="4" />
++      </sorting>
++      <audit-columns>
++        <column-names value="" />
++        <visible value="true" />
++        <editable value="false" />
++      </audit-columns>
++    </dataset-grid-settings>
++    <dataset-editor-settings>
++      <text-editor-popup>
++        <active value="false" />
++        <active-if-empty value="false" />
++        <data-length-threshold value="100" />
++        <popup-delay value="1000" />
++      </text-editor-popup>
++      <values-actions-popup>
++        <show-popup-button value="true" />
++        <element-count-threshold value="1000" />
++        <data-length-threshold value="250" />
++      </values-actions-popup>
++      <general>
++        <fetch-block-size value="100" />
++        <fetch-timeout value="30" />
++        <trim-whitespaces value="true" />
++        <convert-empty-strings-to-null value="true" />
++        <select-content-on-cell-edit value="true" />
++        <large-value-preview-active value="true" />
++      </general>
++      <filters>
++        <prompt-filter-dialog value="true" />
++        <default-filter-type value="BASIC" />
++      </filters>
++      <qualified-text-editor text-length-threshold="300">
++        <content-types>
++          <content-type name="Text" enabled="true" />
++          <content-type name="Properties" enabled="true" />
++          <content-type name="XML" enabled="true" />
++          <content-type name="DTD" enabled="true" />
++          <content-type name="HTML" enabled="true" />
++          <content-type name="XHTML" enabled="true" />
++          <content-type name="CSS" enabled="true" />
++          <content-type name="Java" enabled="true" />
++          <content-type name="SQL" enabled="true" />
++          <content-type name="PL/SQL" enabled="true" />
++          <content-type name="JavaScript" enabled="true" />
++          <content-type name="JSON" enabled="true" />
++          <content-type name="JSON5" enabled="true" />
++          <content-type name="JSP" enabled="true" />
++          <content-type name="JSPx" enabled="true" />
++          <content-type name="Groovy" enabled="true" />
++          <content-type name="FTL" enabled="true" />
++          <content-type name="VTL" enabled="true" />
++          <content-type name="AIDL" enabled="true" />
++          <content-type name="YAML" enabled="true" />
++          <content-type name="Manifest" enabled="true" />
++        </content-types>
++      </qualified-text-editor>
++      <record-navigation>
++        <navigation-target value="VIEWER" />
++      </record-navigation>
++    </dataset-editor-settings>
++    <code-editor-settings>
++      <general>
++        <show-object-navigation-gutter value="false" />
++        <show-spec-declaration-navigation-gutter value="true" />
++        <enable-spellchecking value="true" />
++        <enable-reference-spellchecking value="false" />
++      </general>
++      <confirmations>
++        <save-changes value="false" />
++        <revert-changes value="true" />
++      </confirmations>
++    </code-editor-settings>
++    <code-completion-settings>
++      <filters>
++        <basic-filter>
++          <filter-element type="RESERVED_WORD" id="keyword" selected="true" />
++          <filter-element type="RESERVED_WORD" id="function" selected="true" />
++          <filter-element type="RESERVED_WORD" id="parameter" selected="true" />
++          <filter-element type="RESERVED_WORD" id="datatype" selected="true" />
++          <filter-element type="RESERVED_WORD" id="exception" selected="true" />
++          <filter-element type="OBJECT" id="schema" selected="true" />
++          <filter-element type="OBJECT" id="role" selected="true" />
++          <filter-element type="OBJECT" id="user" selected="true" />
++          <filter-element type="OBJECT" id="privilege" selected="true" />
++          <user-schema>
++            <filter-element type="OBJECT" id="table" selected="true" />
++            <filter-element type="OBJECT" id="view" selected="true" />
++            <filter-element type="OBJECT" id="materialized view" selected="true" />
++            <filter-element type="OBJECT" id="index" selected="true" />
++            <filter-element type="OBJECT" id="constraint" selected="true" />
++            <filter-element type="OBJECT" id="trigger" selected="true" />
++            <filter-element type="OBJECT" id="synonym" selected="false" />
++            <filter-element type="OBJECT" id="sequence" selected="true" />
++            <filter-element type="OBJECT" id="procedure" selected="true" />
++            <filter-element type="OBJECT" id="function" selected="true" />
++            <filter-element type="OBJECT" id="package" selected="true" />
++            <filter-element type="OBJECT" id="type" selected="true" />
++            <filter-element type="OBJECT" id="dimension" selected="true" />
++            <filter-element type="OBJECT" id="cluster" selected="true" />
++            <filter-element type="OBJECT" id="dblink" selected="true" />
++          </user-schema>
++          <public-schema>
++            <filter-element type="OBJECT" id="table" selected="false" />
++            <filter-element type="OBJECT" id="view" selected="false" />
++            <filter-element type="OBJECT" id="materialized view" selected="false" />
++            <filter-element type="OBJECT" id="index" selected="false" />
++            <filter-element type="OBJECT" id="constraint" selected="false" />
++            <filter-element type="OBJECT" id="trigger" selected="false" />
++            <filter-element type="OBJECT" id="synonym" selected="false" />
++            <filter-element type="OBJECT" id="sequence" selected="false" />
++            <filter-element type="OBJECT" id="procedure" selected="false" />
++            <filter-element type="OBJECT" id="function" selected="false" />
++            <filter-element type="OBJECT" id="package" selected="false" />
++            <filter-element type="OBJECT" id="type" selected="false" />
++            <filter-element type="OBJECT" id="dimension" selected="false" />
++            <filter-element type="OBJECT" id="cluster" selected="false" />
++            <filter-element type="OBJECT" id="dblink" selected="false" />
++          </public-schema>
++          <any-schema>
++            <filter-element type="OBJECT" id="table" selected="true" />
++            <filter-element type="OBJECT" id="view" selected="true" />
++            <filter-element type="OBJECT" id="materialized view" selected="true" />
++            <filter-element type="OBJECT" id="index" selected="true" />
++            <filter-element type="OBJECT" id="constraint" selected="true" />
++            <filter-element type="OBJECT" id="trigger" selected="true" />
++            <filter-element type="OBJECT" id="synonym" selected="true" />
++            <filter-element type="OBJECT" id="sequence" selected="true" />
++            <filter-element type="OBJECT" id="procedure" selected="true" />
++            <filter-element type="OBJECT" id="function" selected="true" />
++            <filter-element type="OBJECT" id="package" selected="true" />
++            <filter-element type="OBJECT" id="type" selected="true" />
++            <filter-element type="OBJECT" id="dimension" selected="true" />
++            <filter-element type="OBJECT" id="cluster" selected="true" />
++            <filter-element type="OBJECT" id="dblink" selected="true" />
++          </any-schema>
++        </basic-filter>
++        <extended-filter>
++          <filter-element type="RESERVED_WORD" id="keyword" selected="true" />
++          <filter-element type="RESERVED_WORD" id="function" selected="true" />
++          <filter-element type="RESERVED_WORD" id="parameter" selected="true" />
++          <filter-element type="RESERVED_WORD" id="datatype" selected="true" />
++          <filter-element type="RESERVED_WORD" id="exception" selected="true" />
++          <filter-element type="OBJECT" id="schema" selected="true" />
++          <filter-element type="OBJECT" id="user" selected="true" />
++          <filter-element type="OBJECT" id="role" selected="true" />
++          <filter-element type="OBJECT" id="privilege" selected="true" />
++          <user-schema>
++            <filter-element type="OBJECT" id="table" selected="true" />
++            <filter-element type="OBJECT" id="view" selected="true" />
++            <filter-element type="OBJECT" id="materialized view" selected="true" />
++            <filter-element type="OBJECT" id="index" selected="true" />
++            <filter-element type="OBJECT" id="constraint" selected="true" />
++            <filter-element type="OBJECT" id="trigger" selected="true" />
++            <filter-element type="OBJECT" id="synonym" selected="true" />
++            <filter-element type="OBJECT" id="sequence" selected="true" />
++            <filter-element type="OBJECT" id="procedure" selected="true" />
++            <filter-element type="OBJECT" id="function" selected="true" />
++            <filter-element type="OBJECT" id="package" selected="true" />
++            <filter-element type="OBJECT" id="type" selected="true" />
++            <filter-element type="OBJECT" id="dimension" selected="true" />
++            <filter-element type="OBJECT" id="cluster" selected="true" />
++            <filter-element type="OBJECT" id="dblink" selected="true" />
++          </user-schema>
++          <public-schema>
++            <filter-element type="OBJECT" id="table" selected="true" />
++            <filter-element type="OBJECT" id="view" selected="true" />
++            <filter-element type="OBJECT" id="materialized view" selected="true" />
++            <filter-element type="OBJECT" id="index" selected="true" />
++            <filter-element type="OBJECT" id="constraint" selected="true" />
++            <filter-element type="OBJECT" id="trigger" selected="true" />
++            <filter-element type="OBJECT" id="synonym" selected="true" />
++            <filter-element type="OBJECT" id="sequence" selected="true" />
++            <filter-element type="OBJECT" id="procedure" selected="true" />
++            <filter-element type="OBJECT" id="function" selected="true" />
++            <filter-element type="OBJECT" id="package" selected="true" />
++            <filter-element type="OBJECT" id="type" selected="true" />
++            <filter-element type="OBJECT" id="dimension" selected="true" />
++            <filter-element type="OBJECT" id="cluster" selected="true" />
++            <filter-element type="OBJECT" id="dblink" selected="true" />
++          </public-schema>
++          <any-schema>
++            <filter-element type="OBJECT" id="table" selected="true" />
++            <filter-element type="OBJECT" id="view" selected="true" />
++            <filter-element type="OBJECT" id="materialized view" selected="true" />
++            <filter-element type="OBJECT" id="index" selected="true" />
++            <filter-element type="OBJECT" id="constraint" selected="true" />
++            <filter-element type="OBJECT" id="trigger" selected="true" />
++            <filter-element type="OBJECT" id="synonym" selected="true" />
++            <filter-element type="OBJECT" id="sequence" selected="true" />
++            <filter-element type="OBJECT" id="procedure" selected="true" />
++            <filter-element type="OBJECT" id="function" selected="true" />
++            <filter-element type="OBJECT" id="package" selected="true" />
++            <filter-element type="OBJECT" id="type" selected="true" />
++            <filter-element type="OBJECT" id="dimension" selected="true" />
++            <filter-element type="OBJECT" id="cluster" selected="true" />
++            <filter-element type="OBJECT" id="dblink" selected="true" />
++          </any-schema>
++        </extended-filter>
++      </filters>
++      <sorting enabled="true">
++        <sorting-element type="RESERVED_WORD" id="keyword" />
++        <sorting-element type="RESERVED_WORD" id="datatype" />
++        <sorting-element type="OBJECT" id="column" />
++        <sorting-element type="OBJECT" id="table" />
++        <sorting-element type="OBJECT" id="view" />
++        <sorting-element type="OBJECT" id="materialized view" />
++        <sorting-element type="OBJECT" id="index" />
++        <sorting-element type="OBJECT" id="constraint" />
++        <sorting-element type="OBJECT" id="trigger" />
++        <sorting-element type="OBJECT" id="synonym" />
++        <sorting-element type="OBJECT" id="sequence" />
++        <sorting-element type="OBJECT" id="procedure" />
++        <sorting-element type="OBJECT" id="function" />
++        <sorting-element type="OBJECT" id="package" />
++        <sorting-element type="OBJECT" id="type" />
++        <sorting-element type="OBJECT" id="dimension" />
++        <sorting-element type="OBJECT" id="cluster" />
++        <sorting-element type="OBJECT" id="dblink" />
++        <sorting-element type="OBJECT" id="schema" />
++        <sorting-element type="OBJECT" id="role" />
++        <sorting-element type="OBJECT" id="user" />
++        <sorting-element type="RESERVED_WORD" id="function" />
++        <sorting-element type="RESERVED_WORD" id="parameter" />
++      </sorting>
++      <format>
++        <enforce-code-style-case value="true" />
++      </format>
++    </code-completion-settings>
++    <execution-engine-settings>
++      <statement-execution>
++        <fetch-block-size value="100" />
++        <execution-timeout value="20" />
++        <debug-execution-timeout value="600" />
++        <focus-result value="false" />
++        <prompt-execution value="false" />
++      </statement-execution>
++      <script-execution>
++        <command-line-interfaces />
++        <execution-timeout value="300" />
++      </script-execution>
++      <method-execution>
++        <execution-timeout value="30" />
++        <debug-execution-timeout value="600" />
++        <parameter-history-size value="10" />
++      </method-execution>
++    </execution-engine-settings>
++    <operation-settings>
++      <transactions>
++        <uncommitted-changes>
++          <on-project-close value="ASK" />
++          <on-disconnect value="ASK" />
++          <on-autocommit-toggle value="ASK" />
++        </uncommitted-changes>
++        <multiple-uncommitted-changes>
++          <on-commit value="ASK" />
++          <on-rollback value="ASK" />
++        </multiple-uncommitted-changes>
++      </transactions>
++      <session-browser>
++        <disconnect-session value="ASK" />
++        <kill-session value="ASK" />
++        <reload-on-filter-change value="false" />
++      </session-browser>
++      <compiler>
++        <compile-type value="KEEP" />
++        <compile-dependencies value="ASK" />
++        <always-show-controls value="false" />
++      </compiler>
++      <debugger>
++        <debugger-type value="ASK" />
++        <use-generic-runners value="true" />
++      </debugger>
++    </operation-settings>
++    <ddl-file-settings>
++      <extensions>
++        <mapping file-type-id="VIEW" extensions="vw" />
++        <mapping file-type-id="TRIGGER" extensions="trg" />
++        <mapping file-type-id="PROCEDURE" extensions="prc" />
++        <mapping file-type-id="FUNCTION" extensions="fnc" />
++        <mapping file-type-id="PACKAGE" extensions="pkg" />
++        <mapping file-type-id="PACKAGE_SPEC" extensions="pks" />
++        <mapping file-type-id="PACKAGE_BODY" extensions="pkb" />
++        <mapping file-type-id="TYPE" extensions="tpe" />
++        <mapping file-type-id="TYPE_SPEC" extensions="tps" />
++        <mapping file-type-id="TYPE_BODY" extensions="tpb" />
++      </extensions>
++      <general>
++        <lookup-ddl-files value="true" />
++        <create-ddl-files value="false" />
++        <synchronize-ddl-files value="true" />
++        <use-qualified-names value="false" />
++        <make-scripts-rerunnable value="true" />
++      </general>
++    </ddl-file-settings>
++    <general-settings>
++      <regional-settings>
++        <date-format value="MEDIUM" />
++        <number-format value="UNGROUPED" />
++        <locale value="SYSTEM_DEFAULT" />
++        <use-custom-formats value="false" />
++      </regional-settings>
++      <environment>
++        <environment-types>
++          <environment-type id="development" name="Development" description="Development environment" color="-2430209/-12296320" readonly-code="false" readonly-data="false" />
++          <environment-type id="integration" name="Integration" description="Integration environment" color="-2621494/-12163514" readonly-code="true" readonly-data="false" />
++          <environment-type id="production" name="Production" description="Productive environment" color="-11574/-10271420" readonly-code="true" readonly-data="true" />
++          <environment-type id="other" name="Other" description="" color="-1576/-10724543" readonly-code="false" readonly-data="false" />
++        </environment-types>
++        <visibility-settings>
++          <connection-tabs value="true" />
++          <dialog-headers value="true" />
++          <object-editor-tabs value="true" />
++          <script-editor-tabs value="false" />
++          <execution-result-tabs value="true" />
++        </visibility-settings>
++      </environment>
++    </general-settings>
++  </component>
++  <component name="DBNavigator.Project.StatementExecutionManager">
++    <execution-variables />
++  </component>
++</project>
+\ No newline at end of file

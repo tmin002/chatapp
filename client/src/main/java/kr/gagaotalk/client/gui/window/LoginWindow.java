@@ -84,11 +84,13 @@ public class LoginWindow extends JFrame implements ActionListener {
             }
         }
         if(e.getSource() == suButton) {
-            SignUpWindow b = new SignUpWindow();
+            new SignUpWindow();
 //          JOptionPane.showMessageDialog(null, "Sign up");
         }
         if(e.getSource() == fpButton) {
-            Forgot_IdPw c = new Forgot_IdPw();
+//            new AddChatUser();
+//            new Search_id();
+            new Forgot_IdPw();
 //            JOptionPane.showMessageDialog(null, "Forgot ID/password");
         }
     }

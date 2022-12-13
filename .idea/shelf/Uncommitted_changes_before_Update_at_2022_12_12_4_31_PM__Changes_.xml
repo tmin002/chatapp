@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_Update_at_2022_12_12_4_31_PM_[Changes]" date="1670830284981" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_4_31_PM_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2022/12/12 4:31 PM [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="gagaotalk_client.jar" />
+    <option name="AFTER_PATH" value="gagaotalk_client.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_4_31_PM_[Changes]/gagaotalk_client.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="gagaotalk_server.jar" />
+    <option name="AFTER_PATH" value="gagaotalk_server.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_4_31_PM_[Changes]/gagaotalk_server.jar" />
+  </binary>
+</changelist>

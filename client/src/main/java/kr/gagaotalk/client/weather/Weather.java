@@ -102,18 +102,63 @@ public class Weather {
                     data[0] = weather.get("fcstValue").getAsString(); //
                 }
                 else if(weather.get("category").getAsString().compareTo("SKY") == 0) {
-                    data[1] = weather.get("fcstValue").getAsString(); // 말긍ㅁ
+                    data[1] = weather.get("fcstValue").getAsString(); // 하늘상태
                 }
                 else if(weather.get("category").getAsString().compareTo("PTY") == 0) {
-                    data[2] = weather.get("fcstValue").getAsString(); // rain
+                    data[2] = weather.get("fcstValue").getAsString(); // 강수형태
                 }
 
             }
 
         }
-        System.out.println(data[0]);
-        System.out.println(data[1]);
-        System.out.println(data[2]);
-
+//        System.out.println(data[0]);
+//        System.out.println(data[1]);
+//        System.out.println(data[2]);
+    }
+    //하늘상태
+    public static String getCloud() {
+        String cloud = new String();
+        switch (data[1]) {
+            case "1":
+                //맑음
+                cloud = "맑음";
+                break;
+            case "3":
+                //구름많음
+                cloud = "구름많음";
+                break;
+            case "4":
+                //흐림
+                cloud = "흐림";
+                break;
+        }
+        return cloud;
+    }
+    //강수형태
+    public static String getRain() {
+        String rain = new String();
+        switch (data[2]) {
+            case "0":
+                //없음
+                rain = "없음";
+                break;
+            case "1":
+                //비
+                rain = "비";
+                break;
+            case "2":
+                //비/눈
+                rain = "비/눈";
+                break;
+            case "3":
+                //눈
+                rain = "눈";
+                break;
+            case "4":
+                //소나기
+                rain = "소나기";
+                break;
+        }
+        return rain;
     }
 }

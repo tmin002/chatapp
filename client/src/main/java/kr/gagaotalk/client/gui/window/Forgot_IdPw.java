@@ -18,7 +18,7 @@ public class Forgot_IdPw extends JFrame implements ActionListener {
     JTextField cp2 = new JTextField("component2");
     public Forgot_IdPw() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ImageIcon icon = ResourceManager.getImageIcon("/forgot_idpw.png");
+        ImageIcon icon = ImageIconResizer.resize(ResourceManager.getImageIcon("/forgot_idpw.png"), 499, 713);
                 JPanel fippanel = new JPanel() {
                     public void paintComponent(Graphics g) {
                 g.drawImage(icon.getImage(), 0, 0, null);
@@ -37,12 +37,12 @@ public class Forgot_IdPw extends JFrame implements ActionListener {
         //Set birthday or phone_number textfield
         cp2.setOpaque(false);
         cp2.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-        cp2.setSize(300, 40);
-        cp2.setLocation(88, 371);
+        cp2.setSize(330, 42);
+        cp2.setLocation(83, 369);
 
-        //Set Sign Up button
-        fButton.setSize(130, 50);
-        fButton.setLocation(184, 607);
+        //Set Find button
+        fButton.setSize(172, 55);
+        fButton.setLocation(164, 604);
         fButton.setBorderPainted(false);
         fButton.setContentAreaFilled(false);
         fButton.addActionListener(this);
