@@ -1,6 +1,7 @@
 package kr.gagaotalk.server;
 
-import sun.security.x509.FreshestCRLExtension;
+import kr.gagaotalk.server.table.ChatroomTables;
+import kr.gagaotalk.server.table.UserTable;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

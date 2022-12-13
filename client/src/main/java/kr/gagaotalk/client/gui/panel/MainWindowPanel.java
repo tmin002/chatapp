@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 public abstract class MainWindowPanel extends JPanel {
 
     public final SpringLayout layout = new SpringLayout();
-    private Label titleLabel;
+    public Label titleLabel;
     private ImageButton topButton;
 
     private void initialize(String titleLabelText) {

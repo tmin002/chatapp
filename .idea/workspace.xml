@@ -4,9 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="93208719-b4e2-40bf-ac31-b60a0ff24c52" name="Changes" comment="">
+    <list default="true" id="93208719-b4e2-40bf-ac31-b60a0ff24c52" name="Changes" comment="Server 프로젝트에 SQL CONNECTOR 추가">
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/ChatWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/resources/addfile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/resources/clearsky.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/resources/cloudy.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/resources/littlecloudy.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/resources/nightsky.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/resources/raining.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/resources/rainingsky.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/resources/refresh_white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/resources/snowandrain.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/resources/snowing.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/resources/sunny.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__10_37__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__10_37__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__10_37__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__10_37__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_4_31_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_4_31_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_13_12_00_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_13_12_00_AM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/panel/MainWindowPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/panel/MainWindowPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/panel/WeatherPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/panel/WeatherPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gagaotalk_client.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gagaotalk_client.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gagaotalk_server.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gagaotalk_server.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +41,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Kotlin Class" />
         <option value="Class" />
       </list>
     </option>
@@ -34,21 +59,15 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="c44bbd8e-13e0-4dd8-b1ee-492a5dd7a7f2" />
-        <option name="url" value="https://github.com/tmin002/gagaotalk.git" />
-      </UrlAndAccount>
-    </option>
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="usePluginRegistry" value="true" />
+      </MavenGeneralSettings>
+    </option>
   </component>
   <component name="ProjectId" id="2Hyslytn5AqITSTwoX3BSirFfJF" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -58,37 +77,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;azul-1.8&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/PC/Downloads/gagaotalk&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "azul-1.8",
+    "last_opened_file_path": "C:/Users/PC/IdeaProjects/gagaotalk/client/src/main/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="kr.gagaotalk.client.gui.window" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\PC\IdeaProjects\gagaotalk\client\src\main\resources" />
       <recent name="C:\Users\Administrator\IdeaProjects\gagaotalk\client\src\main\resources" />
       <recent name="$PROJECT_DIR$/client" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\PC\IdeaProjects\gagaotalk\client\src\main\resources" />
       <recent name="C:\Users\Administrator\IdeaProjects\gagaotalk\client\src\main\resources" />
       <recent name="$PROJECT_DIR$/" />
     </key>
@@ -137,7 +158,6 @@
       <workItem from="1670692942438" duration="554000" />
       <workItem from="1670693509343" duration="3699000" />
       <workItem from="1670815134969" duration="25190000" />
-      <workItem from="1670903878764" duration="15872000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed submodule dependencies">
       <created>1669271663768</created>
@@ -300,28 +320,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670843619971</updated>
     </task>
-    <task id="LOCAL-00024" summary="회원탈퇴 수정">
-      <created>1670906691436</created>
+    <task id="LOCAL-00024" summary="Server 프로젝트에 SQL CONNECTOR 추가">
+      <created>1670914343137</created>
       <option name="number" value="00024" />
       <option name="presentableId" value="LOCAL-00024" />
       <option name="project" value="LOCAL" />
-      <updated>1670906691436</updated>
+      <updated>1670914343137</updated>
     </task>
-    <task id="LOCAL-00025" summary="공공데이터 코드 수정">
-      <created>1670908199511</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1670908199511</updated>
-    </task>
-    <task id="LOCAL-00026" summary="공공데이터 코드 최종 수정">
-      <created>1670922202093</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1670922202093</updated>
-    </task>
-    <option name="localTasksCounter" value="27" />
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -355,21 +361,8 @@
     <MESSAGE value="최상위 JFrame (Window) 추가" />
     <MESSAGE value="MainWindow 관련 추가" />
     <MESSAGE value="친구 검색 기능 및 채팅방 친구 초대 기능 추가" />
-    <MESSAGE value="회원탈퇴 수정" />
-    <MESSAGE value="공공데이터 코드 수정" />
-    <MESSAGE value="공공데이터 코드 최종 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="공공데이터 코드 최종 수정" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/weather/Weather.java</url>
-          <line>96</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Server 프로젝트에 SQL CONNECTOR 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="Server 프로젝트에 SQL CONNECTOR 추가" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

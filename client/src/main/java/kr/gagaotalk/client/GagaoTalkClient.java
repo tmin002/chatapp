@@ -1,8 +1,8 @@
 package kr.gagaotalk.client;
 
 import kr.gagaotalk.client.gui.window.ChatRoom;
+import kr.gagaotalk.client.gui.window.ChatWindow;
 import kr.gagaotalk.client.gui.window.MainWindow;
-import kr.gagaotalk.client.gui.window.Unregister;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -19,9 +19,6 @@ public class GagaoTalkClient {
             SERVER_ADDRESS = InetAddress.getByName("localhost");
             SERVER_PORT = 24242;
         } catch (UnknownHostException ignored) {}
-//        new LoginWindow();
-//        new PublicData();
-//        new ChatRoom().FileProgressbar();
-        new Unregister();
+        new MainWindow();
     }
 }

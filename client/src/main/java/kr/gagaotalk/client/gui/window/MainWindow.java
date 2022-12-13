@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class MainWindow extends Window {
 
     private final SpringLayout mainWindowLayout = new SpringLayout();
-    private final JPanel sideBar = new JPanel(null);
+    public final JPanel sideBar = new JPanel(null);
     private final SideBarButton friendsButton = new SideBarButton(
             "friends",
             "/friends.png",
@@ -40,18 +40,43 @@ public class MainWindow extends Window {
             "/logout.png",
             true, this);
 
-    // 보여질 판넬
     private final MainWindowPanel chatPanel = new ChatPanel();
-    private final MainWindowPanel weatherPanel = new WeatherPanel();
+    private final MainWindowPanel weatherPanel = new WeatherPanel(this);
     private final MainWindowPanel settingsPanel = new SettingsPanel();
     private final MainWindowPanel friendsPanel = new FriendsPanel();
+    // 보여질 판넬
     private JPanel shownPanel = new JPanel(new GridLayout(1, 1)); // default
+
+    // Background panel
+    public BackgroundPanel backgroundPanel = new BackgroundPanel();
 
     public MainWindow() {
         // Initialize
         Container root = this.getContentPane();
         setSize(374, 656);
         setLayout(mainWindowLayout);
+
+
+        // Add buttons
+        friendsButton.setPreferredSize(new Dimension(66, 63));
+        mainWindowLayout.putConstraint(SpringLayout.WEST, friendsButton, 0, SpringLayout.WEST, root);
+        mainWindowLayout.putConstraint(SpringLayout.NORTH, friendsButton, 37, SpringLayout.NORTH, root);
+        add(friendsButton);
+
+        chatButton.setPreferredSize(new Dimension(66, 63));
+        mainWindowLayout.putConstraint(SpringLayout.WEST, chatButton, 0, SpringLayout.WEST, root);
+        mainWindowLayout.putConstraint(SpringLayout.NORTH, chatButton, 101, SpringLayout.NORTH, root);
+        add(chatButton);
+
+        weatherButton.setPreferredSize(new Dimension(66, 63));
+        mainWindowLayout.putConstraint(SpringLayout.WEST, weatherButton, 0, SpringLayout.WEST, root);
+        mainWindowLayout.putConstraint(SpringLayout.NORTH, weatherButton, 164, SpringLayout.NORTH, root);
+        add(weatherButton);
+
+        settingsButton.setPreferredSize(new Dimension(66, 63));
+        mainWindowLayout.putConstraint(SpringLayout.WEST, settingsButton, 0, SpringLayout.WEST, root);
+        mainWindowLayout.putConstraint(SpringLayout.NORTH, settingsButton, 227, SpringLayout.NORTH, root);
+        add(settingsButton);
 
         // Configure sidebar
         sideBar.setBackground(Colors.GACHON_BLUE);
@@ -61,18 +86,6 @@ public class MainWindow extends Window {
         mainWindowLayout.putConstraint(SpringLayout.SOUTH, sideBar, 0, SpringLayout.NORTH, signOutButton);
         root.add(sideBar);
 
-        // Add buttons to sidebar
-        sideBar.add(friendsButton);
-        friendsButton.setBounds(0, 37, 66, 63);
-
-        sideBar.add(chatButton);
-        chatButton.setBounds(0, 101, 66, 63);
-
-        sideBar.add(weatherButton);
-        weatherButton.setBounds(0, 164, 66, 63);
-
-        sideBar.add(settingsButton);
-        settingsButton.setBounds(0, 227, 66, 63);
 
         // Add sign out button
         mainWindowLayout.putConstraint(SpringLayout.WEST, signOutButton, 0, SpringLayout.WEST, root);
@@ -92,6 +105,14 @@ public class MainWindow extends Window {
         mainWindowLayout.putConstraint(SpringLayout.SOUTH, shownPanel, 0, SpringLayout.SOUTH, root);
         root.add(shownPanel);
 
+        // Add backgroundPanel
+        mainWindowLayout.putConstraint(SpringLayout.NORTH, backgroundPanel, 0, SpringLayout.NORTH, root);
+        mainWindowLayout.putConstraint(SpringLayout.WEST, backgroundPanel, 0, SpringLayout.WEST, root);
+        mainWindowLayout.putConstraint(SpringLayout.EAST, backgroundPanel, 0, SpringLayout.EAST, root);
+        mainWindowLayout.putConstraint(SpringLayout.SOUTH, backgroundPanel, 0, SpringLayout.SOUTH, root);
+        add(backgroundPanel);
+        backgroundPanel.setVisible(false);
+
         // Event handlers
         friendsButton.addActionListener(e -> changeShownPanel(friendsPanel));
         chatButton.addActionListener(e -> changeShownPanel(chatPanel));
@@ -108,9 +129,6 @@ public class MainWindow extends Window {
         });
         chatPanel.addTopButtonActionListener(e -> {
             System.out.println("채팅방추가 버튼 클릭됨");
-        });
-        weatherPanel.addTopButtonActionListener(e -> {
-            System.out.println("날씨 새로고침 버튼 클릭됨");
         });
 
         // Finish
@@ -174,6 +192,16 @@ class SideBarButton extends ImageButton {
                     }
                 }
             }
+            if (selectedButtonName.equals("weather")) {
+                parent.sideBar.setVisible(false);
+                parent.backgroundPanel.setVisible(true);
+                parent.backgroundPanel.setBackgroundImageIcon(
+                        ResourceManager.getImageIcon("/nightsky.png"));
+            } else {
+                parent.sideBar.setVisible(true);
+                parent.getContentPane().setBackground(Color.white);
+                parent.backgroundPanel.setVisible(false);
+            }
         });
     }
 
@@ -182,5 +210,23 @@ class SideBarButton extends ImageButton {
     }
     public void changeImageToDefault() {
         setIcon(imageWhenDefault);
+    }
+}
+
+class BackgroundPanel extends JLabel {
+    private ImageIcon backgroundIconImage;
+    public BackgroundPanel() {
+       setText("");
+    }
+    public void setBackgroundImageIcon(ImageIcon backgroundIconImage) {
+        this.backgroundIconImage = backgroundIconImage;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(ImageIconResizer.resize(backgroundIconImage,
+                        this.getWidth(), this.getHeight()).getImage(),
+                         0, 0, null);
     }
 }

@@ -1,8 +1,7 @@
-package kr.gagaotalk.server;
+package kr.gagaotalk.server.table;
 
 import java.io.*;
 import java.sql.Connection;
-import java.sql.SQLException;
 
 // The table with entire chatrooms in **server**
 // NOTE: chatroomID is int

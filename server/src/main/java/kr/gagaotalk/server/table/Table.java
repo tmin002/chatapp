@@ -1,4 +1,6 @@
-package kr.gagaotalk.server;
+package kr.gagaotalk.server.table;
+
+import kr.gagaotalk.server.Database;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
