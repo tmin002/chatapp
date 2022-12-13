@@ -208,6 +208,7 @@ public class Connection implements Runnable {
         } catch (Exception e) {
             // 알수없는 예외가 발생함. 출력하고 쓰레드 종료.
             System.out.println("!! Exception: " + e + ", terminating thread.");
+            e.printStackTrace();
         } finally {
             try {
                 client.close();

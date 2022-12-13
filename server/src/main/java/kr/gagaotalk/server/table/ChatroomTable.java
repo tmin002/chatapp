@@ -23,7 +23,7 @@ public class ChatroomTable extends Table {
 
     private final int fileIDLength = 8;
 
-    public static String schema = "chatroomID int not null, chatroomName varchar(32) not null, contentAddress varchar(32) not null, participantsAddress varchar(32) not null, primary key(chatroomID)";
+    public static String schema = "chatroomID varchar(16) not null, chatroomName varchar(32) not null, contentAddress varchar(32) not null, participantsAddress varchar(32) not null, primary key(chatroomID)";
     public static String database = "gagaotalkDB";
 
     private boolean doesExistChatID(String chatroomID) {
@@ -63,6 +63,7 @@ public class ChatroomTable extends Table {
     //mkCtRm
     public String createChatroom(ArrayList<String> participants, String chatroomName) {
         String chatroomID = getRandomChatroomID();
+
         return "";
     }
 
