@@ -1,6 +1,8 @@
 package kr.gagaotalk.server;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -24,8 +26,11 @@ public class UserTable extends Table{
     private boolean isValidBirthdayFormat(String birth) {
         boolean t = true;
         try {
-            LocalDate localDate2 = LocalDate.parse("birth", DateTimeFormatter.ofPattern("yyyyMMdd"));
-        } catch(DateTimeParseException e) {
+            SimpleDateFormat dtFormat = new SimpleDateFormat("yyyyMMdd");
+            dtFormat.setLenient(false);
+            Date formatDate = dtFormat.parse(birth);
+            //LocalDate localDate2 = LocalDate.parse("birth", DateTimeFormatter.ofPattern("yyyyMMdd"));
+        } catch(ParseException e) {
             t = false;
         }
         return t;
@@ -36,7 +41,7 @@ public class UserTable extends Table{
         return password.toString();
     }
 
-    public String getRandomPassword(int temporaryPasswordSize) {
+    private String getRandomPassword(int temporaryPasswordSize) {
         char[] charSet = new char[] {
                 '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
                 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
@@ -95,18 +100,23 @@ public class UserTable extends Table{
         return "";
     }
 
+    // phone number format : no hyphen
+    // test check no problem
     public String signup(String userID, String nickname, String phoneNumber, String birth, String password) {
         // ********* need to add Error type : password security (8 over)
-        if(doesExistID(userID)) { return "1"; } //already exist IDddddddd
+        if(doesExistID(userID)) { return "1"; } //already exist ID
         else {
             if(!isValidBirthdayFormat(birth)) { return "2"; } //invalid birthday
             if(nickname.isEmpty()) { return "3"; } //nickname is null
-            // need to add checking phone number // not character
+            if(phoneNumber.length() != 11) { return "4"; }
+            try {
+                int phone = Integer.parseInt(phoneNumber);
+            } catch (NumberFormatException e) { return "4"; }
             if(password.isEmpty()) { return "5"; } //password is null
-            // need to Check for duplicates ID
+
         }
         executeUpdate("insert into " + tableName + " values ('" + userID + "', '" + nickname + "', '" + phoneNumber + "', '" + birth + "', '" + password + "' );");
-        return ""; // success
+        return "0"; // success
     }
 
     public String findID(String nickname, String birth) {
@@ -120,8 +130,8 @@ public class UserTable extends Table{
         if(!doesExistID(userID)) { return "2"; } // userID does not exist
         StringBuilder password = executeQuery("select password from " + tableName + " where id = '" + userID + "' and phoneNumber = '" + phoneNumber + "';", 1);
         if(password.equals("")) { return "1"; }
-        // ******* need to insert table *******
         String tempPassword = getRandomPassword(12);
+        executeUpdate("update " + tableName + " set password = '" + tempPassword + "' where id = '" + userID + "';");
         return password.toString(); // return password in String (success)
     }
 
@@ -159,6 +169,4 @@ public class UserTable extends Table{
         }
         return userInfo;
     }
-
-    //session ID 16자리 String 16진법
 }

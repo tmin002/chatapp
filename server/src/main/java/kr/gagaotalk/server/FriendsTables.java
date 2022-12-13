@@ -12,18 +12,18 @@ public class FriendsTables extends Table {
 
 
 
-    public boolean isFriend(String myID, String searchID) {
+    public boolean isFriend(String searchID) {
         StringBuilder countS = executeQuery("select exists ( select from " + tableName + " where id = '" + searchID + "') as success;", 1);
         return countS.equals("1");
     }
 
-    public int getNumberOfFriends(String ID) {
+    public int getNumberOfFriends() {
         StringBuilder countS = executeQuery("select count(*) from " + tableName + ";", 1);
         int count = Integer.parseInt(countS.toString());
         return count;
     }
 
-    public StringBuilder getFriends(String ID) {
+    public StringBuilder getFriends() {
         StringBuilder friends = executeQuery("select id from " + tableName + ";", 1, '\n');
         return friends;
     }

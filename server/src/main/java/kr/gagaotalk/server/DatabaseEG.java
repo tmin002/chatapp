@@ -27,6 +27,8 @@ public class DatabaseEG {
         //makeConnection("jdbc:mysql://localhost", "root", pw);
 
         UserTable test = new UserTable();
-        System.out.println(test.getRandomPassword(12));
+        System.out.println(test.signup("user1", "ddong", "01012345478", "20021001", "cfkdfkdkdkdkdk"));
+
+
     }
 }
