@@ -53,8 +53,8 @@ public class FileTable extends Table {
 
     public void uploadFile(String fileName, String userID) {
         String fileID = getRandomFileID();
-        //executeUpdate("insert into " + tableName + " values ('" + fileID + "', '" + fileName + "', '" + userID + "', '")
+        String fileAddress = fileID + ".txt";
+        executeUpdate("insert into " + tableName + " values ('" + fileID + "', '" + fileName + "', '" + userID + "', '" + fileAddress + "');");
     }
-
 
 }
