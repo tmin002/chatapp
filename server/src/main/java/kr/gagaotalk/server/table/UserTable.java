@@ -93,7 +93,7 @@ public class UserTable extends Table {
                 else {
                     onlineUserTable.insertOnlineTableLoginUser(inputtedUserID); // insert this account into onlineTable
                 }
-                //success
+
             }
             else {
                 throw new ErrorInProcessingException(1, "wrong password");

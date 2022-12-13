@@ -49,12 +49,10 @@ public class ChatroomTable extends Table {
 
     //non-finished
     public String leaveChatroom() {
+
         return "";
     }
 
-    public void receiveMessage(String userID, String chatroomID, String messageType, String content) {
-
-    }
 
     //non-finished
     // ** NOTE : delimiter is ',' in a line
@@ -86,8 +84,8 @@ public class ChatroomTable extends Table {
             String currentDate = formatter.format(date).toString();
 
             BufferedWriter bw = new BufferedWriter(new FileWriter(chatroomContentFile, true));
-            // *** file format : userID, type, date and time, content
-            bw.write(userID + "," + type + ","  + currentDate + "," + fileName + '\n');
+            // *** file format : userID, type, date and time, fileName, fileID
+            bw.write(userID + "," + type + ","  + currentDate + "," + fileName + "," + fileID + "\n");
 
             bw.flush();
         } catch (IOException e) {
@@ -95,8 +93,6 @@ public class ChatroomTable extends Table {
         }
         return "";
     }
-
-
 
     // need to extract only the message part
     public StringBuilder getMessage(String chatroomID) {

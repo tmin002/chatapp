@@ -21,7 +21,7 @@ public class FileTable extends Table {
         fileTableGlobal.makeTable();
     }
 
-    private final int fileIDLength = 3;
+    private final int fileIDLength = 8;
     private final String fileAddress = "./database/file/";
 
     private boolean doesExistFileID(String fileID) {
