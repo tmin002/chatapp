@@ -30,9 +30,10 @@ public class Connection {
         // session ID
         System.arraycopy(Authentication.getSessionID(), 0, bytes, 10, 16);
         // action
-        System.arraycopy(action.getBytes(), 0, bytes, 26, 8);
+        System.arraycopy(action.getBytes(), 0, bytes, 26, action.getBytes().length);
         // data
-        System.arraycopy(gson.toJson(data).getBytes(StandardCharsets.UTF_8), 0, bytes, 34, 2048);
+        byte[] gsonBytes = gson.toJson(data).getBytes(StandardCharsets.UTF_8);
+        System.arraycopy(gsonBytes, 0, bytes, 34, gsonBytes.length);
 
         return bytes;
     }

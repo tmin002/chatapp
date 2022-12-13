@@ -1,5 +1,7 @@
 package kr.gagaotalk.server;
 
+import kr.gagaotalk.server.connection.Connection;
+
 import java.io.IOException;
 import java.net.BindException;
 import java.net.ServerSocket;
@@ -23,7 +25,7 @@ public class GagaoTalkServer {
                 System.out.println("* Connection attempt from "
                         + client.getInetAddress().getHostAddress());
 
-
+                new Connection(client);
             }
         }
         catch (BindException e) {
