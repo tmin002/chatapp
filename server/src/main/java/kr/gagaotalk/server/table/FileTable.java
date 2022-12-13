@@ -12,7 +12,7 @@ public class FileTable extends Table {
     public FileTable(Connection con) { super(con); }
     public FileTable(Connection con, String tableName) { super(con, tableName, schema, database); }
 
-    public static String schema = "fileID int not null, fileName varchar(32) not null, userID varchar(32) not null, fileAddress varchar(32) not null, primary key(fileID)";
+    public static String schema = "fileID varchar(16) not null, fileName varchar(32) not null, userID varchar(32) not null, fileAddress varchar(32) not null, primary key(fileID)";
     public static String database = "gagaotalkDB";
 
     public static FileTable fileTableGlobal;

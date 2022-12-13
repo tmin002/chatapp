@@ -3,8 +3,10 @@ package kr.gagaotalk.server.table;
 import kr.gagaotalk.server.DatabaseEG;
 
 import java.io.*;
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 // The table with entire chatrooms in **server**
@@ -19,8 +21,37 @@ public class ChatroomTable extends Table {
         chatroomTableGlobal.makeTable();
     }
 
-    public static String schema = "chatroomID int not null, name varchar(32) not null, contentAddress varchar(32) not null, participantsAddress varchar(32) not null, primary key(chatroomID)";
+    private final int fileIDLength = 8;
+
+    public static String schema = "chatroomID int not null, chatroomName varchar(32) not null, contentAddress varchar(32) not null, participantsAddress varchar(32) not null, primary key(chatroomID)";
     public static String database = "gagaotalkDB";
+
+    private boolean doesExistChatID(String chatroomID) {
+        StringBuilder checkExists = executeQuery("select exists (select from " + tableName + " where chatroomID = '" + chatroomID + "') as success;", 1);
+        return checkExists.toString().trim().equals("1");
+    }
+
+    private String getRandomChatroomID() {
+        char[] charSet = new char[] {
+                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+        };
+
+        StringBuilder sb;
+        do {
+            sb = new StringBuilder();
+            SecureRandom sr = new SecureRandom();
+            sr.setSeed(new Date().getTime());
+
+            int idx = 0;
+            int len = charSet.length;
+            for (int i = 0; i < fileIDLength; i++) {
+                // idx = (int) (len * Math.random());
+                idx = sr.nextInt(len);
+                sb.append(charSet[idx]);
+            }
+        } while (doesExistChatID(sb.toString()));
+        return sb.toString();
+    }
 
     public int getNumberOfParticipants(String chatroomID) {
         StringBuilder countS = executeQuery("select count(*) from " + tableName + " where id = " + chatroomID + ";", 1);
@@ -30,8 +61,8 @@ public class ChatroomTable extends Table {
 
     //non-finished
     //mkCtRm
-    public String createChatroom() {
-
+    public String createChatroom(ArrayList<String> participants, String chatroomName) {
+        String chatroomID = getRandomChatroomID();
         return "";
     }
 

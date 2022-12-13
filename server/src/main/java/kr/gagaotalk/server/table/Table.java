@@ -17,7 +17,7 @@ public class Table {
     public int cnt;
 
     //just test
-    Table() {
+    public Table() {
         this.tableName = "noName";
         this.schema = "noSchema";
         this.databaseName = "noDatabase";
@@ -169,8 +169,12 @@ public class Table {
             throw new RuntimeException(e);
         }
     }
-    public void dropTable() throws SQLException {
-        if(isTable(tableName))
-            executeUpdate("drop table " + tableName + ";");
+    public void dropTable(String tablename) {
+        try {
+            if(isTable(tablename))
+                executeUpdate("drop table " + tablename + ";");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

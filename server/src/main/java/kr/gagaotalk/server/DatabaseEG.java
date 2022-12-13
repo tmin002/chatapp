@@ -5,6 +5,8 @@ import kr.gagaotalk.server.table.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DatabaseEG {
     public static Connection con = null;
@@ -34,6 +36,10 @@ public class DatabaseEG {
 
         ChatroomTables chatroomInUser1 = new ChatroomTables(con, "user1");
         chatroomInUser1.makeTable();
+
+        Table s = new Table();
+        s.dropTable("tablename");
+
        //UserTable.userTableGlobal.signup("user1", "ddong", "01012345678", "20021001", "1234");
         //UserTable.userTableGlobal.unregister("user1");
 
