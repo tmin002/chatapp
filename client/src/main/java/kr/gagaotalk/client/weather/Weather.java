@@ -17,7 +17,7 @@ import com.google.gson.JsonParser;
 public class Weather {
     private static String date;
     private static String time;
-    private static String data[] = new String[3];
+    private static String data[][] = new String[3][2];
 
     public Weather() throws IOException {
         // 1. URL을 만들기 위한 StringBuilder.
@@ -80,7 +80,7 @@ public class Weather {
 
         // 11. 전달받은 데이터 확인.
         String result= sb.toString();
-        System.out.println(sb.toString());
+//        System.out.println(sb.toString());
 
         JsonParser parser = new JsonParser();
         JsonObject obj = (JsonObject) parser.parse(result);
@@ -92,71 +92,88 @@ public class Weather {
         JsonObject weather;
         String nextTime = null;
         System.out.println(parse_item);
-        for(int i = 0 ; i < parse_item.size(); i++) {
-            weather = (JsonObject) parse_item.get(i);
-            if(i == 0) {
-                nextTime = weather.get("fcstTime").getAsString();
+        System.out.println(data[1]);
+        System.out.println(data[2]);
+        for(int j = 0; j < 3; j++) {
+            weather = (JsonObject) parse_item.get(j);
+            nextTime = weather.get("fcstTime").getAsString();
+            for (int i = 0; i < parse_item.size(); i++) {
+                weather = (JsonObject) parse_item.get(i);
+//                if (i == 0) {
+//                    nextTime = weather.get("fcstTime").getAsString();
+//                }
+//                System.out.println(weather.get("fcstTime").getAsString());
+                if (weather.get("fcstTime").getAsString().compareTo(nextTime) == 0) {
+//                    if (weather.get("category").getAsString().compareTo("T1H") == 0) {
+//                        data[j] = weather.get("fcstValue").getAsString(); //
+                    if (weather.get("category").getAsString().compareTo("SKY") == 0) {
+                        data[j][0] = weather.get("fcstValue").getAsString(); // 하늘상태
+                    } else if (weather.get("category").getAsString().compareTo("PTY") == 0) {
+                        data[j][1] = weather.get("fcstValue").getAsString(); // 강수형태
+                    }
+
+                }
+
             }
-
-            if(weather.get("fcstTime").getAsString().compareTo(nextTime) == 0) {
-                if(weather.get("category").getAsString().compareTo("T1H") == 0) {
-                    data[0] = weather.get("fcstValue").getAsString(); //
-                }
-                else if(weather.get("category").getAsString().compareTo("SKY") == 0) {
-                    data[1] = weather.get("fcstValue").getAsString(); // 하늘상태
-                }
-                else if(weather.get("category").getAsString().compareTo("PTY") == 0) {
-                    data[2] = weather.get("fcstValue").getAsString(); // 강수형태
-                }
-
-            }
-
         }
-//        System.out.println(data[0]);
-//        System.out.println(data[1]);
-//        System.out.println(data[2]);
+        System.out.println(data[0][0]);
+        System.out.println(data[0][1]);
+        System.out.println(data[1][0]);
+        System.out.println(data[1][1]);
+        System.out.println(data[2][0]);
+        System.out.println(data[2][1]);
     }
     //하늘상태
-    public static String getWhether() {
-        String whether = "";
-        //강수량 없을 경우 구름많 반환
-        if (Objects.equals(data[2], "0")) {
-            switch (data[1]) {
-                case "1":
-                    //맑음
-                    whether = "맑음";
-                    break;
-                case "3":
-                    //구름많음
-                    whether = "구름많음";
-                    break;
-                case "4":
-                    //흐림
-                    whether = "흐림";
-                    break;
+    public static String[] getWeather() {
+        String weather[] = new String[3];
+        for(int i = 0; i < 3; i++) {
+            //강수량 없을 경우 구름만 반환
+            if (Objects.equals(data[i][0], "0")) {
+                switch (data[i][0]) {
+                    case "1":
+                        //맑음
+                        weather[i] = "맑음";
+                        break;
+                    case "3":
+                        //구름많음
+                        weather[i] = "구름많음";
+                        break;
+                    case "4":
+                        //흐림
+                        weather[i] = "흐림";
+                        break;
+                }
+            }
+            //강수형태 있을 경우 강수형태만 반환
+            else {
+                switch (data[i][1]) {
+                    case "1":
+                        //비
+                        weather[i] = "비";
+                        break;
+                    case "2":
+                        //비/눈
+                        weather[i] = "비/눈";
+                        break;
+                    case "3":
+                        //눈
+                        weather[i] = "눈";
+                        break;
+                    case "5":
+                        //빗방울
+                        weather[i] = "빗방울";
+                        break;
+                    case "6":
+                        //빗방울
+                        weather[i] = "빗방울눈날림";
+                        break;
+                    case "7":
+                        //빗방울
+                        weather[i] = "눈날림";
+                        break;
+                }
             }
         }
-        //강수량 있을 경우 강수량만 반환
-        else {
-            switch (data[2]) {
-                case "1":
-                    //비
-                    whether = "비";
-                    break;
-                case "2":
-                    //비/눈
-                    whether = "비/눈";
-                    break;
-                case "3":
-                    //눈
-                    whether = "눈";
-                    break;
-                case "4":
-                    //소나기
-                    whether = "소나기";
-                    break;
-            }
-        }
-        return whether;
+        return weather;
     }
 }
