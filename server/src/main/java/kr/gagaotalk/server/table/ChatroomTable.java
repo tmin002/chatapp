@@ -50,18 +50,21 @@ public class ChatroomTable extends Table {
         return "";
     }
 
-    public void receiveMessage() {
+    public void receiveMessage(String userID, String chatroomID, String messageType, String content) {
 
     }
 
     //non-finished
-    public String sendMessage(String chatroomID, String content, String userID) {
+    // ** NOTE : delimiter is ',' in a line
+    public String sendMessage(String chatroomID, String type, String content, String userID) {
         StringBuilder chatroomContentAddress = executeQuery("select contentAddress from " + tableName + " where chatroomID = " + chatroomID + ";", 1);
         File chatroomContentFile = new File(chatroomContentAddress.toString());
         try {
+
             BufferedWriter bw = new BufferedWriter(new FileWriter(chatroomContentFile, true));
-            // format : userID, date and time, content
-            bw.write(userID + "" + content + '\n');
+            // format : userID, type, date and time, content
+            bw.write(userID + "," + type + "," + content + '\n');
+
             bw.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
