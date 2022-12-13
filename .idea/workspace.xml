@@ -6,7 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="93208719-b4e2-40bf-ac31-b60a0ff24c52" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/Unregister.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/Unregister.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/weather/Weather.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/weather/Weather.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gagaotalk_client.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gagaotalk_client.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gagaotalk_server.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gagaotalk_server.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,11 +38,11 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -137,7 +141,7 @@
       <workItem from="1670692942438" duration="554000" />
       <workItem from="1670693509343" duration="3699000" />
       <workItem from="1670815134969" duration="25190000" />
-      <workItem from="1670903878764" duration="4291000" />
+      <workItem from="1670903878764" duration="14639000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed submodule dependencies">
       <created>1669271663768</created>
@@ -307,7 +311,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670906691436</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="공공데이터 코드 수정">
+      <created>1670908199511</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1670908199511</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -342,7 +353,19 @@
     <MESSAGE value="MainWindow 관련 추가" />
     <MESSAGE value="친구 검색 기능 및 채팅방 친구 초대 기능 추가" />
     <MESSAGE value="회원탈퇴 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="회원탈퇴 수정" />
+    <MESSAGE value="공공데이터 코드 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="공공데이터 코드 수정" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/weather/Weather.java</url>
+          <line>96</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
