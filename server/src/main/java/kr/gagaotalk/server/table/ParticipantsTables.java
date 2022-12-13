@@ -24,8 +24,20 @@ public class ParticipantsTables extends Table {
         }
     }
 
+    public void deleteUserFromChatroom(String userID) {
+        if(isParticipants(userID)) {
+            executeUpdate("delete from " + tableName + " where userID = '" + userID + "';");
+        }
+    }
+
     public int getNumberOfParticipants() {
         StringBuilder counts = executeQuery("select count(*) from " + tableName + ";", 1);
         return Integer.parseInt(counts.toString());
+    }
+
+    public ArrayList<String> getParticipants() {
+        ArrayList<String> participants = new ArrayList<>();
+        participants = executeQueryArrayList("select userID from " + tableName + ";", 1);
+        return participants;
     }
 }

@@ -1,6 +1,7 @@
 package kr.gagaotalk.server.table;
 
 import kr.gagaotalk.server.DatabaseEG;
+import kr.gagaotalk.server.ErrorInProcessingException;
 
 import java.io.*;
 import java.security.SecureRandom;
@@ -83,21 +84,17 @@ public class ChatroomTable extends Table {
 
     //non-finished
     //addCtRm
-    public String inviteUserToChatroom(ArrayList<String> participants, String chatroomID) {
-
+    public String inviteUsersToChatroom(ArrayList<String> participants, String chatroomID) {
+        ParticipantsTables participantsTables = new ParticipantsTables(con, chatroomID);
+        participantsTables.addUsersToChatroom(participants);
         return "";
     }
 
     //non-finished
-    //invCtRm (notification)
-    public String invitedChatroom(String chatroomID) {
-
-        return "";
-    }
-
-    //non-finished
-    public String leaveChatroom() {
-
+    public String leaveChatroom(String sessionID, String chatroomID) throws ErrorInProcessingException {
+        String myUserID = OnlineUserTable.onlineUserTableGlobal.getUserIDInOnlineTable(sessionID);
+        ParticipantsTables participantsTables = new ParticipantsTables(con, chatroomID);
+        participantsTables.deleteUserFromChatroom(myUserID);
         return "";
     }
 
