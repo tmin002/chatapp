@@ -5,8 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="93208719-b4e2-40bf-ac31-b60a0ff24c52" name="Changes" comment="친구 검색 기능 및 채팅방 친구 초대 기능 추가">
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/Unregister.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__10_37__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__10_37__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__10_37__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__10_37__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_4_31_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_4_31_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_13_12_00_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_13_12_00_AM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/GagaoTalkClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/Unregister.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/Unregister.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +42,19 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="c44bbd8e-13e0-4dd8-b1ee-492a5dd7a7f2" />
+        <option name="url" value="https://github.com/tmin002/gagaotalk.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -52,7 +73,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;azul-1.8&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/jwooo/Desktop/Univ/instakilogram&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/PC/Downloads/gagaotalk&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -86,7 +107,7 @@
       <recent name="kr.gagaotalk.server" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DatabaseEG">
+  <component name="RunManager" selected="Application.Build Client">
     <configuration name="DatabaseEG" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="kr.gagaotalk.server.DatabaseEG" />
       <module name="server" />
@@ -102,7 +123,6 @@
     </configuration>
     <list>
       <item itemvalue="Application.Build Client" />
-      <item itemvalue="Application.Build Server" />
       <item itemvalue="Application.DatabaseEG" />
     </list>
     <recent_temporary>
@@ -125,6 +145,7 @@
       <workItem from="1670692942438" duration="554000" />
       <workItem from="1670693509343" duration="3699000" />
       <workItem from="1670815134969" duration="25190000" />
+      <workItem from="1670903878764" duration="2646000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed submodule dependencies">
       <created>1669271663768</created>
