@@ -32,12 +32,20 @@ public class DatabaseEG {
 
         UserTable user1 = new UserTable(con, "userTable");
         user1.makeTable();
+
+        OnlineUserTable onlineUserTable = new OnlineUserTable(con, "onlineUserTable");
+        onlineUserTable.makeTable();
+
+        // below : just test code
         System.out.println(user1.signup("user1", "ddong", "01012345678", "20021001", "1234"));
-        System.out.println(user1.updatePassword("user", "1111", "1234"));
+        System.out.println(user1.updatePassword("user1", "1111", "1234"));
         System.out.println(user1.updateUserInfo("user1", "ddong", "20021001", "sss"));
         System.out.println(user1.getUserInfo("user"));
-        //System.out.println(user1.findPW("user1", "12345678"));
-
+        //System.out.println(user1.findPW("user1", "01012345678"));
+        System.out.println(user1.login("user1", "1233"));
+        System.out.println(user1.logout("user1"));
+        System.out.println(user1.login("user1", "1233"));
+        //System.out.println(user)
 
 
 

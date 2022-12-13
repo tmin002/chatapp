@@ -13,7 +13,8 @@ public class OnlineUserTable extends Table {
 
     private boolean doesExistSessionID(String sessionID) {
         StringBuilder t = executeQuery("select exists (select * from " + tableName + " where sessionID = '" + sessionID + "') as success;", 1);
-        return t.equals("1");
+        String tt = t.toString().trim();
+        return tt.equals("1");
     }
     private String getRandomSessionID() {
         char[] charSet = new char[] {
@@ -33,18 +34,21 @@ public class OnlineUserTable extends Table {
                 idx = sr.nextInt(len);
                 sb.append(charSet[idx]);
             }
-        } while (doesExistSessionID(sb.toString()) == false);
+        } while (doesExistSessionID(sb.toString()) == true);
 
 
         return sb.toString();
     }
     public boolean isOnline(String userID) {
         StringBuilder t = executeQuery("select exists (select * from " + tableName + " where userid = '" + userID + "') as success;", 1);
-        return t.equals("1");
+        String tt = t.toString().trim();
+        return tt.equals("1");
     }
 
     public void insertOnlineTableLoginUser(String userID) {
-        executeUpdate("insert into " + tableName + " values ('" + userID + "');");
+        String sessionID = getRandomSessionID();
+        executeUpdate("insert into " + tableName + " values ('" + userID + "', '" + sessionID + "');");
+
     }
 
     public void deleteOnlineTableLogoutUser(String userID) {

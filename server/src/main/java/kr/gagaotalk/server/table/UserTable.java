@@ -1,9 +1,12 @@
-package kr.gagaotalk.server.table;
+package kr.gagaotalk.server;
 
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.security.SecureRandom;
 
 public class UserTable extends Table{
@@ -13,13 +16,14 @@ public class UserTable extends Table{
     public static String schema = "ID varchar(32) not null, password varchar(32) not null, nickname varchar(32), bio varchar(32), phoneNumber varchar(16) not null, birthday varchar(16) not null, primary key(ID)";
     public static String database = "gagaotalkDB";
 
+    // test result : no problem
     // true : already exist false : does not exist
     private boolean doesExistID(String userID) {
         StringBuilder t = executeQuery("select exists (select * from " + tableName + " where id = '" + userID + "') as success;", 1);
         return t.toString().trim().equals("1");
     }
 
-    // need to test
+    // test result : no problem
     private boolean isValidBirthdayFormat(String birth) {
         boolean t = true;
         try {
@@ -33,11 +37,13 @@ public class UserTable extends Table{
         return t;
     } // format : yyyymmdd
 
+    // test result : no problem
     private String getPW(String userID) {
         StringBuilder password = executeQuery("select password from " + tableName + " where id = '" + userID + "';", 1);
         return password.toString();
     }
 
+    // test result : no problem
     private String getRandomPassword(int temporaryPasswordSize) {
         char[] charSet = new char[] {
                 '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -60,17 +66,18 @@ public class UserTable extends Table{
         return sb.toString();
     }
 
+    //test result : no problem
     public String login(String inputtedUserID, String inputtedPW) {
-        StringBuilder password = executeQuery("select password from " + tableName + "userTable where id = '" + inputtedUserID + "';", 1);
+        StringBuilder password = executeQuery("select password from " + tableName + " where id = '" + inputtedUserID + "';", 1);
         if(password.length() == 0) { // doesn't exist inputted ID in table
             return "1";
         }
         else {
-            if(inputtedUserID.equals(password)) {
+            if(inputtedPW.equals(password.toString().trim())) {
                 // login success
                 OnlineUserTable onlineUserTable = new OnlineUserTable(con, "onlineUserTable");
                 if(onlineUserTable.isOnline(inputtedUserID)) { // already online
-                    System.out.println(inputtedUserID + ": already online!");
+                    return "2";
                 }
                 else {
                     onlineUserTable.insertOnlineTableLoginUser(inputtedUserID); // insert this account into onlineTable
@@ -84,7 +91,6 @@ public class UserTable extends Table{
         }
     }
 
-    //non_finished
     public String logout(String userID) {
         OnlineUserTable onlineUserTable = new OnlineUserTable(con, "onlineUserTable");
         if(onlineUserTable.isOnline(userID)) { // already online
@@ -131,7 +137,7 @@ public class UserTable extends Table{
         return password.toString(); // return password in String (success)
     }
 
-    // need to distinguish
+    // test result : no problem
     public String updateUserInfo(String userID, String nickname, String birth, String bio) {
         if(!isValidBirthdayFormat(birth)) { return "1"; }
         if(nickname.isEmpty()) { return "2"; }

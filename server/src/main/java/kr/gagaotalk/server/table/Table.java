@@ -90,6 +90,7 @@ public class Table {
             rs = stmt.executeQuery(query);
             while(rs.next()) {
                 resultStringBuilder.append(rs.getString(1) + " ");
+                cnt++;
             }
         } catch(SQLException e) {
             e.printStackTrace();
@@ -134,7 +135,7 @@ public class Table {
             cnt++;
         }
         if(cnt >= 1) {
-            System.out.println("ERROR: '" + name + "' does already exist");
+            System.out.println(name + " does already exist");
             return true;
         }
         else {
