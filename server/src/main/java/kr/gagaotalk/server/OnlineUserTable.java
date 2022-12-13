@@ -41,7 +41,8 @@ public class OnlineUserTable extends Table {
     }
     public boolean isOnline(String userID) {
         StringBuilder t = executeQuery("select exists (select * from " + tableName + " where userid = '" + userID + "') as success;", 1);
-        return t.equals("1");
+        String tt = t.toString().trim();
+        return tt.equals("1");
     }
 
     public void insertOnlineTableLoginUser(String userID) {

@@ -133,7 +133,7 @@ public class Table {
             cnt++;
         }
         if(cnt >= 1) {
-            System.out.println("ERROR: '" + name + "' does already exist");
+            System.out.println(name + " does already exist");
             return true;
         }
         else {

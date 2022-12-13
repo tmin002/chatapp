@@ -77,7 +77,7 @@ public class UserTable extends Table{
                 // login success
                 OnlineUserTable onlineUserTable = new OnlineUserTable(con, "onlineUserTable");
                 if(onlineUserTable.isOnline(inputtedUserID)) { // already online
-                    System.out.println(inputtedUserID + ": already online!");
+                    return "2";
                 }
                 else {
                     onlineUserTable.insertOnlineTableLoginUser(inputtedUserID); // insert this account into onlineTable
