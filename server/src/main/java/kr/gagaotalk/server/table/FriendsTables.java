@@ -12,7 +12,7 @@ public class FriendsTables extends Table {
     }
 
     public static String database = "friends";
-    public static String schema = "userID varchar(32) not null, primary key(id)"; // or "id varchar(32) not null, state varchar(8), primary key(id)" state : invisible/ block etc.
+    public static String schema = "userID varchar(32) not null, primary key(userID)"; // or "id varchar(32) not null, state varchar(8), primary key(id)" state : invisible/ block etc.
 
     public boolean isFriend(String searchID) {
         StringBuilder countS = executeQuery("select exists ( select from " + tableName + " where userID = '" + searchID + "') as success;", 1);

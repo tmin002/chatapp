@@ -59,6 +59,7 @@ public class Connection implements Runnable {
 
             // Data sent from client parsed to Map
             Map<String, Object> rcvMap = rcv.dataToDictionary();
+            System.out.println(rcv.dataToString());
 
             // Do different things based on actions
             Gson gson = new Gson();
@@ -79,7 +80,7 @@ public class Connection implements Runnable {
                         UserTable.userTableGlobal.signup(
                                 (String) rcvMap.get("id"),
                                 (String) rcvMap.get("nickname"),
-                                (String) rcvMap.get("phone_number"),
+                                (String) rcvMap.get("phoneNumber"),
                                 (String) rcvMap.get("birthday"),
                                 (String) rcvMap.get("password")
                         );

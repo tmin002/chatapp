@@ -66,7 +66,7 @@ public class OnlineUserTable extends Table {
     public void insertOnlineTableLoginUser(String userID) {
         if(!isOnline(userID)) {
             String sessionID = getRandomSessionID();
-            executeUpdate("inert into " + tableName + " values ('" + userID + "', '" + sessionID + "');");
+            executeUpdate("insert into " + tableName + " values ('" + userID + "', '" + sessionID + "');");
         }
     }
 

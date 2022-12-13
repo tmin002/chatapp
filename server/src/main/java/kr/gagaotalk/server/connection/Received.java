@@ -26,7 +26,7 @@ public class Received {
     }
 
     public String dataToString() {
-        return new String(data);
+        return new String(data).trim();
     }
     public Map<String, Object> dataToDictionary() {
         Gson gson = new Gson();
