@@ -4,6 +4,8 @@ import kr.gagaotalk.server.DatabaseEG;
 
 import java.io.*;
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 // The table with entire chatrooms in **server**
 // NOTE: chatroomID is int
@@ -56,14 +58,36 @@ public class ChatroomTable extends Table {
 
     //non-finished
     // ** NOTE : delimiter is ',' in a line
-    public String sendMessage(String chatroomID, String type, String content, String userID) {
+    public String sendMessageText(String chatroomID, String type, String content, String userID) {
         StringBuilder chatroomContentAddress = executeQuery("select contentAddress from " + tableName + " where chatroomID = " + chatroomID + ";", 1);
         File chatroomContentFile = new File(chatroomContentAddress.toString());
         try {
+            Date date = new Date();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd-HHmmss");
+            String currentDate = formatter.format(date).toString();
 
             BufferedWriter bw = new BufferedWriter(new FileWriter(chatroomContentFile, true));
-            // format : userID, type, date and time, content
-            bw.write(userID + "," + type + "," + content + '\n');
+            // *** text format : userID, type, date and time, content
+            bw.write(userID + "," + type + ","  + currentDate + "," + content + '\n');
+
+            bw.flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return "";
+    }
+
+    public String sendMessageFile(String chatroomID, String type, String fileName, String fileID, String userID) {
+        StringBuilder chatroomContentAddress = executeQuery("select contentAddress from " + tableName + " where chatroomID = " + chatroomID + ";", 1);
+        File chatroomContentFile = new File(chatroomContentAddress.toString());
+        try {
+            Date date = new Date();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd-HHmmss");
+            String currentDate = formatter.format(date).toString();
+
+            BufferedWriter bw = new BufferedWriter(new FileWriter(chatroomContentFile, true));
+            // *** file format : userID, type, date and time, content
+            bw.write(userID + "," + type + ","  + currentDate + "," + fileName + '\n');
 
             bw.flush();
         } catch (IOException e) {

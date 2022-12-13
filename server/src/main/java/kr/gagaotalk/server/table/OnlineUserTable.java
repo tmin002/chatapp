@@ -63,11 +63,13 @@ public class OnlineUserTable extends Table {
         else throw new ErrorInProcessingException(1);
     }
 
-    public void insertOnlineTableLoginUser(String userID) {
+    public String insertOnlineTableLoginUser(String userID) throws ErrorInProcessingException {
         if(!isOnline(userID)) {
             String sessionID = getRandomSessionID();
             executeUpdate("insert into " + tableName + " values ('" + userID + "', '" + sessionID + "');");
+            return sessionID;
         }
+        throw new ErrorInProcessingException(2, "already login");
     }
 
     public void deleteOnlineTableLogoutUser(String userID) {
