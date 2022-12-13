@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="93208719-b4e2-40bf-ac31-b60a0ff24c52" name="Changes" comment="친구 검색 기능 및 채팅방 친구 초대 기능 추가">
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/Unregister.java" afterDir="false" />
+    <list default="true" id="93208719-b4e2-40bf-ac31-b60a0ff24c52" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/weather/Weather.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/weather/Weather.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +34,19 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="c44bbd8e-13e0-4dd8-b1ee-492a5dd7a7f2" />
+        <option name="url" value="https://github.com/tmin002/gagaotalk.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -52,7 +65,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;azul-1.8&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/jwooo/Desktop/Univ/instakilogram&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/PC/Downloads/gagaotalk&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -86,7 +99,7 @@
       <recent name="kr.gagaotalk.server" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DatabaseEG">
+  <component name="RunManager" selected="Application.Build Client">
     <configuration name="DatabaseEG" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="kr.gagaotalk.server.DatabaseEG" />
       <module name="server" />
@@ -102,7 +115,6 @@
     </configuration>
     <list>
       <item itemvalue="Application.Build Client" />
-      <item itemvalue="Application.Build Server" />
       <item itemvalue="Application.DatabaseEG" />
     </list>
     <recent_temporary>
@@ -125,6 +137,7 @@
       <workItem from="1670692942438" duration="554000" />
       <workItem from="1670693509343" duration="3699000" />
       <workItem from="1670815134969" duration="25190000" />
+      <workItem from="1670903878764" duration="4291000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed submodule dependencies">
       <created>1669271663768</created>
@@ -287,7 +300,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670843619971</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="회원탈퇴 수정">
+      <created>1670906691436</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1670906691436</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,7 +341,8 @@
     <MESSAGE value="최상위 JFrame (Window) 추가" />
     <MESSAGE value="MainWindow 관련 추가" />
     <MESSAGE value="친구 검색 기능 및 채팅방 친구 초대 기능 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="친구 검색 기능 및 채팅방 친구 초대 기능 추가" />
+    <MESSAGE value="회원탈퇴 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="회원탈퇴 수정" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
