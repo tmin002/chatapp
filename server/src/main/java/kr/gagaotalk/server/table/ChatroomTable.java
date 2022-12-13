@@ -27,7 +27,7 @@ public class ChatroomTable extends Table {
     public static String schema = "chatroomID varchar(16) not null, chatroomName varchar(32) not null, contentAddress varchar(32) not null, primary key(chatroomID)";
     public static String database = "gagaotalkDB";
 
-    private boolean doesExistChatID(String chatroomID) {
+    public boolean doesExistChatID(String chatroomID) {
         StringBuilder checkExists = executeQuery("select exists (select from " + tableName + " where chatroomID = '" + chatroomID + "') as success;", 1);
         return checkExists.toString().trim().equals("1");
     }
@@ -95,6 +95,8 @@ public class ChatroomTable extends Table {
         String myUserID = OnlineUserTable.onlineUserTableGlobal.getUserIDInOnlineTable(sessionID);
         ParticipantsTables participantsTables = new ParticipantsTables(con, chatroomID);
         participantsTables.deleteUserFromChatroom(myUserID);
+        ChatroomTables chatroomInUser = new ChatroomTables(con, myUserID);
+        chatroomInUser.deleteChatroomInUser(chatroomID);
         return "";
     }
 
