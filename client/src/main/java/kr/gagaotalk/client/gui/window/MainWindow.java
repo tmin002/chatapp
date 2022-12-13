@@ -4,10 +4,7 @@ import kr.gagaotalk.client.authentication.Authentication;
 import kr.gagaotalk.client.gui.Colors;
 import kr.gagaotalk.client.gui.ResourceManager;
 import kr.gagaotalk.client.gui.component.ImageButton;
-import kr.gagaotalk.client.gui.panel.FriendsPanel;
-import kr.gagaotalk.client.gui.panel.MainWindowPanel;
-import kr.gagaotalk.client.gui.panel.SettingsPanel;
-import kr.gagaotalk.client.gui.panel.WeatherPanel;
+import kr.gagaotalk.client.gui.panel.*;
 
 import javax.swing.*;
 import java.awt.*;

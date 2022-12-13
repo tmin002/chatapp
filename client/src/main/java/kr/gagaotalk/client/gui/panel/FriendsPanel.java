@@ -19,7 +19,7 @@ public class FriendsPanel extends MainWindowPanel {
     public FriendsPanel() {
 
         // Initialize
-        super("친구", "/friend_new.png");
+        super("Friends", "/friend_new.png");
 
         // init scrollPane
         scrollPane.setPreferredSize(new Dimension(238, 520));

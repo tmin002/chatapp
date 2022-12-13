@@ -1,4 +1,4 @@
-package kr.gagaotalk.client.gui.window;
+package kr.gagaotalk.client.gui.panel;
 
 import kr.gagaotalk.client.chat.Chatroom;
 import kr.gagaotalk.client.gui.component.ChatRoomListAtom;
@@ -18,7 +18,7 @@ public class ChatPanel extends MainWindowPanel {
     public ChatPanel() {
 
         // Initialize
-        super("채팅", "/chat_new.png");
+        super("Chat", "/chat_new.png");
 
         // init scrollPane
         scrollPane.setPreferredSize(new Dimension(238, 520));

@@ -37,7 +37,7 @@ public abstract class MainWindowPanel extends JPanel {
 
         // topButton placement
         topButton = new ImageButton(topButtonImagePath, 30, 30);
-        layout.putConstraint(SpringLayout.NORTH, topButton, 50, SpringLayout.NORTH, this);
+        layout.putConstraint(SpringLayout.NORTH, topButton, 54, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.EAST, topButton, -33, SpringLayout.EAST, this);
         add(topButton);
     }
