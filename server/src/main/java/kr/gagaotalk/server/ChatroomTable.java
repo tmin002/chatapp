@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 // The table with entire chatrooms in **server**
+// NOTE: chatroomID is int
 public class ChatroomTable extends Table {
     public ChatroomTable(Connection con) { super(con); }
     public ChatroomTable(Connection con, String tableName) { super(con, tableName, schema, database); }
@@ -19,13 +20,21 @@ public class ChatroomTable extends Table {
     }
 
     //non-finished
+    //mkCtRm
     public String createChatroom() {
 
         return "";
     }
 
     //non-finished
+    //addCtRm
     public String inviteUserToChatroom() {
+        return "";
+    }
+
+    //non-finished
+    //invCtRm (notification)
+    public String invitedChatroom() {
         return "";
     }
 
@@ -49,10 +58,7 @@ public class ChatroomTable extends Table {
         return "";
     }
 
-    //non-finished
-    public String invitedChatroom() {
-        return "";
-    }
+
 
     // need to extract only the message part
     public StringBuilder getContents(String chatroomID) {

@@ -51,7 +51,7 @@ public class UserTable extends Table{
         int len = charSet.length;
         for (int i = 0; i < temporaryPasswordSize; i++) {
             // idx = (int) (len * Math.random());
-            idx = sr.nextInt(len);    // 강력한 난수를 발생시키기 위해 SecureRandom을 사용한다.
+            idx = sr.nextInt(len);
             sb.append(charSet[idx]);
         }
 
@@ -66,21 +66,32 @@ public class UserTable extends Table{
         else {
             if(inputtedUserID.equals(password)) {
                 // login success
-                /* already logged in
-                if()
-                else
-                */
+                OnlineUserTable onlineUserTable = new OnlineUserTable(con, "onlineUserTable");
+                if(onlineUserTable.isOnline(inputtedUserID)) { // already online
+                    System.out.println(inputtedUserID + ": already online!");
+                }
+                else {
+                    onlineUserTable.insertOnlineTableLoginUser(inputtedUserID); // insert this account into onlineTable
+                }
+                return "0"; //success
             }
             else {
                 return "1"; //wrong password
 
             }
         }
-        return ""; // success
     }
 
     //non_finished
-    public String logout() {
+    public String logout(String userID) {
+        OnlineUserTable onlineUserTable = new OnlineUserTable(con, "onlineUserTable");
+        if(onlineUserTable.isOnline(userID)) { // already online
+            onlineUserTable.deleteOnlineTableLogoutUser(userID);
+            return "0";
+        }
+        else {
+            // that userID is OFFLINE
+        }
         return "";
     }
 
@@ -109,7 +120,8 @@ public class UserTable extends Table{
         if(!doesExistID(userID)) { return "2"; } // userID does not exist
         StringBuilder password = executeQuery("select password from " + tableName + " where id = '" + userID + "' and phoneNumber = '" + phoneNumber + "';", 1);
         if(password.equals("")) { return "1"; }
-        // ******* return temporary password *******
+        // ******* need to insert table *******
+        String tempPassword = getRandomPassword(12);
         return password.toString(); // return password in String (success)
     }
 
@@ -129,12 +141,24 @@ public class UserTable extends Table{
         else { return "1"; } // wrong password
     }
 
+    //NOTE: order is userID, nickname, birthday, bio
     public StringBuilder getUserInfo(String userID) {
         ResultSet userInfoResultSet = null;
         userInfoResultSet = executeQuery("select nickname, birthday, bio from " + tableName + " where id = '" + userID + "';");
+        StringBuilder userInfo = new StringBuilder("");
+        try {
+            if(userInfoResultSet.next()) {
+                userInfo.append(userID + "\n");
+                userInfo.append(userInfoResultSet.getString(1) + "\n");
+                userInfo.append(userInfoResultSet.getString(2) + "\n");
+                userInfo.append(userInfoResultSet.getString(3) + "\n");
+                //e.g. user11\nddong\n20021001\n뿌직\n
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return userInfo;
     }
-
-    // **** 아이디 입력하면 그 아이디 계정의 정보 return
 
     //session ID 16자리 String 16진법
 }
