@@ -14,7 +14,7 @@ public class FriendsTables extends Table {
 
     public boolean isFriend(String searchID) {
         StringBuilder countS = executeQuery("select exists ( select from " + tableName + " where id = '" + searchID + "') as success;", 1);
-        return countS.equals("1");
+        return countS.toString().equals("1");
     }
 
     public int getNumberOfFriends() {

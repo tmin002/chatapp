@@ -140,9 +140,13 @@ public class Table {
             return false;
         }
     }
-    public void makeTable() throws SQLException {
-        if(!isTable(tableName)) {
-            int createRow = executeUpdate("create table " + tableName + " (" + schema + ");");
+    public void makeTable()   {
+        try {
+            if(!isTable(tableName)) {
+                int createRow = executeUpdate("create table " + tableName + " (" + schema + ");");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
     public void dropTable() throws SQLException {

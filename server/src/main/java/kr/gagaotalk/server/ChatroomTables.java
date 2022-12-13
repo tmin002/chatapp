@@ -12,8 +12,8 @@ public class ChatroomTables extends Table {
     public static String schema = "chatroomID int not null, primary key(chatroomID)";
 
     //getCtRms
-    public StringBuilder getChatroomIDsInUser(String userID) {
-        StringBuilder chatroomIDs = executeQuery("select chatroomID from " + tableName + ";", 1, '\n');
+    public StringBuilder getChatroomIDsInUser(){
+        StringBuilder chatroomIDs = executeQuery( "select chatroomID from " + tableName + ";", 1, '\n');
         return chatroomIDs;
     }
 

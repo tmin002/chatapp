@@ -19,7 +19,7 @@ public class UserTable extends Table{
     // true : already exist false : does not exist
     private boolean doesExistID(String userID) {
         StringBuilder t = executeQuery("select exists (select * from " + tableName + " where id = '" + userID + "') as success;", 1);
-        return t.equals("1");
+        return t.toString().trim().equals("1");
     }
 
     // need to test
@@ -113,15 +113,14 @@ public class UserTable extends Table{
                 int phone = Integer.parseInt(phoneNumber);
             } catch (NumberFormatException e) { return "4"; }
             if(password.isEmpty()) { return "5"; } //password is null
-
+            executeUpdate("insert into " + tableName + " values ('" + userID + "', '" + password + "', '" + nickname + "', '', '" + phoneNumber + "', '" + birth + "' );");
         }
-        executeUpdate("insert into " + tableName + " values ('" + userID + "', '" + nickname + "', '" + phoneNumber + "', '" + birth + "', '" + password + "' );");
         return "0"; // success
     }
 
     public String findID(String nickname, String birth) {
         StringBuilder id = executeQuery("select id from " + tableName + " where nickname = '" + nickname + "' and birthday = '" + birth + "';", 1);
-        if(id.equals("")) { return "1"; } //does not exist
+        if(id.toString().trim().equals("")) { return "1"; } //does not exist
         return id.toString(); // return id
     }
 
@@ -129,12 +128,13 @@ public class UserTable extends Table{
 
         if(!doesExistID(userID)) { return "2"; } // userID does not exist
         StringBuilder password = executeQuery("select password from " + tableName + " where id = '" + userID + "' and phoneNumber = '" + phoneNumber + "';", 1);
-        if(password.equals("")) { return "1"; }
+        if(password.toString().trim().equals("")) { return "1"; }
         String tempPassword = getRandomPassword(12);
         executeUpdate("update " + tableName + " set password = '" + tempPassword + "' where id = '" + userID + "';");
         return password.toString(); // return password in String (success)
     }
 
+    // need to distinguish
     public String updateUserInfo(String userID, String nickname, String birth, String bio) {
         if(!isValidBirthdayFormat(birth)) { return "1"; }
         if(nickname.isEmpty()) { return "2"; }
@@ -142,17 +142,23 @@ public class UserTable extends Table{
         return "0"; //success
     }
 
+    // test result : no problem
     public String updatePassword(String userID, String inputtedCurrentPW, String newPW) {
         String curPW = getPW(userID);
-        if(curPW.equals(inputtedCurrentPW)) { // if same
+        if(curPW.trim().equals(inputtedCurrentPW)) { // if same
             executeUpdate("update " + tableName + " set password = '" + newPW + "' where id = '" + userID + "';");
             return "0"; // update success
         }
         else { return "1"; } // wrong password
     }
 
+    // test result : no problem
     //NOTE: order is userID, nickname, birthday, bio
     public StringBuilder getUserInfo(String userID) {
+        if(doesExistID(userID)) {
+            StringBuilder IDError = new StringBuilder("1");
+            return IDError;
+        }
         ResultSet userInfoResultSet = null;
         userInfoResultSet = executeQuery("select nickname, birthday, bio from " + tableName + " where id = '" + userID + "';");
         StringBuilder userInfo = new StringBuilder("");
