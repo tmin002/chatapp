@@ -54,6 +54,11 @@ public class OnlineUserTable extends Table {
         return tt.equals("1");
     }
 
+    public String getUserIDInOnlineTable(String sessionID) {
+        StringBuilder userID = executeQuery("select userID from " + tableName + " where sessionID = '" + sessionID + "';", 1);
+        return userID.toString().trim();
+    }
+
     public void insertOnlineTableLoginUser(String userID) {
         String sessionID = getRandomSessionID();
         executeUpdate("insert into " + tableName + " values ('" + userID + "', '" + sessionID + "');");
