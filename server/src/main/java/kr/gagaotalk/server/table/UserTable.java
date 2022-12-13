@@ -29,7 +29,7 @@ public class UserTable extends Table {
 
     // test result : no problem
     // true : already exist false : does not exist
-    private boolean doesExistID(String userID) {
+    public boolean doesExistID(String userID) {
         StringBuilder t = executeQuery("select exists (select * from " + tableName + " where id = '" + userID + "') as success;", 1);
         return t.toString().trim().equals("1");
     }

@@ -20,7 +20,7 @@ public class OnlineUserTable extends Table {
     public static String schema = "userID varchar(32) not null, sessionID varchar(17) not null, primary key(userID)";
     public static String database = "gagaotalkDB";
 
-    private boolean doesExistSessionID(String sessionID) {
+    public boolean doesExistSessionID(String sessionID) {
         StringBuilder t = executeQuery("select exists (select * from " + tableName + " where sessionID = '" + sessionID + "') as success;", 1);
         String tt = t.toString().trim();
         return tt.equals("1");
@@ -60,7 +60,7 @@ public class OnlineUserTable extends Table {
             StringBuilder userID = executeQuery("select userID from " + tableName + " where sessionID = '" + sessionID + "';", 1);
             return userID.toString().trim();
         }
-        else throw new ErrorInProcessingException(1, "does not exist sessionID");
+        else throw new ErrorInProcessingException(1);
     }
 
     public void insertOnlineTableLoginUser(String userID) {

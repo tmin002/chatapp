@@ -2,13 +2,17 @@ package kr.gagaotalk.server.connection;
 
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gson.Gson;
 import kr.gagaotalk.core.Action;
+import kr.gagaotalk.server.Database;
+import kr.gagaotalk.server.DatabaseEG;
 import kr.gagaotalk.server.ErrorInProcessingException;
 import kr.gagaotalk.server.User;
+import kr.gagaotalk.server.table.FriendsTables;
 import kr.gagaotalk.server.table.OnlineUserTable;
 import kr.gagaotalk.server.table.UserTable;
 
@@ -29,6 +33,9 @@ public class Connection implements Runnable {
         thread.start();
     }
 
+    public String getUserOfSessionID(String sessionID) throws ErrorInProcessingException {
+        return OnlineUserTable.onlineUserTableGlobal.getUserIDInOnlineTable(sessionID);
+    }
     public void run() {
 
         try {
@@ -55,8 +62,8 @@ public class Connection implements Runnable {
 
             // Do different things based on actions
             Gson gson = new Gson();
-            byte statusCode = 0;
             Map<String, Object> sendMap = new HashMap<>();
+            byte statusCode = 0;
 
             // does not uses persistent socket
             try {
@@ -110,36 +117,83 @@ public class Connection implements Runnable {
                         break;
 
                     case signOut:
-                        // Se
+                        UserTable.userTableGlobal.logout(getUserOfSessionID(rcv.sessionIDToString()));
                         break;
+
                     case upPW:
+                        UserTable.userTableGlobal.updatePassword(
+                                getUserOfSessionID(rcv.sessionIDToString()),
+                                (String) rcvMap.get("previous_password"),
+                                (String) rcvMap.get("new_password"));
                         break;
+
                     case getFrens:
+                        ArrayList<String> friendsIDList = new FriendsTables(
+                                DatabaseEG.con, getUserOfSessionID(rcv.sessionIDToString()))
+                                .getFriends();
+
+                        ArrayList<Map<String, Object>> userObjList = new ArrayList<>();
+                        for (String friendID : friendsIDList) {
+                            Map<String, Object> userObj = new HashMap<>();
+                            User userIns = UserTable.userTableGlobal.getUserInfo(friendID);
+                            userObj.put("id", userIns.ID);
+                            userObj.put("birthday", userIns.birthDay);
+                            userObj.put("nickname", userIns.nickname);
+                            userObj.put("bio", userIns.bio);
+                            userObjList.add(userObj);
+                        }
+
+                        sendMap.put("friends_list", userObjList);
                         break;
+
                     case unRegs:
+                        UserTable.userTableGlobal.unregister(
+                                getUserOfSessionID(rcv.sessionIDToString()));
                         break;
+
                     case getCtRms:
+                        // 구현 안됨
                         break;
+
                     case upUsrInf:
+                        UserTable.userTableGlobal.updateUserInfo(
+                                getUserOfSessionID(rcv.sessionIDToString()),
+                                (String) rcvMap.get("nickname"),
+                                (String) rcvMap.get("birthday"),
+                                (String) rcvMap.get("bio"));
                         break;
+
                     case mkCtRm:
+                        // 구현 안됨
                         break;
+
                     case addCtRm:
+                        // 구현 안됨
                         break;
+
                     case lvCtRm:
+                        // 구현 안됨
                         break;
+
                     case sendMsg:
+                        // 구현 안됨
                         break;
+
                     case downFile:
+                        // 구현 안됨
                         break;
+
                     case uplFile:
+                        // 구현 안됨
                         break;
                 }
             } catch (ErrorInProcessingException e) {
                 // Construct the error data
-                sendMap.put("error_code", e.errorCode);
-                sendMap.put("message", e.errorMessage);
-                statusCode = 1;
+                if (e.statusCode == 1) {
+                    sendMap.put("error_code", e.errorCode);
+                    sendMap.put("message", e.errorMessage);
+                    statusCode = 1;
+                }
             }
 
             // finally, send data to user

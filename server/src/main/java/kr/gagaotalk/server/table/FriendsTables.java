@@ -1,11 +1,15 @@
 package kr.gagaotalk.server.table;
 
+import kr.gagaotalk.server.ErrorInProcessingException;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
 public class FriendsTables extends Table {
     FriendsTables(Connection con) { super(con); }
-    FriendsTables(Connection con, String userID) { super(con, userID + "_friends", schema, database); }
+    public FriendsTables(Connection con, String userID) throws ErrorInProcessingException {
+        super(con, userID + "_friends", schema, database);
+    }
 
     public static String database = "friends";
     public static String schema = "userID varchar(32) not null, primary key(id)"; // or "id varchar(32) not null, state varchar(8), primary key(id)" state : invisible/ block etc.

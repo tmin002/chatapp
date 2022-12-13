@@ -5,6 +5,7 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import kr.gagaotalk.core.Action;
 import kr.gagaotalk.core.Constants;
+import kr.gagaotalk.core.HexDataConvert;
 
 import java.lang.reflect.Type;
 import java.util.Map;
@@ -18,6 +19,10 @@ public class Received {
         this.sessionID = sessionID;
         this.action = action;
         this.data = data;
+    }
+
+    public String sessionIDToString() {
+        return HexDataConvert.BytesToHexString(sessionID).toUpperCase();
     }
 
     public String dataToString() {
