@@ -9,13 +9,17 @@ public class OnlineUserTable extends Table {
     public static String schema = "userID varchar(32) not null, primary key(userID)";
     public static String database = "gagaotalkDB";
 
+    public boolean isOnline(String userID) {
+        StringBuilder t = executeQuery("select exists (select * from " + tableName + " where id = '" + userID + "') as success;", 1);
+        return t.equals("1");
+    }
+
     public void insertOnlineTableLoginUser(String userID) {
         executeUpdate("insert into " + tableName + " values ('" + userID + "');");
     }
 
-    public boolean isOnline(String userID) {
-        StringBuilder t = executeQuery("select exists (select * from " + tableName + " where id = '" + userID + "') as success;", 1);
-        return t.equals("1");
+    public void deleteOnlineTableLogoutUser(String userID) {
+        executeUpdate("delete from " + tableName + " where userID = '" + userID + "';");
     }
 
 

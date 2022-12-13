@@ -1,0 +1,118 @@
+Index: server/src/main/java/kr/gagaotalk/server/Table.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/server/src/main/java/kr/gagaotalk/server/Table.java b/server/src/main/java/kr/gagaotalk/server/Table.java
+--- a/server/src/main/java/kr/gagaotalk/server/Table.java	
++++ b/server/src/main/java/kr/gagaotalk/server/Table.java	
+@@ -18,17 +18,6 @@
+         this.con = con;
+         this.tableName = "noName";
+     }
+-    public Table(Connection con, String tableName) {
+-        this.con = con;
+-        this.tableName = tableName;
+-        cnt = getTableLength(tableName) + 1;
+-    }
+-    public Table(Connection con, String tableName, String schema) {
+-        this.con = con;
+-        this.tableName = tableName;
+-        this.schema = schema;
+-        cnt = getTableLength(tableName) + 1;
+-    }
+     public Table(Connection con, String tableName, String schema, String databaseName) {
+         this.con = con;
+         this.tableName = tableName;
+Index: server/src/main/java/kr/gagaotalk/server/FriendsTables.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/server/src/main/java/kr/gagaotalk/server/FriendsTables.java b/server/src/main/java/kr/gagaotalk/server/FriendsTables.java
+--- a/server/src/main/java/kr/gagaotalk/server/FriendsTables.java	
++++ b/server/src/main/java/kr/gagaotalk/server/FriendsTables.java	
+@@ -5,7 +5,7 @@
+ 
+ public class FriendsTables extends Table {
+     FriendsTables(Connection con) { super(con); }
+-    FriendsTables(Connection con, String userID) { super(con, userID + "_friends", database); }
++    FriendsTables(Connection con, String userID) { super(con, userID + "_friends", schema, database); }
+ 
+     public static String database = "friends";
+     public static String schema = "id varchar(32) not null, primary key(id)"; // or "id varchar(32) not null, state varchar(8), primary key(id)" state : invisible/ block etc.
+Index: server/src/main/java/kr/gagaotalk/server/UserTable.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/server/src/main/java/kr/gagaotalk/server/UserTable.java b/server/src/main/java/kr/gagaotalk/server/UserTable.java
+--- a/server/src/main/java/kr/gagaotalk/server/UserTable.java	
++++ b/server/src/main/java/kr/gagaotalk/server/UserTable.java	
+@@ -1,6 +1,9 @@
+ package kr.gagaotalk.server;
+ 
+ import java.sql.Connection;
++import java.time.LocalDate;
++import java.time.format.DateTimeFormatter;
++import java.time.format.DateTimeParseException;
+ 
+ public class UserTable extends Table{
+     public UserTable(Connection con) {
+@@ -18,9 +21,15 @@
+         return t.equals("1");
+     }
+ 
+-    // non-finished
++    // need to test
+     private boolean isValidBirthdayFormat(String birth) {
+-        return true;
++        boolean t = true;
++        try {
++            LocalDate localDate2 = LocalDate.parse("birth", DateTimeFormatter.ofPattern("yyyyMMdd"));
++        } catch(DateTimeParseException e) {
++            t = false;
++        }
++        return t;
+     } // format : yyyymmdd
+ 
+     private String getPW(String ID) {
+Index: server/src/main/java/kr/gagaotalk/server/Main.java
+===================================================================
+diff --git a/server/src/main/java/kr/gagaotalk/server/Main.java b/server/src/main/java/kr/gagaotalk/server/Main.java
+deleted file mode 100644
+--- a/server/src/main/java/kr/gagaotalk/server/Main.java	
++++ /dev/null	
+@@ -1,7 +0,0 @@
+-package kr.gagaotalk.server;
+-public class Main {
+-    public static void main(String[] args) {
+-        System.out.println("Hello world!");
+-
+-    }
+-}
+\ No newline at end of file
+Index: server/src/main/java/kr/gagaotalk/server/OnlineUserTable.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/server/src/main/java/kr/gagaotalk/server/OnlineUserTable.java b/server/src/main/java/kr/gagaotalk/server/OnlineUserTable.java
+new file mode 100644
+--- /dev/null	
++++ b/server/src/main/java/kr/gagaotalk/server/OnlineUserTable.java	
+@@ -0,0 +1,14 @@
++package kr.gagaotalk.server;
++
++import java.sql.Connection;
++
++public class OnlineUserTable extends Table {
++    public OnlineUserTable(Connection con) { super(con); }
++    public OnlineUserTable(Connection con, String tableName) { super(con, tableName, schema, database); }
++
++    public static String schema = "userID not null, primary key(userID)";
++    public static String database = "gagaotalkDB";
++
++
++
++}
