@@ -29,5 +29,4 @@ public class ChatroomTables extends Table {
         if(ChatroomTable.chatroomTableGlobal.doesExistChatID(chatroomID)) // if chatroomID is exists
         executeUpdate("delete from " + tableName + " where chatroomID = " + chatroomID + ";");
     }
-
 }
