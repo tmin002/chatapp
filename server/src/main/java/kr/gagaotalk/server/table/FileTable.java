@@ -57,4 +57,9 @@ public class FileTable extends Table {
         executeUpdate("insert into " + tableName + " values ('" + fileID + "', '" + fileName + "', '" + userID + "', '" + fileAddress + "');");
     }
 
+    public String getFileAddress(String fileID) {
+        StringBuilder fileAddress = executeQuery("select fileAddress from " + tableName + " where fileID = '" + fileID + "';", 1);
+        return fileAddress.toString().trim();
+    }
+
 }

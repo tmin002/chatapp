@@ -1,6 +1,7 @@
 package kr.gagaotalk.server.table;
 
 import kr.gagaotalk.server.DatabaseEG;
+import kr.gagaotalk.server.ErrorInProcessingException;
 
 import java.io.*;
 import java.security.SecureRandom;
@@ -23,10 +24,10 @@ public class ChatroomTable extends Table {
 
     private final int fileIDLength = 8;
 
-    public static String schema = "chatroomID varchar(16) not null, chatroomName varchar(32) not null, contentAddress varchar(32) not null, participantsAddress varchar(32) not null, primary key(chatroomID)";
+    public static String schema = "chatroomID varchar(16) not null, chatroomName varchar(32) not null, contentAddress varchar(32) not null, primary key(chatroomID)";
     public static String database = "gagaotalkDB";
 
-    private boolean doesExistChatID(String chatroomID) {
+    public boolean doesExistChatID(String chatroomID) {
         StringBuilder checkExists = executeQuery("select exists (select from " + tableName + " where chatroomID = '" + chatroomID + "') as success;", 1);
         return checkExists.toString().trim().equals("1");
     }
@@ -62,26 +63,40 @@ public class ChatroomTable extends Table {
     //non-finished
     //mkCtRm
     public String createChatroom(ArrayList<String> participants, String chatroomName) {
+        //if(chatroomName.length() > 16)  limit word length
         String chatroomID = getRandomChatroomID();
+        String contentAddress = "./database/chatrooms/" + chatroomID + ".txt";
+        File chatroomContentFile = new File(contentAddress);
 
+        ParticipantsTables participantsTable = new ParticipantsTables(con, chatroomID);
+        participantsTable.addUsersToChatroom(participants);
+
+        try {
+            chatroomContentFile.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        executeUpdate("insert into " + tableName + " values ('" + chatroomID + "', '" + chatroomName + "', '" + contentAddress + "');");
         return "";
     }
 
     //non-finished
     //addCtRm
-    public String inviteUserToChatroom() {
+    public String inviteUsersToChatroom(ArrayList<String> participants, String chatroomID) {
+        ParticipantsTables participantsTables = new ParticipantsTables(con, chatroomID);
+        participantsTables.addUsersToChatroom(participants);
         return "";
     }
 
     //non-finished
-    //invCtRm (notification)
-    public String invitedChatroom() {
-        return "";
-    }
-
-    //non-finished
-    public String leaveChatroom() {
-
+    public String leaveChatroom(String sessionID, String chatroomID) throws ErrorInProcessingException {
+        String myUserID = OnlineUserTable.onlineUserTableGlobal.getUserIDInOnlineTable(sessionID);
+        ParticipantsTables participantsTables = new ParticipantsTables(con, chatroomID);
+        participantsTables.deleteUserFromChatroom(myUserID);
+        ChatroomTables chatroomInUser = new ChatroomTables(con, myUserID);
+        chatroomInUser.deleteChatroomInUser(chatroomID);
         return "";
     }
 
