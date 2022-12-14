@@ -196,7 +196,9 @@ public class UserTable extends Table {
 
     public void addFriend(String sessionID, String someoneUserID) throws ErrorInProcessingException {
         String myUserID = OnlineUserTable.onlineUserTableGlobal.getUserIDInOnlineTable(sessionID);
-        FriendsTables myFriendsTable = new FriendsTables(con, myUserID);
-        myFriendsTable.addFriend(someoneUserID);
+        if(!myUserID.trim().equals(someoneUserID.trim())) {
+            FriendsTables myFriendsTable = new FriendsTables(con, myUserID);
+            myFriendsTable.addFriend(someoneUserID);
+        }
     }
 }
