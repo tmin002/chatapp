@@ -47,6 +47,7 @@
 | findPW   | Finding password.<br> Requires user ID, phone number.<br>(phone number is only used for this purpose) | no                 | no                     |
 | upPW     | Changing password.<br> Requires user password once again.                                             | <b>yes</b>         | no                     |
 | getFrens | Get Information of user's friends.                                                                    | <b>yes</b>         | no                     |
+| adFriend | Add friend.                                                                                           | <b>yes</b>         | no                     |
 | unRegs   | Remove myself from database.                                                                          | <b>yes</b>         | no                     |
 | getUser  | Get information of user.                                                                              | no                 | no                     |
 | chkUsrOn | Check whether the given user is online.                                                               | no                 | no                     |
@@ -249,6 +250,26 @@ null
 </pre>    
 
 * client receiving if something went wrong 
+
+<pre>
+"error_code" 0 is used only.
+</pre>    
+
+### adFriend
+
+* client sending
+<pre>
+{
+      "user_id": "[ID of friend]"
+}
+</pre>    
+
+* client receiving if opernation successful
+<pre>
+null
+</pre>    
+
+* client receiving if something went wrong
 
 <pre>
 "error_code" 0 is used only.

@@ -14,6 +14,7 @@ public enum Action {
     getCtRms("getCtRms"),
     upUsrInf("upUsrInf"),
     chkUsrOn("chkUsrOn"),
+    adFriend("adFriend"),
     unRegs("unRegs"),
     mkCtRm("mkCtRm"),
     addCtRm("addCtRm"),
