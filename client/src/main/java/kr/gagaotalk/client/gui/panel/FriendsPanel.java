@@ -36,8 +36,10 @@ public class FriendsPanel extends MainWindowPanel {
 
         // Add FriendsListAtom panels
         ArrayList<User> friendList = User.getFriends();
-        for (User u : friendList)
-            addFriendsListAtom(u);
+        for (User u : friendList) {
+            if (u != null)
+                addFriendsListAtom(u);
+        }
     }
 
     private void updateView() {
@@ -45,7 +47,7 @@ public class FriendsPanel extends MainWindowPanel {
         repaint();
     }
     public void addFriendsListAtom(User user) {
-        FriendsListAtom fla = new FriendsListAtom(User.makeDummyUser());
+        FriendsListAtom fla = new FriendsListAtom(user);
         friendsListPaneLayout.putConstraint(SpringLayout.NORTH, fla, friendsCount*79, SpringLayout.NORTH, friendsListPane);
         friendsListPaneLayout.putConstraint(SpringLayout.WEST, fla, 0, SpringLayout.WEST, friendsListPane);
         friendsListPaneLayout.putConstraint(SpringLayout.EAST, fla, 0, SpringLayout.EAST, friendsListPane);

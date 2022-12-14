@@ -1,18 +1,20 @@
 package kr.gagaotalk.client.gui.window;
 
 import kr.gagaotalk.client.User;
+import kr.gagaotalk.client.chat.Chatroom;
+import kr.gagaotalk.client.connection.Connection;
 import kr.gagaotalk.client.gui.ResourceManager;
-import javax.swing.*;
-import kr.gagaotalk.client.authentication.Authentication;
-import kr.gagaotalk.client.connection.Received;
-import kr.gagaotalk.client.gui.ResourceManager;
-import kr.gagaotalk.core.DateConvert;
+import kr.gagaotalk.core.Action;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class AddChatUser extends JFrame implements ActionListener {
+public class AddChatRoom extends JFrame implements ActionListener {
     JButton saButton = new JButton();
     JButton adButton = new JButton();
     JTextField sid = new JTextField("enter id");
@@ -20,7 +22,7 @@ public class AddChatUser extends JFrame implements ActionListener {
 
     String totalUser;
 
-    public AddChatUser() {
+    public AddChatRoom() {
         ImageIcon icon = ImageIconResizer.resize(ResourceManager.getImageIcon("/addchatuser.png"), 301, 197);
         JPanel sapanel = new JPanel() {
             public void paintComponent(Graphics g) {
@@ -33,15 +35,16 @@ public class AddChatUser extends JFrame implements ActionListener {
 
         //Set search id textfield
         sid.setOpaque(false);
-        sid.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        sid.setBorder(BorderFactory.createEmptyBorder());
         sid.setSize(225, 35);
         sid.setLocation(12, 12);
 
         //Set find id textfield
         aid.setOpaque(false);
-        aid.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        aid.setBorder(BorderFactory.createEmptyBorder());
         aid.setSize(223, 129);
         aid.setLocation(12, 57);
+        aid.setLineWrap(true);
 
         //Set Sign Up button
         saButton.setSize(48, 33);
@@ -75,7 +78,7 @@ public class AddChatUser extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saButton) {
-            String sauser = User.getUserByID(sid.getText()).toString();
+            String sauser = User.getUserByID(sid.getText()).nickname;
             if (sauser != null) {
                 if (totalUser == null) {
                     totalUser = sauser;
@@ -90,16 +93,17 @@ public class AddChatUser extends JFrame implements ActionListener {
             }
         }
         if (e.getSource() == adButton) {
-            String[] idList = sid.getText().split(",");
-            boolean success = true;
+            String[] idList = totalUser.split(",");
+            ArrayList<User> finalList = new ArrayList<>();
             for (String id : idList) {
-                if (User.addFriend(id).statusCode != 0) {
-                    success = false;
-                    break;
-                }
+                finalList.add(User.getUserByID(id));
             }
-            if (!success) {
-                JOptionPane.showMessageDialog(null, "Failed!", "Add user", JOptionPane.ERROR_MESSAGE);
+
+            Map<String, Object> req = new HashMap<>();
+            req.put("chatroom_name", aid.getText());
+            req.put("chatroom_people", finalList);
+            if (Connection.communicate(Action.mkCtRm, req).statusCode != 0) {
+                JOptionPane.showMessageDialog(null, "Failed", "Add user", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

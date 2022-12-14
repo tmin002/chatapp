@@ -1,6 +1,7 @@
 package kr.gagaotalk.client.chat;
 
 import kr.gagaotalk.client.User;
+import kr.gagaotalk.client.authentication.Authentication;
 import kr.gagaotalk.client.connection.Connection;
 import kr.gagaotalk.client.connection.Received;
 import kr.gagaotalk.core.Action;
@@ -80,6 +81,7 @@ public class Chatroom {
         ArrayList<String> userIDs = new ArrayList<>();
         for (User u : chatRoomPeople)
             userIDs.add(u.ID);
+        userIDs.add(Authentication.getCurrentUser().ID);
         request.put("chatroom_people", userIDs.toArray());
 
         Received rcv = Connection.communicate(Action.mkCtRm, request);

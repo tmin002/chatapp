@@ -69,7 +69,7 @@ public class FriendsListAtom extends JPanel {
         add(onlineIndicatorImage);
 
         // profile pic add
-        profilePicImage = new RoundPictureBox(user.userProfilePicture, 50, 50);
+        profilePicImage = new RoundPictureBox(ImageIconResizer.resize(ResourceManager.getImageIcon("/user_default_profile_pic.png"), 50, 50), 50, 50);
         layout.putConstraint(SpringLayout.NORTH, profilePicImage, 15, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, profilePicImage, 0, SpringLayout.WEST, this);
         add(profilePicImage);

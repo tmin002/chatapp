@@ -119,6 +119,12 @@ public class Connection implements Runnable {
                         sendMap.put("user_online", isUserOnline);
                         break;
 
+                    case adFriend:
+                        UserTable.userTableGlobal.addFriend(
+                                rcv.sessionIDToString(), (String) rcvMap.get("user_id")
+                        );
+                        break;
+
                     case signOut:
                         UserTable.userTableGlobal.logout(getUserOfSessionID(rcv.sessionIDToString()));
                         break;

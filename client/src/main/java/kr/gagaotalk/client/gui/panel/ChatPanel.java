@@ -39,7 +39,8 @@ public class ChatPanel extends MainWindowPanel {
             System.out.println("null chatroom list");
         }
         for (Chatroom c : chatRoomList)
-            addChatListPane(c);
+            if (c != null)
+                addChatListPane(c);
 
     }
 
@@ -48,7 +49,7 @@ public class ChatPanel extends MainWindowPanel {
         repaint();
     }
     public void addChatListPane(Chatroom chatroom) {
-        ChatRoomListAtom cla = new ChatRoomListAtom(Chatroom.createDummyChatRoom());
+        ChatRoomListAtom cla = new ChatRoomListAtom(chatroom);
         chatListPaneLayout.putConstraint(SpringLayout.NORTH, cla, chatCount*79, SpringLayout.NORTH, chatListPane);
         chatListPaneLayout.putConstraint(SpringLayout.WEST, cla, 0, SpringLayout.WEST, chatListPane);
         chatListPaneLayout.putConstraint(SpringLayout.EAST, cla, 0, SpringLayout.EAST, chatListPane);

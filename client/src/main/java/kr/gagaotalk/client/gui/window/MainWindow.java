@@ -125,10 +125,10 @@ public class MainWindow extends Window {
         });
 
         friendsPanel.addTopButtonActionListener(e -> {
-            new AddChatUser();
+            new AddFriend();
         });
         chatPanel.addTopButtonActionListener(e -> {
-            new ChatRoom();
+            new AddChatRoom();
         });
 
         // Finish
