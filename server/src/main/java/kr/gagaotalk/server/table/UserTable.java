@@ -5,6 +5,7 @@ import kr.gagaotalk.server.ErrorInProcessingException;
 import kr.gagaotalk.server.User;
 import kr.gagaotalk.server.table.Table;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -78,7 +79,7 @@ public class UserTable extends Table {
     }
 
     //test result : no problem
-    public void login(String inputtedUserID, String inputtedPW) throws ErrorInProcessingException {
+    public String login(String inputtedUserID, String inputtedPW) throws ErrorInProcessingException {
         StringBuilder password = executeQuery("select password from " + tableName + " where id = '" + inputtedUserID + "';", 1);
         if(password.length() == 0) {
             throw new ErrorInProcessingException(1, "doesn't exist inputted ID in table");
@@ -91,7 +92,7 @@ public class UserTable extends Table {
                     throw new ErrorInProcessingException(2, " already online");
                 }
                 else {
-                    onlineUserTable.insertOnlineTableLoginUser(inputtedUserID); // insert this account into onlineTable
+                    return onlineUserTable.insertOnlineTableLoginUser(inputtedUserID); // insert this account into onlineTable
                 }
 
             }
@@ -125,6 +126,8 @@ public class UserTable extends Table {
             executeUpdate("insert into " + tableName + " values ('" + userID + "', '" + password + "', '" + nickname + "', '', '" + phoneNumber + "', '" + birth + "' );");
             FriendsTables friendsTable = new FriendsTables(DatabaseEG.con, userID);
             friendsTable.makeTable();
+            ChatroomTables chatroomTables = new ChatroomTables(con, userID);
+            chatroomTables.makeTable();
         }
     }
 
@@ -174,7 +177,7 @@ public class UserTable extends Table {
     // test result : no problem
     //NOTE: order is userID, nickname, birthday, bio
     public User getUserInfo(String userID) throws ErrorInProcessingException {
-        if(doesExistID(userID)) {
+        if(!doesExistID(userID)) {
             throw new ErrorInProcessingException(1, "ID not found");
         }
         ResultSet userInfoResultSet = null;

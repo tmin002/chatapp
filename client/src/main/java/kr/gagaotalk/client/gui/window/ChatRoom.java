@@ -10,7 +10,6 @@ public class ChatRoom extends JFrame implements ActionListener {
 
     public void FileProgressbar() {
         JFrame f = new JFrame("File receiving");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container content = f.getContentPane();
         JProgressBar progressBar = new JProgressBar(0, 100);
         progressBar.setValue(0);

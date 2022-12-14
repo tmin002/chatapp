@@ -35,11 +35,7 @@ public class FriendsPanel extends MainWindowPanel {
         friendsListPane.setBackground(Color.white);
 
         // Add FriendsListAtom panels
-        //ArrayList<User> friendList = User.getFriends();
-        ArrayList<User> friendList = new ArrayList<>();
-        for (int i=0; i<2; i++)
-            friendList.add(User.makeDummyUser());
-
+        ArrayList<User> friendList = User.getFriends();
         for (User u : friendList)
             addFriendsListAtom(u);
     }

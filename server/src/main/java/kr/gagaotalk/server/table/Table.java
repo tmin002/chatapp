@@ -84,6 +84,7 @@ public class Table {
     //return result with StringBuilder default delimiter(' ') / When the expected result is one row
     public StringBuilder executeQuery(String query, int column) {
         start();
+        System.out.println(query);
         ResultSet rs = null;
         StringBuilder resultStringBuilder = new StringBuilder("");
         try {

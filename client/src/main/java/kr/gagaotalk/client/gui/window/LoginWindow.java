@@ -1,4 +1,5 @@
 package kr.gagaotalk.client.gui.window;
+import jdk.jfr.internal.tool.Main;
 import kr.gagaotalk.client.authentication.Authentication;
 import kr.gagaotalk.client.connection.Received;
 import kr.gagaotalk.client.gui.ResourceManager;
@@ -81,6 +82,10 @@ public class LoginWindow extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null, "ID or password wrong.", "LOGIN", JOptionPane.ERROR_MESSAGE);
                 } else if (received.getErrorCode() == 2)
                     JOptionPane.showMessageDialog(null, "Already logged in on another device.", "LOGIN", JOptionPane.ERROR_MESSAGE);
+            } else {
+                // success
+                new MainWindow();
+                dispose();
             }
         }
         if(e.getSource() == suButton) {

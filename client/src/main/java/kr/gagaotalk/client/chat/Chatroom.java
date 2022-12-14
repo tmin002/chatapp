@@ -48,25 +48,21 @@ public class Chatroom {
 
     // get chat rooms: get list of chat room IDs user is in.
     // TODO: not certain the array type will be in simple array type. Needs further inspection
+
+    @SuppressWarnings("unchecked")
     public static ArrayList<Chatroom> getChatRooms() {
         Received rcv = Connection.communicate(getCtRms, Constants.EMPTY_MAP);
-        if (rcv.statusCode != 0) {
+        if (rcv.statusCode == 0) {
             Map<String, Object> rcvData = rcv.dataToDictionary();
             ArrayList<Chatroom> chatroomList = new ArrayList<>();
 
-            Object[] rcvChatList = (Object[]) rcvData.get("chatroom_list");
-            for (Object chatroom : rcvChatList) {
-                if (chatroom instanceof Map) {
-                    Map<?, ?> chatroomMap = (Map<?, ?>) chatroom;
+            ArrayList<Map<String, Object>> rcvChatList = (ArrayList<Map<String, Object>>) rcvData.get("chatroom_list");
+            for (Map<String, Object> chatroom : rcvChatList) {
                     chatroomList.add(new Chatroom(
-                            (String) chatroomMap.get("chatroom_id"),
-                            (String) chatroomMap.get("chatroom_name"),
-                            (Integer) chatroomMap.get("chatroom_people_count")
+                            (String) chatroom.get("chatroom_id"),
+                            (String) chatroom.get("chatroom_name"),
+                            (Integer) chatroom.get("chatroom_people_count")
                     ));
-                } else {
-                    // TODO: this part should be unreachable.
-                    System.out.println("getChatRooms() casting error maybe");
-                }
             }
             return chatroomList;
 

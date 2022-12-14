@@ -101,13 +101,14 @@ public class User extends UserBasic {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static ArrayList<User> getFriends() {
         Received rcv = Connection.communicate(Action.getFrens, Constants.EMPTY_MAP);
-        if (rcv.statusCode != 0) {
+        if (rcv.statusCode == 0) {
             Map<String, Object> rcvData = rcv.dataToDictionary();
             ArrayList<User> friendsList = new ArrayList<>();
 
-            Object[] rcvFriendList = (Object[]) rcvData.get("friends_list");
+            ArrayList<Object> rcvFriendList = (ArrayList<Object>) rcvData.get("friends_list");
             for (Object friend : rcvFriendList) {
                 if (friend instanceof Map) {
                     Map<?, ?> friendConverted = (Map<?, ?>) friend;
@@ -123,6 +124,12 @@ public class User extends UserBasic {
             // TODO: err handling.
             return null;
         }
+    }
+
+    public static Received addFriend(String friendID) {
+        Map<String, Object> request = new HashMap<>();
+        request.put("user_id", friendID);
+       return Connection.communicate(Action.adFriend, request);
     }
 
 }

@@ -21,7 +21,6 @@ public class AddChatUser extends JFrame implements ActionListener {
     String totalUser;
 
     public AddChatUser() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ImageIcon icon = ImageIconResizer.resize(ResourceManager.getImageIcon("/addchatuser.png"), 301, 197);
         JPanel sapanel = new JPanel() {
             public void paintComponent(Graphics g) {
@@ -76,7 +75,7 @@ public class AddChatUser extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saButton) {
-            String sauser = User.getUserByID(sid.toString()).toString();
+            String sauser = User.getUserByID(sid.getText()).toString();
             if (sauser != null) {
                 if (totalUser == null) {
                     totalUser = sauser;
@@ -91,7 +90,17 @@ public class AddChatUser extends JFrame implements ActionListener {
             }
         }
         if (e.getSource() == adButton) {
-            //aid의 text에 써있는 것들을 이용하여 처리해라
+            String[] idList = sid.getText().split(",");
+            boolean success = true;
+            for (String id : idList) {
+                if (User.addFriend(id).statusCode != 0) {
+                    success = false;
+                    break;
+                }
+            }
+            if (!success) {
+                JOptionPane.showMessageDialog(null, "Failed!", "Add user", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 }

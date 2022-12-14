@@ -17,7 +17,7 @@ public class OnlineUserTable extends Table {
        onlineUserTableGlobal.makeTable();
     }
 
-    public static String schema = "userID varchar(32) not null, sessionID varchar(17) not null, primary key(userID)";
+    public static String schema = "userID varchar(32) not null, sessionID varchar(33) not null, primary key(userID)";
     public static String database = "gagaotalkDB";
 
     public boolean doesExistSessionID(String sessionID) {
@@ -38,7 +38,7 @@ public class OnlineUserTable extends Table {
 
             int idx = 0;
             int len = charSet.length;
-            for (int i = 0; i < 16; i++) {
+            for (int i = 0; i < 32; i++) {
                 // idx = (int) (len * Math.random());
                 idx = sr.nextInt(len);
                 sb.append(charSet[idx]);

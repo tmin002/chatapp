@@ -125,10 +125,10 @@ public class MainWindow extends Window {
         });
 
         friendsPanel.addTopButtonActionListener(e -> {
-            System.out.println("친구추가 버튼 클릭됨");
+            new AddChatUser();
         });
         chatPanel.addTopButtonActionListener(e -> {
-            System.out.println("채팅방추가 버튼 클릭됨");
+            new ChatRoom();
         });
 
         // Finish

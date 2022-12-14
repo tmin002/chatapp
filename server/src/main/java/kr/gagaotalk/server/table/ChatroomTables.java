@@ -9,11 +9,11 @@ public class ChatroomTables extends Table {
     public ChatroomTables(Connection con) { super(con); }
     public ChatroomTables(Connection con, String userID) { super(con, userID, schema, database); }
 
-    public static String database = "chatrooms";
-    public static String schema = "chatroomID int not null, primary key(chatroomID)";
+        public static String database = "chatrooms";
+        public static String schema = "chatroomID int not null, primary key(chatroomID)";
 
-    //getCtRms
-    public ArrayList<String> getChatroomIDsInUser(){
+        //getCtRms
+        public ArrayList<String> getChatroomIDsInUser(){
         ArrayList<String> chatroomIDs = executeQueryArrayList( "select chatroomID from " + tableName + ";", 1);
         return chatroomIDs;
     }

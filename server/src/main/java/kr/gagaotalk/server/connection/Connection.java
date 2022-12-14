@@ -12,9 +12,7 @@ import kr.gagaotalk.server.Database;
 import kr.gagaotalk.server.DatabaseEG;
 import kr.gagaotalk.server.ErrorInProcessingException;
 import kr.gagaotalk.server.User;
-import kr.gagaotalk.server.table.FriendsTables;
-import kr.gagaotalk.server.table.OnlineUserTable;
-import kr.gagaotalk.server.table.UserTable;
+import kr.gagaotalk.server.table.*;
 
 // 한 클라이언트와 소켓과 소켓을 관리하는 쓰레드를 담고있는 객체
 public class Connection implements Runnable {
@@ -36,7 +34,10 @@ public class Connection implements Runnable {
     public String getUserOfSessionID(String sessionID) throws ErrorInProcessingException {
         return OnlineUserTable.onlineUserTableGlobal.getUserIDInOnlineTable(sessionID);
     }
+
+    @SuppressWarnings("unchecked")
     public void run() {
+        boolean closeConnection = true;
 
         try {
             // 소켓 I/O 스트림 선언
@@ -70,10 +71,11 @@ public class Connection implements Runnable {
             try {
                 switch (rcv.action) {
                     case signIn:
+                        sendMap.put("session_id",
                         UserTable.userTableGlobal.login(
                                 (String) rcvMap.get("id"),
                                 (String) rcvMap.get("password")
-                        );
+                        ));
                         break;
 
                     case signUp:
@@ -153,7 +155,19 @@ public class Connection implements Runnable {
                         break;
 
                     case getCtRms:
-                        // 구현 안됨
+                        ArrayList<String> chatIDsList = new ChatroomTables(DatabaseEG.con, getUserOfSessionID(rcv.sessionIDToString()))
+                                .getChatroomIDsInUser();
+                        ArrayList<Map<String, Object>> resultArrayList = new ArrayList<>();
+
+                        for (String id : chatIDsList) {
+                            Map<String, Object> as = new HashMap<>();
+                            as.put("chatroom_id", id);
+                            as.put("chatroom_name", ChatroomTable.chatroomTableGlobal.getChatroomName(id));
+                            as.put("chatroom_people_count", ChatroomTable.chatroomTableGlobal.getNumberOfParticipants(id));
+                            resultArrayList.add(as);
+                        }
+
+                        sendMap.put("chatroom_list", resultArrayList);
                         break;
 
                     case upUsrInf:
@@ -165,7 +179,10 @@ public class Connection implements Runnable {
                         break;
 
                     case mkCtRm:
-                        // 구현 안됨
+                        ArrayList<String> userList =
+                                new ArrayList<>((ArrayList<String>) rcvMap.get("chatroom_people"));
+                        ChatroomTable.chatroomTableGlobal.createChatroom(userList,
+                                (String) rcvMap.get("chatroom_name"));
                         break;
 
                     case addCtRm:
@@ -177,15 +194,43 @@ public class Connection implements Runnable {
                         break;
 
                     case sendMsg:
-                        // 구현 안됨
+                        if (!(new ParticipantsTables(DatabaseEG.con,
+                                (String) rcvMap.get("chatroom_id"))
+                                    .isParticipants(getUserOfSessionID(rcv.sessionIDToString())))) {
+                              break;
+                        }
+                        if (rcvMap.get("message_type").equals("file")) {
+                            PersistentConnection.persistentConnectionMap.get(
+                                    getUserOfSessionID(rcv.sessionIDToString()))
+                                        .onUserFileChatReceive(
+                                                (String) rcvMap.get("chatroom_id"),
+                                                (String) rcvMap.get("user_id"),
+                                                (String) rcvMap.get("file_name"),
+                                                (String) rcvMap.get("file_id"));
+                        } else {
+                            PersistentConnection.persistentConnectionMap.get(
+                                    getUserOfSessionID(rcv.sessionIDToString()))
+                                        .onUserTextChatReceive(
+                                            (String) rcvMap.get("chatroom_id"),
+                                            (String) rcvMap.get("user_id"),
+                                            (String) rcvMap.get("content"));
+                        }
+
                         break;
 
                     case downFile:
+                        closeConnection = false;
                         // 구현 안됨
                         break;
 
                     case uplFile:
+                        closeConnection = false;
                         // 구현 안됨
+                        break;
+
+                    case hi:
+                        closeConnection = false;
+                        new PersistentConnection(client, getUserOfSessionID(rcv.sessionIDToString()));
                         break;
                 }
             } catch (ErrorInProcessingException e) {
@@ -198,6 +243,7 @@ public class Connection implements Runnable {
             }
 
             // finally, send data to user
+            System.out.printf("** sending back: action=%s, map=%s", rcv.action, gson.toJson(sendMap));
             byte[] sendBuffer = PacketParse.constructSendBytes(4096, statusCode, rcv.action, sendMap);
             out.write(sendBuffer);
             out.flush();
@@ -211,7 +257,8 @@ public class Connection implements Runnable {
             e.printStackTrace();
         } finally {
             try {
-                client.close();
+                if (closeConnection)
+                    client.close();
             } catch (IOException e) {
                 // 알수없는 예외가 발생함. 출력하고 쓰레드 종료.
                 System.out.println("!! Exception while closing connection: " + e + ", terminating thread.");

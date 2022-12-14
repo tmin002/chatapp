@@ -34,11 +34,10 @@ public class ChatPanel extends MainWindowPanel {
         chatListPane.setBackground(Color.white);
 
         // Add ChatRoomListAtom panels
-        //ArrayList<Chatroom> chatRoomList = Chatroom.getChatRooms();
-        ArrayList<Chatroom> chatRoomList = new ArrayList<>();
-        for (int i=0; i<2; i++)
-            chatRoomList.add(Chatroom.createDummyChatRoom());
-
+        ArrayList<Chatroom> chatRoomList = Chatroom.getChatRooms();
+        if (chatRoomList == null) {
+            System.out.println("null chatroom list");
+        }
         for (Chatroom c : chatRoomList)
             addChatListPane(c);
 

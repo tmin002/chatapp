@@ -37,8 +37,8 @@ public class DatabaseEG {
         ChatroomTables chatroomInUser1 = new ChatroomTables(con, "user1");
         chatroomInUser1.makeTable();
 
-        Table s = new Table();
-        s.dropTable("tablename");
+        OnlineUserTable.onlineUserTableGlobal.dropTable("OnlineUserTable");
+        OnlineUserTable.onlineUserTableGlobal.makeTable();
 
        //UserTable.userTableGlobal.signup("user1", "ddong", "01012345678", "20021001", "1234");
         //UserTable.userTableGlobal.unregister("user1");

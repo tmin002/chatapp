@@ -4,13 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="93208719-b4e2-40bf-ac31-b60a0ff24c52" name="Changes" comment="global table instances add">
+    <list default="true" id="93208719-b4e2-40bf-ac31-b60a0ff24c52" name="Changes" comment="adFriend">
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/connection/SessionGarbageCollector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/server_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/server_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__10_19__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__10_19__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__10_37__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__10_37__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__10_37__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__10_37__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__1_38__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__1_38__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__3_52__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__3_52__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__7_06__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-13__7_06__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_4_31_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_4_31_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_12_8_12_PM__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_13_12_00_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_12_13_12_00_AM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/ErrorInProcessingException.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/ErrorInProcessingException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/chat/Chatroom.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/chat/Chatroom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/panel/ChatPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/panel/ChatPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/panel/FriendsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/panel/FriendsPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/AddChatUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/AddChatUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/ChatRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/ChatRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/LoginWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/LoginWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/kr/gagaotalk/client/gui/window/MainWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gagaotalk_client.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gagaotalk_server.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/server/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/DatabaseEG.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/DatabaseEG.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/connection/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/connection/Connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/connection/Received.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/connection/Received.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/table/FriendsTables.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/table/FriendsTables.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/connection/PersistentConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/connection/PersistentConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/table/ChatroomTables.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/table/ChatroomTables.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/table/OnlineUserTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/table/OnlineUserTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/table/Table.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/table/UserTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/kr/gagaotalk/server/table/UserTable.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +95,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
@@ -140,6 +164,11 @@
       <workItem from="1670693509343" duration="3699000" />
       <workItem from="1670815134969" duration="25190000" />
       <workItem from="1670945820215" duration="11273000" />
+      <workItem from="1670967521147" duration="2941000" />
+      <workItem from="1670971267315" duration="63000" />
+      <workItem from="1670971341221" duration="8241000" />
+      <workItem from="1670979596502" duration="109000" />
+      <workItem from="1670979714348" duration="3492000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed submodule dependencies">
       <created>1669271663768</created>
@@ -337,7 +366,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670952905562</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="adFriend">
+      <created>1670976508074</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1670976508074</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -375,10 +411,21 @@
     <MESSAGE value="chatroom gui및 서버 패키지 푸가" />
     <MESSAGE value="서버에서 에러 처리를 위한 클래스" />
     <MESSAGE value="global table instances add" />
-    <option name="LAST_COMMIT_MESSAGE" value="global table instances add" />
+    <MESSAGE value="adFriend" />
+    <option name="LAST_COMMIT_MESSAGE" value="adFriend" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="action.name" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/gagaotalk$Build_Client.ic" NAME="Build Client Coverage Results" MODIFIED="1670971222343" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
