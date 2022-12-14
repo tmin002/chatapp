@@ -1,11 +1,12 @@
 package kr.gagaotalk.server.connection;
 
 import java.io.*;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class FileUploadConnection {
-    public void test() {
+    /*public void test() {
         OutputStream outputStream;
         FileInputStream fileInputStream;
 
@@ -53,5 +54,23 @@ public class FileUploadConnection {
         }catch (IOException e) {
             e.printStackTrace();
         }
+    }*/
+    public void test(Socket sck, File requestedFile ) {
+        Socket socket = sck; // 실질적으로 데이터 흐름
+        try {
+            BufferedOutputStream out = new BufferedOutputStream(socket.getOutputStream());
+            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            BufferedInputStream in = new BufferedInputStream(new FileInputStream(requestedFile));
+            byte[] buffer = new byte[1000];
+            int readed = -1;
+            while((readed = in.read(buffer)) > 0) {
+                out.write(buffer, 0, readed);
+            }
+            out.flush();
+
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
+
 }

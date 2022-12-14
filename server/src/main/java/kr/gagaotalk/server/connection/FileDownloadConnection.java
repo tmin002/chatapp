@@ -7,7 +7,7 @@ import java.net.Socket;
 public class FileDownloadConnection {
 
 
-    public void test(Socket receiveSocket) throws IOException {
+    /*public void test(Socket receiveSocket) throws IOException {
 
         InputStream in = null;
         FileOutputStream out = null;
@@ -34,6 +34,11 @@ public class FileDownloadConnection {
             out.flush();
             out.close();
         }
-    }
+    }*/
+    /*public void test() {
+        try {
+            
+        }
+    }*/
 }
 
