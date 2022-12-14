@@ -193,4 +193,10 @@ public class UserTable extends Table {
         }
         return null;
     }
+
+    public void addFriend(String sessionID, String someoneUserID) throws ErrorInProcessingException {
+        String myUserID = OnlineUserTable.onlineUserTableGlobal.getUserIDInOnlineTable(sessionID);
+        FriendsTables myFriendsTable = new FriendsTables(con, myUserID);
+        myFriendsTable.addFriend(someoneUserID);
+    }
 }

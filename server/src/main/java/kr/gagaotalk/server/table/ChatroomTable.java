@@ -55,9 +55,8 @@ public class ChatroomTable extends Table {
     }
 
     public int getNumberOfParticipants(String chatroomID) {
-        StringBuilder countS = executeQuery("select count(*) from " + tableName + " where id = " + chatroomID + ";", 1);
-        int count = Integer.parseInt(countS.toString());
-        return count;
+        ParticipantsTables participantsTables = new ParticipantsTables(con, chatroomID);
+        return participantsTables.getNumberOfParticipants();
     }
 
     //non-finished

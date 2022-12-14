@@ -28,6 +28,10 @@ public class FriendsTables extends Table {
         return  friends;
     }
 
+    public void addFriend(String someoneUserID) {
+        executeUpdate("insert into " + tableName + " values ('" + someoneUserID + "');");
+    }
+
 
 
 
