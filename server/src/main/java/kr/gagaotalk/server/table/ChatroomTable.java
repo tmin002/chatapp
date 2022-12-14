@@ -162,5 +162,10 @@ public class ChatroomTable extends Table {
         return content;
     }
 
+    public String getChatroomName(String chatroomID) {
+        StringBuilder chatroomName = executeQuery("select chatroomName from " + tableName + " where chatroomName = '" + chatroomID + "';", 1);
+        return chatroomName.toString();
+    }
+
 
 }
